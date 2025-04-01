@@ -1,0 +1,122 @@
+#include "gamescreen.h"
+
+void gamescreen(void) {
+    spawn_player();
+    while (1) {
+        ALLEGRO_EVENT event;
+        al_wait_for_event(event_queue, &event);
+        keyboard_update(&event);
+
+        if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
+            if (key[ALLEGRO_KEY_Q]) spawn_enermy(true);
+            if (key[ALLEGRO_KEY_W]) clear_summons(true);
+            if (key[ALLEGRO_KEY_A]) spawn_summon(false);
+            if (key[ALLEGRO_KEY_S]) clear_summons(false);
+            if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
+        }
+
+        if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
+            spawn_enermy(true);
+        }
+
+        move_player();
+        move_bullets();
+        move_summons();
+        check_collision();
+        check_bullet_collision();
+        check_player_collision();
+
+        al_clear_to_color(al_map_rgb(0, 0, 0));
+        al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+            0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+
+        if (invincible_timer > 0) {
+            if ((invincible_timer / 15) % 2 == 0) {
+                if (player.sees_left) {
+                    al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
+                        player.x - 50, player.y - 50, 100, 100, 0);
+                }
+                else {
+                    al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
+                        player.x - 50, player.y - 50, 100, 100, 0);
+                }
+            }
+        }
+        else {
+            if (player.sees_left) {
+                al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
+                    player.x - 50, player.y - 50, 100, 100, 0);
+            }
+            else {
+                al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
+                    player.x - 50, player.y - 50, 100, 100, 0);
+            }
+        }
+
+
+        for (int i = 0; i < MAX_ENEMIES; i++) {
+            if (enemies[i].active) {
+                if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
+                    al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
+                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                }
+                else if (enemies[i].matched_enemy == -1 && enemies[i].x >= player.x) {
+                    al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
+                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                }
+                else if (enemies[i].x >= summons[enemies[i].matched_enemy].x) {
+                    al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
+                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                }
+                else {
+                    al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
+                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                }
+            }
+        }
+
+        for (int i = 0; i < MAX_SUMMONS; i++) {
+            if (summons[i].active) {
+                int closest_enemy = -1;
+                float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
+                for (int j = 0; j < MAX_ENEMIES; j++) {
+                    if (enemies[j].active && !enemies[j].matched) {
+                        float dx = summons[i].x - enemies[j].x;
+                        float dy = summons[i].y - enemies[j].y;
+                        float distance = sqrt(dx * dx + dy * dy);
+                        if (distance < min_distance) {
+                            min_distance = distance;
+                            closest_enemy = j;
+                        }
+                    }
+                }
+                if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
+                    al_draw_scaled_bitmap(summon_img_r, 0, 0, al_get_bitmap_width(summon_img_r), al_get_bitmap_height(summon_img_r),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                }
+                else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
+                    al_draw_scaled_bitmap(summon_img_l, 0, 0, al_get_bitmap_width(summon_img_l), al_get_bitmap_height(summon_img_l),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                }
+                else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
+                    al_draw_scaled_bitmap(summon_img_r, 0, 0, al_get_bitmap_width(summon_img_r), al_get_bitmap_height(summon_img_r),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                }
+                else {
+                    al_draw_scaled_bitmap(summon_img_l, 0, 0, al_get_bitmap_width(summon_img_l), al_get_bitmap_height(summon_img_l),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                }
+            }
+        }
+
+        for (int i = 0; i < MAX_BULLETS; i++) {
+            if (bullets[i].active) {
+                al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
+                    bullets[i].x - 50, bullets[i].y - 50, 100, 100, 0);
+            }
+        }
+        hud_draw();
+
+        al_flip_display();
+    }
+}
