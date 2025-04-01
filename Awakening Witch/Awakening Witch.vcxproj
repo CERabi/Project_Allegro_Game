@@ -162,13 +162,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resource\pic\battleback1.png" />
     <Image Include="Resource\pic\fireball.png" />
     <Image Include="Resource\pic\goblin_l.png" />
     <Image Include="Resource\pic\goblin_r.png" />
     <Image Include="Resource\pic\knight_l.png" />
     <Image Include="Resource\pic\knight_r.png" />
+    <Image Include="Resource\pic\life.png" />
+    <Image Include="Resource\pic\money.png" />
+    <Image Include="Resource\pic\player_dead.png" />
     <Image Include="Resource\pic\player_l.png" />
     <Image Include="Resource\pic\player_r.png" />
+    <Image Include="Resource\pic\score.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\rank_db\rank.txt" />

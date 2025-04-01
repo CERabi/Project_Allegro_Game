@@ -2,20 +2,20 @@
 
 void move_player() {
     if (key[ALLEGRO_KEY_UP]) {
-        player.y -= PLAYER_SPEED;
+        player.y -= player.speed;
         player_direction = UP;
     }
     if (key[ALLEGRO_KEY_DOWN]) {
-        player.y += PLAYER_SPEED;
+        player.y += player.speed;
         player_direction = DOWN;
     }
     if (key[ALLEGRO_KEY_LEFT]) {
-        player.x -= PLAYER_SPEED;
+        player.x -= player.speed;
         player_direction = LEFT;
         player.sees_left = true;
     }
     if (key[ALLEGRO_KEY_RIGHT]) {
-        player.x += PLAYER_SPEED;
+        player.x += player.speed;
         player_direction = RIGHT;
         player.sees_left = false;
     }
@@ -27,6 +27,18 @@ void move_player() {
         player.x = SCREEN_WIDTH - 100;
     if (player.y > SCREEN_HEIGHT - 100)
         player.y = SCREEN_HEIGHT - 100;
+}
+
+void player_enhance_sp() {
+    if (money_display < 50) return;
+    player.speed += 5;
+    money_display -= 50;
+}
+
+void player_enhance_dm() {
+    if (money_display < 50) return;
+    player.damage += 1;
+    money_display -= 50;
 }
 
 void fire_bullet() {
@@ -256,6 +268,7 @@ void check_collision() {
                 enemies[i].invincible = 120;
                 printf("적 %d의 체력 : %d 소환수 %d의 체력 %d\n", i, enemies[i].health, j, summons[j].health);
                 if (enemies[i].health <= 0) {
+                    money_display += 50;
                     score_display += 100;
                     enemies[i].active = false;
                     enemies[i].matched = false;
@@ -310,6 +323,7 @@ void check_bullet_collision() {
                         enemies[j].health -= BULLET_DAMAGE;
                         if (enemies[j].health <= 0) {
                             score_display += 100;
+                            money_display += 50;
                             enemies[j].active = false;
                             enemies[j].matched_enemy = -1;
 

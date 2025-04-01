@@ -29,6 +29,8 @@ ALLEGRO_BITMAP* enermy_img_r;
 ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
+ALLEGRO_BITMAP* HUD_score;
+ALLEGRO_BITMAP* HUD_money;
 
 ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
@@ -47,6 +49,7 @@ int invincible_timer;
 double last_att;
 char state[20];
 long score_display;
+int money_display;
 
 void load_resource(void);
 void destroy_resource(void);

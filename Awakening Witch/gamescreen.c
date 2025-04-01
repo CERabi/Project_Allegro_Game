@@ -8,12 +8,23 @@ void gamescreen(void) {
         keyboard_update(&event);
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
+            // 적 생성
             if (key[ALLEGRO_KEY_Q]) spawn_enermy(1);
             if (key[ALLEGRO_KEY_W]) spawn_enermy(2);
+            // 적 삭제
             if (key[ALLEGRO_KEY_E]) clear_summons(1);
+            
+            // 아군 생성
             if (key[ALLEGRO_KEY_A]) spawn_summon(11);
+            // 아군 삭제
             if (key[ALLEGRO_KEY_S]) clear_summons(11);
+            
+            // 공격
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
+
+            // 본인 강화(상점)
+            if (key[ALLEGRO_KEY_D]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_F]) player_enhance_dm();
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
@@ -30,6 +41,10 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+        al_draw_scaled_bitmap(HUD_score, 0, 0, al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
+            50, 55, 40, 40, 0);
+        al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
+            50, 105, 40, 40, 0);
 
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {

@@ -37,6 +37,8 @@ Summon summons[MAX_SUMMONS];
 Bullet bullets[MAX_BULLETS];
 
 void move_player();
+void player_enhance_sp(void);
+void player_enhance_dm(void);
 void fire_bullet();
 void move_summons();
 void move_bullets();
