@@ -8,10 +8,11 @@ void gamescreen(void) {
         keyboard_update(&event);
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
-            if (key[ALLEGRO_KEY_Q]) spawn_enermy(true);
-            if (key[ALLEGRO_KEY_W]) clear_summons(true);
-            if (key[ALLEGRO_KEY_A]) spawn_summon(false);
-            if (key[ALLEGRO_KEY_S]) clear_summons(false);
+            if (key[ALLEGRO_KEY_Q]) spawn_enermy(1);
+            if (key[ALLEGRO_KEY_W]) spawn_enermy(2);
+            if (key[ALLEGRO_KEY_E]) clear_summons(1);
+            if (key[ALLEGRO_KEY_A]) spawn_summon(11);
+            if (key[ALLEGRO_KEY_S]) clear_summons(11);
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
         }
 
@@ -71,6 +72,27 @@ void gamescreen(void) {
                 else {
                     al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
                         enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                }
+            }
+        }
+
+        for (int i = 0; i < MAX_ENEMIES; i++) {
+            if (enemies_boss[i].active) {
+                if (enemies_boss[i].matched_enemy == -1 && enemies_boss[i].x < player.x) {
+                    al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
+                        enemies_boss[i].x - 50, enemies_boss[i].y - 50, 100, 100, 0);
+                }
+                else if (enemies_boss[i].matched_enemy == -1 && enemies_boss[i].x >= player.x) {
+                    al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
+                        enemies_boss[i].x - 50, enemies_boss[i].y - 50, 100, 100, 0);
+                }
+                else if (enemies_boss[i].x >= summons[enemies_boss[i].matched_enemy].x) {
+                    al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
+                        enemies_boss[i].x - 50, enemies_boss[i].y - 50, 100, 100, 0);
+                }
+                else {
+                    al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
+                        enemies_boss[i].x - 50, enemies_boss[i].y - 50, 100, 100, 0);
                 }
             }
         }

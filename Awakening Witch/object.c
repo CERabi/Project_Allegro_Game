@@ -146,7 +146,7 @@ void spawn_player(void) {
     player.sees_left = true;
 }
 
-void spawn_summon(bool is_enemy) {
+void spawn_summon(int number) {
     Summon* target_array = summons;
     int max_summons = MAX_SUMMONS;
 
@@ -156,7 +156,6 @@ void spawn_summon(bool is_enemy) {
             target_array[i].y = player.y + (rand() % 121 - 60);
             target_array[i].active = true;
             target_array[i].matched = false;
-            target_array[i].is_enemy = is_enemy;
             target_array[i].health = ENEMY_HEALTH;
             target_array[i].invincible = 0;
             target_array[i].matched_enemy = -1;
@@ -165,8 +164,20 @@ void spawn_summon(bool is_enemy) {
     }
 }
 
-void spawn_enermy(bool is_enemy) {
-    Summon* target_array = enemies;
+void spawn_enermy(int number) {
+    Summon* target_array;
+    switch (number) {
+    case 1:
+        target_array = enemies;
+        break;
+    case 2:
+        target_array = enemies_boss;
+        break;
+    default:
+        printf("잘못된 입력값: %d\n", number);
+        return;  // 잘못된 값이면 함수 종료
+    }
+
     int max_summons = MAX_ENEMIES;
     const int SAFE_ZONE = 300;
 
@@ -177,7 +188,7 @@ void spawn_enermy(bool is_enemy) {
 
             while (!safe_position) {
                 x = rand() % SCREEN_WIDTH;
-                y = rand() % SCREEN_HEIGHT + 230;
+                y = rand() % (SCREEN_HEIGHT - 250) + 230;
 
                 if (abs(x - player.x) > SAFE_ZONE || abs(y - player.y) > SAFE_ZONE) {
                     safe_position = true;
@@ -188,7 +199,6 @@ void spawn_enermy(bool is_enemy) {
             target_array[i].y = y;
             target_array[i].active = true;
             target_array[i].matched = false;
-            target_array[i].is_enemy = is_enemy;
             target_array[i].health = ENEMY_HEALTH;
             target_array[i].invincible = 0;
             target_array[i].matched_enemy = -1;
@@ -198,9 +208,22 @@ void spawn_enermy(bool is_enemy) {
 }
 
 
-void clear_summons(bool is_enemy) {
-    Summon* target_array = is_enemy ? enemies : summons;
-    int max_summons = is_enemy ? MAX_ENEMIES : MAX_SUMMONS;
+void clear_summons(int number) {
+    Summon* target_array;
+    int max_summons;
+    switch (number) {
+    case 1:
+        target_array = summons;
+        max_summons = MAX_SUMMONS;
+        break;
+    case 11:
+        target_array = enemies;
+        max_summons = MAX_ENEMIES;
+        break;
+    default:
+        printf("잘못된 입력값: %d\n", number);
+        return;  // 잘못된 값이면 함수 종료
+    }
     for (int i = 0; i < max_summons; i++) {
         target_array[i].active = false;
     }

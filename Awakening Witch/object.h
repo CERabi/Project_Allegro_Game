@@ -18,7 +18,7 @@ typedef struct Summon {
     float x, y;
     bool active;
     bool matched;
-    bool is_enemy;
+    int number;
     int matched_enemy;
     int health;
     int invincible; // 몬스터 소환수 무적 시간
@@ -32,6 +32,7 @@ typedef struct Bullet {
 
 Player player;
 Summon enemies[MAX_ENEMIES];
+Summon enemies_boss[MAX_ENEMIES];
 Summon summons[MAX_SUMMONS];
 Bullet bullets[MAX_BULLETS];
 
@@ -40,9 +41,9 @@ void fire_bullet();
 void move_summons();
 void move_bullets();
 void spawn_player(void);
-void spawn_summon(bool);
-void spawn_enermy(bool);
-void clear_summons(bool);
+void spawn_summon(int);
+void spawn_enermy(int);
+void clear_summons(int);
 void check_collision(); 
 void check_bullet_collision();
 void check_player_collision();
