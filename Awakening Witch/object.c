@@ -96,18 +96,20 @@ void fire_bullet() {
 }
 
 void move_summons() {
+    // 적 이동 관련
     for (int i = 0; i < MAX_ENEMIES; i++) {
         if (enemies[i].active && !enemies[i].matched) {
             float dx = player.x - enemies[i].x;
             float dy = player.y - enemies[i].y;
             float distance = sqrt(dx * dx + dy * dy);
-            if (distance > 1) {
+            if (distance > 30) {
                 enemies[i].x += dx / distance * ENEMY_SPEED;
                 enemies[i].y += dy / distance * ENEMY_SPEED;
             }
         }
     }
 
+    // 소환수 이동 관련
     for (int i = 0; i < MAX_SUMMONS; i++) {
         if (summons[i].active && !summons[i].matched) {
             float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
@@ -163,7 +165,8 @@ void spawn_summon(int number) {
     int max_summons = MAX_SUMMONS;
 
     for (int i = 0; i < max_summons; i++) {
-        if (!target_array[i].active) {
+        if (!target_array[i].active && money_display >= 100) {
+            money_display -= 100;
             target_array[i].x = player.x + (rand() % 121 - 60);
             target_array[i].y = player.y + (rand() % 121 - 60);
             target_array[i].active = true;
@@ -298,7 +301,7 @@ void check_player_collision() {
             float distance = sqrt(dx * dx + dy * dy);
             if (distance < COLLISION_DISTANCE) {
                 if (invincible_timer <= 0) {
-                    player.health -= BULLET_DAMAGE;
+                    player.health -= ENERMY_DAMAGE;
                     invincible_timer = 180;
                     printf("플레이어 남은 체력 : %d\n", player.health);
                     if (player.health <= 0) {
@@ -320,7 +323,7 @@ void check_bullet_collision() {
                     float dy = bullets[i].y - enemies[j].y;
                     float distance = sqrt(dx * dx + dy * dy);
                     if (distance < COLLISION_DISTANCE) {
-                        enemies[j].health -= BULLET_DAMAGE;
+                        enemies[j].health -= player.damage;
                         if (enemies[j].health <= 0) {
                             score_display += 100;
                             money_display += 50;
