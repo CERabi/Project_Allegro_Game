@@ -37,6 +37,7 @@ void gamescreen(void) {
         check_collision();
         check_bullet_collision();
         check_player_collision();
+        if (player.health <= 0) break;
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),

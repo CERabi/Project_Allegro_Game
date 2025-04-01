@@ -305,7 +305,8 @@ void check_player_collision() {
                     invincible_timer = 180;
                     printf("플레이어 남은 체력 : %d\n", player.health);
                     if (player.health <= 0) {
-                        exit(0);
+                        //exit(0);
+                        break;
                     }
                 }
             }
