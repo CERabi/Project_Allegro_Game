@@ -2,9 +2,12 @@
 #define RES_H
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h >
 #include <allegro5/allegro_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 
 #define SCREEN_WIDTH 1500
 #define SCREEN_HEIGHT 900
@@ -41,13 +44,14 @@ ALLEGRO_BITMAP* fireball_boss_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
+ALLEGRO_BITMAP* HUD_speed;
+ALLEGRO_BITMAP* HUD_damage;
 ALLEGRO_BITMAP* SHOP_ORIGIN;
 ALLEGRO_BITMAP* SHOP_UP_ATT;
 ALLEGRO_BITMAP* SHOP_UP_ATT_NO;
 ALLEGRO_BITMAP* SHOP_UP_SPD;
 ALLEGRO_BITMAP* SHOP_UP_SPD_NO;
 //ALLEGRO_BITMAP* SHOP_FRIENDLY;
-
 
 ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
@@ -57,6 +61,11 @@ ALLEGRO_FONT* font;
 ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;
 ALLEGRO_FONT* hud_font;
+
+ALLEGRO_SAMPLE* BGM;
+ALLEGRO_SAMPLE* monster_hit;
+ALLEGRO_SAMPLE* player_attack;
+ALLEGRO_SAMPLE* boss_summon;
 
 float player_x;
 float player_y;

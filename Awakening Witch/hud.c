@@ -1,4 +1,5 @@
 #include "hud.h"
+
 // hud
 void hud_init() {
 	score_display = 0;
@@ -26,7 +27,22 @@ void hud_draw() {
 		"%06ld",
 		money_display
 	);
-	
+	al_draw_textf(
+		hud_font,
+		al_map_rgb_f(1, 1, 1),
+		100, 200,
+		0,
+		"%d",
+		player.speed / 5
+	); 
+	al_draw_textf(
+		hud_font,
+		al_map_rgb_f(1, 1, 1),
+		200, 200,
+		0,
+		"%d",
+		player.damage
+	);
 	for (int i = 0; i < player.health; ++i) {
 		al_draw_scaled_bitmap(HUD_life, 0, 0, al_get_bitmap_width(HUD_life), 
 			al_get_bitmap_height(HUD_life), 50 + i * 50, 160, 40, 40, 0);
