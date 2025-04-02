@@ -25,7 +25,9 @@ int main(void) {
             gamescreen();
             strcpy(state, "rank");
         }
-        else if (!strcmp(state, "rank")) rank();
+        else if (!strcmp(state, "rank")) {
+            rank();
+        }
         else { // 마우스 이벤트 업데이트
             if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
                 int x = ev.mouse.x;

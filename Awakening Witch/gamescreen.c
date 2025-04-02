@@ -1,8 +1,7 @@
 #include "gamescreen.h"
 
 void gamescreen(void) {
-    spawn_player();
-    while (1) {
+    while (player.health > 0) {
         ALLEGRO_EVENT event;
         al_wait_for_event(event_queue, &event);
         keyboard_update(&event);
@@ -28,7 +27,7 @@ void gamescreen(void) {
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
-            spawn_enermy(true);
+            spawn_enermy(1);
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == timer) {

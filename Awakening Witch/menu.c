@@ -19,9 +19,15 @@ void draw_menu() {
     int text_size = 70;  // 텍스트 크기 키움
 
     // 텍스트 위치를 버튼 중앙에 맞추기 위해 버튼 중앙에 맞게 정렬
-    al_draw_text(button_font, al_map_rgb(0, 0, 0), button_x + button_width / 2, button_y + button_height / 2 - text_size / 2, ALLEGRO_ALIGN_CENTER, "Play");
-    al_draw_text(button_font, al_map_rgb(0, 0, 0), button_x + button_width / 2, button_y + button_height / 2 - text_size / 2 + 100, ALLEGRO_ALIGN_CENTER, "Rankings");
-    al_draw_text(button_font, al_map_rgb(0, 0, 0), button_x + button_width / 2, button_y + button_height / 2 - text_size / 2 + 200, ALLEGRO_ALIGN_CENTER, "Exit");
+    const char* button_labels[] = { "Play", "Rankings", "Exit" };
+    int num_buttons = sizeof(button_labels) / sizeof(button_labels[0]);
+
+    for (int i = 0; i < num_buttons; i++) {
+        al_draw_text(button_font, al_map_rgb(0, 0, 0),
+            button_x + button_width / 2,
+            button_y + button_height / 2 - text_size / 2 + i * 100,
+            ALLEGRO_ALIGN_CENTER, button_labels[i]);
+    }
 }
 
 bool is_button_clicked(int mouse_x, int mouse_y, int button_y_offset) {

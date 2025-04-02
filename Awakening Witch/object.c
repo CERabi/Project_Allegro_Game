@@ -150,17 +150,6 @@ void move_bullets() {
     }
 }
 
-void spawn_player(void) {
-    invincible_timer = 0;
-    player.x = SCREEN_WIDTH / 2;
-    player.y = SCREEN_HEIGHT / 2;
-    //player.health = PLAYER_HEALTH;
-    player.health = 1;
-    player.damage = BULLET_DAMAGE;
-    player.speed = PLAYER_SPEED;
-    player.sees_left = true;
-}
-
 void spawn_summon(int number) {
     Summon* target_array = summons;
     int max_summons = MAX_SUMMONS;

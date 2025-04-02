@@ -47,7 +47,6 @@ void move_summons();
 void move_bullets();
 void move_boss_bullets(void);
 void attack_boss(void);
-void spawn_player(void);
 void spawn_summon(int);
 void spawn_enermy(int);
 void clear_summons(int);
