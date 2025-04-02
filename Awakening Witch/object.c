@@ -154,7 +154,8 @@ void spawn_player(void) {
     invincible_timer = 0;
     player.x = SCREEN_WIDTH / 2;
     player.y = SCREEN_HEIGHT / 2;
-    player.health = PLAYER_HEALTH;
+    //player.health = PLAYER_HEALTH;
+    player.health = 1;
     player.damage = BULLET_DAMAGE;
     player.speed = PLAYER_SPEED;
     player.sees_left = true;
@@ -305,7 +306,7 @@ void check_player_collision() {
                     invincible_timer = 180;
                     printf("플레이어 남은 체력 : %d\n", player.health);
                     if (player.health <= 0) {
-                        //exit(0);
+                        name(font);  // 이름 입력 받기
                         break;
                     }
                 }
@@ -342,6 +343,56 @@ void check_bullet_collision() {
                         bullets[i].active = false;
                     }
                 }
+            }
+        }
+    }
+}
+
+void boss_shoot(int j) {
+    for (int i = 0; i < MAX_BULLETS; i++) {
+        if (!boss_bullets[j][i].active && enemies_boss[j].active) {
+            boss_bullets[j][i].x = enemies_boss[j].x;
+            boss_bullets[j][i].y = enemies_boss[j].y;
+            boss_bullets[j][i].active = true;
+            float dx = player.x - enemies_boss[j].x;
+            float dy = player.y - enemies_boss[j].y;
+            float length = sqrt(dx * dx + dy * dy);
+            if (length != 0) {
+                boss_bullets[j][i].direction_x = (dx / length) * 5;
+                boss_bullets[j][i].direction_y = (dy / length) * 5;
+            }
+            else {
+                boss_bullets[j][i].direction_x = 0;
+                boss_bullets[j][i].direction_y = 0;
+            }
+
+            break;
+        }
+    }
+}
+
+void move_boss_bullets() {
+    for (int j = 0; j < MAX_ENEMIES; ++j) {
+        for (int i = 0; i < MAX_BULLETS; i++) {
+            if (boss_bullets[j][i].active) {
+                boss_bullets[j][i].x += boss_bullets[j][i].direction_x;
+                boss_bullets[j][i].y += boss_bullets[j][i].direction_y;
+                if (boss_bullets[j][i].x < 0 || boss_bullets[j][i].x > SCREEN_WIDTH ||
+                    boss_bullets[j][i].y < 0 || boss_bullets[j][i].y > SCREEN_HEIGHT) {
+                    boss_bullets[j][i].active = false;
+                }
+            }
+        }
+    }
+}
+
+void attack_boss() {
+    for (int i = 0; i < MAX_ENEMIES; ++i) {
+        if (enemies_boss[i].active) {
+            boss_shoot_timer[i]++;
+            if (boss_shoot_timer[i] > boss_attack_delay) {
+                boss_shoot(i);
+                boss_shoot_timer[i] = 0;
             }
         }
     }

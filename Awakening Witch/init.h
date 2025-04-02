@@ -9,5 +9,6 @@
 #include "object.h"
 #include "hud.h"
 
+void reset_game_state();
 void init(void);
 #endif

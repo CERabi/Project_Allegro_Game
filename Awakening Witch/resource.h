@@ -27,11 +27,15 @@ ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
 ALLEGRO_BITMAP* enermy_img_l;
 ALLEGRO_BITMAP* enermy_img_r;
+ALLEGRO_BITMAP* enemy_boss_img_l;
+ALLEGRO_BITMAP* enemy_boss_img_r;
 ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
+ALLEGRO_BITMAP* HUD_life;
+
 
 ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
@@ -51,6 +55,8 @@ double last_att;
 char state[20];
 long score_display;
 int money_display;
+int boss_shoot_timer[MAX_ENEMIES];
+int boss_attack_delay;
 
 void load_resource(void);
 void destroy_resource(void);

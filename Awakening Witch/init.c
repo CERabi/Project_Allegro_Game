@@ -1,5 +1,36 @@
 #include "init.h"
 
+void reset_game_state() {
+    // 플레이어 초기화
+    player_health = PLAYER_HEALTH;
+    player_x = SCREEN_WIDTH / 2;
+    player_y = SCREEN_HEIGHT / 2;
+    invincible_timer = 0;
+    /*for (int i = 0; i < ALLEGRO_KEY_MAX; ++i) {
+        key[i] = 0;
+    }*/
+    memset(key, 0, sizeof(key));
+
+    // 점수 및 재화 초기화
+    score_display = 0;
+    money_display = 0;
+    boss_attack_delay = 20;
+
+    // 몬스터 초기화
+    for (int i = 0; i < MAX_ENEMIES; i++) {
+        enemies[i].active = false;  // 모든 적 비활성화
+        enemies_boss[i].active = false;  // 모든 적 보스 비활성화
+    }
+
+    // 소환수 초기화
+    for (int i = 0; i < MAX_SUMMONS; i++) {
+        summons[i].active = false;  // 모든 소환수 비활성화
+    }
+
+    // 플레이어 공격 관련 초기화
+    last_att = 0;  // 공격 타이밍 초기화
+}
+
 void init(void) {
     strcpy(state, "menu");
     srand(time(NULL));

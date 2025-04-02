@@ -5,6 +5,7 @@
 
 #include "resource.h"
 #include "keyboard.h"
+#include "menu.h"
 
 typedef struct Player {
     float x, y;
@@ -35,13 +36,17 @@ Summon enemies[MAX_ENEMIES];
 Summon enemies_boss[MAX_ENEMIES];
 Summon summons[MAX_SUMMONS];
 Bullet bullets[MAX_BULLETS];
+Bullet boss_bullets[MAX_ENEMIES][MAX_BULLETS];
 
 void move_player();
 void player_enhance_sp(void);
 void player_enhance_dm(void);
 void fire_bullet();
+void boss_shoot(int);
 void move_summons();
 void move_bullets();
+void move_boss_bullets(void);
+void attack_boss(void);
 void spawn_player(void);
 void spawn_summon(int);
 void spawn_enermy(int);
