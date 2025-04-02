@@ -25,8 +25,8 @@ void gamescreen(void) {
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
             // 본인 강화(상점)
-            if (key[ALLEGRO_KEY_F]) player_enhance_sp();
-            if (key[ALLEGRO_KEY_G]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_F]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_G]) player_enhance_sp();
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
@@ -48,7 +48,7 @@ void gamescreen(void) {
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
         
-        int player_size = 70;
+        int player_size = 80;
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {
                 if (player.sees_left) {
@@ -68,11 +68,11 @@ void gamescreen(void) {
             }
             else {
                 al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
-                    player.x - 50, player.y - 50, 100, 100, 0);
+                    player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
             }
         }
 
-        int enemy_size = 70;
+        int enemy_size = 80;
 
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
