@@ -34,6 +34,17 @@ void load_resource(void) {
         fprintf(stderr, "goblin_r.png 로드 실패!\n");
         return;
     }
+    enemy_boss_img_l = al_load_bitmap("Resource/pic/boss_l.png");
+    if (!enemy_boss_img_l) {
+        fprintf(stderr, "boss_l.png 로드 실패!\n");
+        return;
+    }
+    enemy_boss_img_r = al_load_bitmap("Resource/pic/boss_r.png");
+    if (!enemy_boss_img_r) {
+        fprintf(stderr, "boss_r.png 로드 실패!\n");
+        return;
+    }
+
 
     // 플레이어 이미지 로드
     player_img_l = al_load_bitmap("Resource/pic/player_l.png");

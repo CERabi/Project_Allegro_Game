@@ -21,9 +21,9 @@ int main(void) {
         if (ev.type == ALLEGRO_EVENT_TIMER) redraw = true;  // 타이머 이벤트 발생 시 화면 다시 그리기
 
         if (!strcmp(state, "game")) {
+            reset_game_state();
             gamescreen();
             strcpy(state, "rank");
-            reset_game_state();
         }
         else if (!strcmp(state, "rank")) rank();
         else { // 마우스 이벤트 업데이트

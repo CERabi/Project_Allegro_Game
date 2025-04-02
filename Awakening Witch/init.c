@@ -14,6 +14,7 @@ void reset_game_state() {
     // 점수 및 재화 초기화
     score_display = 0;
     money_display = 0;
+    boss_attack_delay = 20;
 
     // 몬스터 초기화
     for (int i = 0; i < MAX_ENEMIES; i++) {
