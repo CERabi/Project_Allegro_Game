@@ -158,7 +158,7 @@ void gamescreen(void) {
                 }
             }
         }
-
+        int summon_size1 = 120;
         for (int i = MAX_ZOMBIES; i < MAX_ZOMBIES+MAX_GOBLINS; i++) {
             if (summons[i].active) {
                 int closest_enemy = -1;
@@ -176,19 +176,19 @@ void gamescreen(void) {
                 }
                 if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(summon2_img_r, 0, 0, al_get_bitmap_width(summon2_img_r), al_get_bitmap_height(summon2_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
                 }
                 else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(summon2_img_l, 0, 0, al_get_bitmap_width(summon2_img_l), al_get_bitmap_height(summon2_img_l),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
                 }
                 else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
                     al_draw_scaled_bitmap(summon2_img_r, 0, 0, al_get_bitmap_width(summon2_img_r), al_get_bitmap_height(summon2_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
                 }
                 else {
                     al_draw_scaled_bitmap(summon2_img_l, 0, 0, al_get_bitmap_width(summon2_img_l), al_get_bitmap_height(summon2_img_l),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
                 }
             }
         }
