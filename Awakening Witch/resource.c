@@ -6,125 +6,158 @@ void load_resource(void) {
     player_health = 5;
     player_size = 30;
     invincible_timer = 120;
-    // ¹è°æ ÀÌ¹ÌÁö ·Îµå
+    // ë°°ê²½ ì´ë¯¸ì§€ ë¡œë“œ
     background = al_load_bitmap("Resource/pic/battleback1.png");
     if (!background) {
-        printf("ÀÌ¹ÌÁö¸¦ ºÒ·¯¿ÀÁö ¸øÇß½À´Ï´Ù!\n");
+        printf("ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤!\n");
         return;
     }
 
-    // ¼ÒÈ¯¼ö ÀÌ¹ÌÁö ·Îµå
+    // ì†Œí™˜ìˆ˜ ì´ë¯¸ì§€ ë¡œë“œ
     summon_img_l = al_load_bitmap("Resource/pic/zombie_l.png");
     if (!summon_img_l) {
-        fprintf(stderr, "zombie_l.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "zombie_l.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     summon_img_r = al_load_bitmap("Resource/pic/zombie_r.png");
     if (!summon_img_r) {
-        fprintf(stderr, "zombie_r.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "zombie_r.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     summon2_img_l = al_load_bitmap("Resource/pic/goblin_l.png");
     if (!summon_img_l) {
-        fprintf(stderr, "goblin_l.png ·Îµå ½ÇÆĞ\n");
+        fprintf(stderr, "goblin_l.png ë¡œë“œ ì‹¤íŒ¨\n");
         return;
     }
     summon2_img_r = al_load_bitmap("Resource/pic/goblin_r.png");
     if (!summon_img_r) {
-        fprintf(stderr, "goblin_r.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "goblin_r.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     enermy_img_l = al_load_bitmap("Resource/pic/knight_l.png");
     if (!enermy_img_l) {
-        fprintf(stderr, "knight_l.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "knight_l.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     enermy_img_r = al_load_bitmap("Resource/pic/knight_r.png");
     if (!enermy_img_r) {
-        fprintf(stderr, "knight_r.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "knight_r.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     enemy_boss_img_l = al_load_bitmap("Resource/pic/boss_l.png");
     if (!enemy_boss_img_l) {
-        fprintf(stderr, "boss_l.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "boss_l.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     enemy_boss_img_r = al_load_bitmap("Resource/pic/boss_r.png");
     if (!enemy_boss_img_r) {
-        fprintf(stderr, "boss_r.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "boss_r.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
 
 
-    // ÇÃ·¹ÀÌ¾î ÀÌ¹ÌÁö ·Îµå
+    // í”Œë ˆì´ì–´ ì´ë¯¸ì§€ ë¡œë“œ
     player_img_l = al_load_bitmap("Resource/pic/player_l.png");
     if (!player_img_l) {
-        fprintf(stderr, "player_l.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "player_l.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     player_img_r = al_load_bitmap("Resource/pic/player_r.png");
     if (!player_img_r) {
-        fprintf(stderr, "player_r.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "player_r.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
 
-    // Åõ»çÃ¼ ÀÌ¹ÌÁö ·Îµå
+    // íˆ¬ì‚¬ì²´ ì´ë¯¸ì§€ ë¡œë“œ
     fireball_img = al_load_bitmap("Resource/pic/fireball.png");
     if (!fireball_img) {
-        fprintf(stderr, "fireball.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "fireball.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     fireball_boss_img = al_load_bitmap("Resource/pic/fireball_boss.png");
     if (!fireball_boss_img) {
-        fprintf(stderr, "fireball.png ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "fireball.png ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
 
-    // HUD ÀÌ¹ÌÁö ·Îµå
+    // HUD ì´ë¯¸ì§€ ë¡œë“œ
     HUD_score = al_load_bitmap("Resource/pic/score.png");
     if (!HUD_score) {
-        printf("ÀÌ¹ÌÁö¸¦ ºÒ·¯¿ÀÁö ¸øÇß½À´Ï´Ù!\n");
+        printf("ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤!\n");
         return;
     }
     HUD_money = al_load_bitmap("Resource/pic/money.png");
     if (!HUD_money) {
-        printf("ÀÌ¹ÌÁö¸¦ ºÒ·¯¿ÀÁö ¸øÇß½À´Ï´Ù!\n");
+        printf("ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤!\n");
         return;
     }
     HUD_life = al_load_bitmap("Resource/pic/life.png");
     if (!HUD_life) {
-        printf("ÀÌ¹ÌÁö¸¦ ºÒ·¯¿ÀÁö ¸øÇß½À´Ï´Ù!\n");
+        printf("ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤!\n");
+        return;
+    }
+    HUD_speed = al_load_bitmap("Resource/pic/speed.png");
+    if (!HUD_speed) {
+        printf("ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤!\n");
+        return;
+    }
+    HUD_damage = al_load_bitmap("Resource/pic/damage.png");
+    if (!HUD_damage) {
+        printf("ì´ë¯¸ì§€ë¥¼ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í–ˆìŠµë‹ˆë‹¤!\n");
         return;
     }
 
-    // »óÁ¡ ÀÌ¹ÌÁö ·Îµå
+    // ìƒì  ì´ë¯¸ì§€ ë¡œë“œ
     SHOP_ORIGIN = al_load_bitmap("Resource/pic/shop_icon.png");
     SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
     SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
     SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
     SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
 
-    // ÆùÆ® ·Îµå
+    // í°íŠ¸ ë¡œë“œ
     font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
     if (!font) {
-        fprintf(stderr, "font ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "font ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     title_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 120, 0);
     if (!title_font) {
-        fprintf(stderr, "title_font ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "title_font ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     button_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
     if (!button_font) {
-        fprintf(stderr, "button_font ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "button_font ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
     hud_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 50, 0);
     if (!hud_font) {
-        fprintf(stderr, "hud_font ·Îµå ½ÇÆĞ!\n");
+        fprintf(stderr, "hud_font ë¡œë“œ ì‹¤íŒ¨!\n");
         return;
     }
+
+    // ì˜¤ë””ì˜¤ ë¡œë“œ
+    BGM = al_load_sample("Resource/audio/bgm.ogg");
+    if (!BGM) {
+        fprintf(stderr, "BGM ë¡œë“œ ì‹¤íŒ¨!\n");
+        return;
+    }
+    monster_hit = al_load_sample("Resource/audio/monster_hit.ogg");
+    if (!monster_hit) {
+        fprintf(stderr, "monster_hit ë¡œë“œ ì‹¤íŒ¨!\n");
+        return;
+    }
+    player_attack = al_load_sample("Resource/audio/player_attack.ogg");
+    if (!player_attack) {
+        fprintf(stderr, "player_attack ë¡œë“œ ì‹¤íŒ¨!\n");
+        return;
+    }
+    boss_summon = al_load_sample("Resource/audio/boss_summon.ogg");
+    if (!player_attack) {
+        fprintf(stderr, "player_attack ë¡œë“œ ì‹¤íŒ¨!\n");
+        return;
+    }
+
 }
 
 void destroy_resource(void) {
@@ -139,6 +172,8 @@ void destroy_resource(void) {
     al_destroy_bitmap(HUD_score);
     al_destroy_bitmap(HUD_money);
     al_destroy_bitmap(HUD_life);
+    al_destroy_bitmap(HUD_speed);
+    al_destroy_bitmap(HUD_damage);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
     al_destroy_timer(timer);
@@ -146,6 +181,10 @@ void destroy_resource(void) {
     al_destroy_font(title_font);
     al_destroy_font(button_font);
     al_destroy_font(hud_font);
+    al_destroy_sample(BGM);
+    al_destroy_sample(monster_hit);
+    al_destroy_sample(player_attack);
+    al_destroy_sample(boss_summon);
 }
 
 ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original) {
@@ -154,7 +193,7 @@ ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original) {
 
     ALLEGRO_BITMAP* gray_bitmap = al_create_bitmap(width, height);
     if (!gray_bitmap) {
-        printf("±×·¹ÀÌ½ºÄÉÀÏ ºñÆ®¸Ê »ı¼º ½ÇÆĞ!\n");
+        printf("ê·¸ë ˆì´ìŠ¤ì¼€ì¼ ë¹„íŠ¸ë§µ ìƒì„± ì‹¤íŒ¨!\n");
         return NULL;
     }
 
@@ -166,7 +205,7 @@ ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original) {
             unsigned char r, g, b;
             al_unmap_rgb(color, &r, &g, &b);
 
-            // ITU-R BT.601 °¡ÁßÄ¡¸¦ Àû¿ëÇÑ ±×·¹ÀÌ½ºÄÉÀÏ º¯È¯
+            // ITU-R BT.601 ê°€ì¤‘ì¹˜ë¥¼ ì ìš©í•œ ê·¸ë ˆì´ìŠ¤ì¼€ì¼ ë³€í™˜
             unsigned char gray = (unsigned char)(0.299 * r + 0.587 * g + 0.114 * b);
 
             al_put_pixel(x, y, al_map_rgb(gray, gray, gray));

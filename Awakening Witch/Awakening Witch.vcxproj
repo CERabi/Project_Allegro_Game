@@ -165,6 +165,7 @@
     <Image Include="Resource\pic\battleback1.png" />
     <Image Include="Resource\pic\boss_l.png" />
     <Image Include="Resource\pic\boss_r.png" />
+    <Image Include="Resource\pic\damage.png" />
     <Image Include="Resource\pic\fireball.png" />
     <Image Include="Resource\pic\fireball_boss.png" />
     <Image Include="Resource\pic\goblin_l.png" />
@@ -177,6 +178,7 @@
     <Image Include="Resource\pic\player_l.png" />
     <Image Include="Resource\pic\player_r.png" />
     <Image Include="Resource\pic\score.png" />
+    <Image Include="Resource\pic\speed.png" />
     <Image Include="Resource\pic\zombie_l.png" />
     <Image Include="Resource\pic\zombie_r.png" />
     <Image Include="Resource\pic\shop_icon.png" />

@@ -7,24 +7,24 @@ void gamescreen(void) {
         keyboard_update(&event);
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
-            // Àû »ý¼º
+            // ì  ìƒì„±
             if (key[ALLEGRO_KEY_Q]) spawn_enermy(1);
             if (key[ALLEGRO_KEY_W]) spawn_enermy(2);
-            // Àû »èÁ¦
+            // ì  ì‚­ì œ
             if (key[ALLEGRO_KEY_E]) clear_summons(1);
             
-            // ¾Æ±º »ý¼º
+            // ì•„êµ° ìƒì„±
             if (key[ALLEGRO_KEY_A]) spawn_summon(11);
             if (key[ALLEGRO_KEY_S]) spawn_summon(12);
-            // ¾Æ±º »èÁ¦
+            // ì•„êµ° ì‚­ì œ
             if (key[ALLEGRO_KEY_D]) clear_summons(11);
 
             
             
-            // °ø°Ý
+            // ê³µê²©
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
-            // º»ÀÎ °­È­(»óÁ¡)
+            // ë³¸ì¸ ê°•í™”(ìƒì )
             if (key[ALLEGRO_KEY_F]) player_enhance_dm();
             if (key[ALLEGRO_KEY_G]) player_enhance_sp();
         }
@@ -47,7 +47,15 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-        
+        al_draw_scaled_bitmap(HUD_score, 0, 0, al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
+            50, 55, 40, 40, 0);
+        al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
+            50, 105, 40, 40, 0);
+        al_draw_scaled_bitmap(HUD_speed, 0, 0, al_get_bitmap_width(HUD_speed), al_get_bitmap_height(HUD_speed),
+            50, 210, 40, 40, 0);
+        al_draw_scaled_bitmap(HUD_damage, 0, 0, al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
+            140, 210, 40, 40, 0);
+
         int player_size = 80;
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {
