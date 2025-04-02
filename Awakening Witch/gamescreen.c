@@ -44,11 +44,7 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-        al_draw_scaled_bitmap(HUD_score, 0, 0, al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
-            50, 55, 40, 40, 0);
-        al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
-            50, 105, 40, 40, 0);
-
+        
         int player_size = 70;
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {

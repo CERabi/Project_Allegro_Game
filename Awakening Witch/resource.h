@@ -37,6 +37,12 @@ ALLEGRO_BITMAP* fireball_boss_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
+ALLEGRO_BITMAP* SHOP_ORIGIN;
+ALLEGRO_BITMAP* SHOP_UP_ATT;
+ALLEGRO_BITMAP* SHOP_UP_ATT_NO;
+ALLEGRO_BITMAP* SHOP_UP_SPD;
+ALLEGRO_BITMAP* SHOP_UP_SPD_NO;
+//ALLEGRO_BITMAP* SHOP_FRIENDLY;
 
 
 ALLEGRO_EVENT_QUEUE* event_queue;
@@ -61,5 +67,6 @@ int boss_shoot_timer[MAX_ENEMIES];
 int boss_attack_delay;
 
 void load_resource(void);
-void destroy_resource(void);
+void destroy_resource(void); 
+ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original);
 #endif
