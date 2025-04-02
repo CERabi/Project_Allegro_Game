@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+
 #include <string.h>
 #include "init.h"
 #include "gamescreen.h"
@@ -22,6 +23,7 @@ int main(void) {
         if (!strcmp(state, "game")) {
             gamescreen();
             strcpy(state, "menu");
+            reset_game_state();
         }
         else if (!strcmp(state, "rank")) rank();
         else { // 마우스 이벤트 업데이트
