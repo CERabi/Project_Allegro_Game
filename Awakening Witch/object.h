@@ -5,6 +5,7 @@
 
 #include "resource.h"
 #include "keyboard.h"
+#include "menu.h"
 
 typedef struct Player {
     float x, y;

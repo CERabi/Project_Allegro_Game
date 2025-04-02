@@ -154,7 +154,8 @@ void spawn_player(void) {
     invincible_timer = 0;
     player.x = SCREEN_WIDTH / 2;
     player.y = SCREEN_HEIGHT / 2;
-    player.health = PLAYER_HEALTH;
+    //player.health = PLAYER_HEALTH;
+    player.health = 1;
     player.damage = BULLET_DAMAGE;
     player.speed = PLAYER_SPEED;
     player.sees_left = true;
@@ -306,6 +307,7 @@ void check_player_collision() {
                     printf("플레이어 남은 체력 : %d\n", player.health);
                     if (player.health <= 0) {
                         //exit(0);
+                        name(font);  // 이름 입력 받기
                         break;
                     }
                 }

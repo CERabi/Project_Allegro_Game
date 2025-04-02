@@ -27,5 +27,6 @@ void draw_rankings(ALLEGRO_FONT* font, ALLEGRO_BITMAP* background);
 int read_rankings(Player1 players[], int max_players);
 int compare_players(const void* a, const void* b);
 void rank(void);
-
+void name(ALLEGRO_FONT*);
+void save_score(const char*, long);
 #endif
