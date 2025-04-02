@@ -15,7 +15,7 @@ void move_player() {
         player.sees_left = true;
     }
     if (key[ALLEGRO_KEY_RIGHT]) {
-        player.x += player.speed;
+        player.x += player.speed; // °íÄ¡±â
         player_direction = RIGHT;
         player.sees_left = false;
     }
