@@ -1,5 +1,5 @@
 #include "hud.h"
-#include "object.h"
+
 // hud
 void hud_init() {
 	score_display = 0;

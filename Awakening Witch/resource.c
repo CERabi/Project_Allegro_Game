@@ -112,6 +112,29 @@ void load_resource(void) {
         fprintf(stderr, "hud_font 로드 실패!\n");
         return;
     }
+
+    // 오디오 로드
+    BGM = al_load_sample("Resource/audio/bgm.ogg");
+    if (!BGM) {
+        fprintf(stderr, "BGM 로드 실패!\n");
+        return;
+    }
+    monster_hit = al_load_sample("Resource/audio/monster_hit.ogg");
+    if (!monster_hit) {
+        fprintf(stderr, "monster_hit 로드 실패!\n");
+        return;
+    }
+    player_attack = al_load_sample("Resource/audio/player_attack.ogg");
+    if (!player_attack) {
+        fprintf(stderr, "player_attack 로드 실패!\n");
+        return;
+    }
+    boss_summon = al_load_sample("Resource/audio/boss_summon.ogg");
+    if (!player_attack) {
+        fprintf(stderr, "player_attack 로드 실패!\n");
+        return;
+    }
+
 }
 
 void destroy_resource(void) {
@@ -135,4 +158,8 @@ void destroy_resource(void) {
     al_destroy_font(title_font);
     al_destroy_font(button_font);
     al_destroy_font(hud_font);
+    al_destroy_sample(BGM);
+    al_destroy_sample(monster_hit);
+    al_destroy_sample(player_attack);
+    al_destroy_sample(boss_summon);
 }

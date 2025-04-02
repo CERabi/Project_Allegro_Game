@@ -84,10 +84,19 @@ void init(void) {
         fprintf(stderr, "Allegro ttf 초기화 실패!\n");
         return;
     }
+    if (!al_install_audio()) {
+        fprintf(stderr, "Allegro audio 초기화 실패!\n");
+        return;
+    }
+    if (!al_init_acodec_addon()) {
+        fprintf(stderr, "Allegro audio 초기화 실패!\n");
+        return;
+    }
 
     for (int i = 0; i < MAX_SUMMONS; i++) enemies[i].matched_enemy = -1;
     for (int i = 0; i < MAX_SUMMONS; i++) summons[i].matched_enemy = -1;
 
+    al_reserve_samples(16);
     load_resource();
     hud_init();
 

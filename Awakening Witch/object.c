@@ -45,6 +45,7 @@ void fire_bullet() {
     double now = al_get_time();
     for (int i = 0; i < MAX_BULLETS; i++) {
         if (!bullets[i].active && now - last_att > ATTACK_DELAY) {
+            al_play_sample(player_attack, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
             last_att = now;
             bullets[i].x = player.x;
             bullets[i].y = player.y;
@@ -177,6 +178,8 @@ void spawn_enermy(int number) {
         break;
     case 2:
         target_array = enemies_boss;
+        al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+
         break;
     default:
         printf("잘못된 입력값: %d\n", number);
@@ -315,6 +318,7 @@ void check_bullet_collision() {
                     float distance = sqrt(dx * dx + dy * dy);
                     if (distance < COLLISION_DISTANCE) {
                         enemies[j].health -= player.damage;
+                        al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
                         if (enemies[j].health <= 0) {
                             score_display += 100;
                             money_display += 50;

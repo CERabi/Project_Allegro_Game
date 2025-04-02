@@ -2,9 +2,12 @@
 #define RES_H
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h >
 #include <allegro5/allegro_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 
 #define SCREEN_WIDTH 1500
 #define SCREEN_HEIGHT 900
@@ -46,6 +49,11 @@ ALLEGRO_FONT* font;
 ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;
 ALLEGRO_FONT* hud_font;
+
+ALLEGRO_SAMPLE* BGM;
+ALLEGRO_SAMPLE* monster_hit;
+ALLEGRO_SAMPLE* player_attack;
+ALLEGRO_SAMPLE* boss_summon;
 
 float player_x;
 float player_y;
