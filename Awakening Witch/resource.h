@@ -14,10 +14,13 @@
 #define PLAYER_SPEED 5
 #define ENEMY_SPEED 1.5f
 #define SUMMON_SPEED 1.7f
-#define MAX_ENEMIES 5
-#define MAX_SUMMONS 5
+#define MAX_KNIGHTS 5
+#define MAX_BOSSES 3
+#define MAX_ZOMBIES 5
+#define MAX_GOBLINS 5
 #define MAX_BULLETS 10
 #define COLLISION_DISTANCE 50
+#define BULLET_COLLISION_DISTANCE 30
 #define BULLET_DAMAGE 1
 #define ENERMY_DAMAGE 1
 #define ENEMY_HEALTH 3
@@ -28,6 +31,8 @@
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
+ALLEGRO_BITMAP* summon2_img_l;
+ALLEGRO_BITMAP* summon2_img_r;
 ALLEGRO_BITMAP* enermy_img_l;
 ALLEGRO_BITMAP* enermy_img_r;
 ALLEGRO_BITMAP* enemy_boss_img_l;
@@ -35,11 +40,18 @@ ALLEGRO_BITMAP* enemy_boss_img_r;
 ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
+ALLEGRO_BITMAP* fireball_boss_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
 ALLEGRO_BITMAP* HUD_speed;
 ALLEGRO_BITMAP* HUD_damage;
+ALLEGRO_BITMAP* SHOP_ORIGIN;
+ALLEGRO_BITMAP* SHOP_UP_ATT;
+ALLEGRO_BITMAP* SHOP_UP_ATT_NO;
+ALLEGRO_BITMAP* SHOP_UP_SPD;
+ALLEGRO_BITMAP* SHOP_UP_SPD_NO;
+//ALLEGRO_BITMAP* SHOP_FRIENDLY;
 
 ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
@@ -64,9 +76,12 @@ double last_att;
 char state[20];
 long score_display;
 int money_display;
-int boss_shoot_timer[MAX_ENEMIES];
+int boss_shoot_timer[MAX_BOSSES];
 int boss_attack_delay;
+int MAX_SUMMONS;
+int MAX_ENEMIES;
 
 void load_resource(void);
-void destroy_resource(void);
+void destroy_resource(void); 
+ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original);
 #endif

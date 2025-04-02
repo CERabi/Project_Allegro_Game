@@ -118,6 +118,12 @@
     <Image Include="Resource\pic\boss_l.png">
       <Filter>리소스 파일\pic</Filter>
     </Image>
+    <Image Include="Resource\pic\fireball_boss.png">
+      <Filter>리소스 파일\pic</Filter>
+    </Image>
+    <Image Include="Resource\pic\shop_icon.png">
+      <Filter>리소스 파일\pic</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\rank_db\rank.txt">

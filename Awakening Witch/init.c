@@ -2,8 +2,8 @@
 
 void reset_game_state() {
     // 플레이어 초기화
-    //player.health = PLAYER_HEALTH;
-    player.health = 1;
+    player.health = PLAYER_HEALTH;
+    //player.health = 1;
     player.damage = BULLET_DAMAGE;
     player.speed = PLAYER_SPEED;
     player.sees_left = true;
@@ -20,22 +20,28 @@ void reset_game_state() {
     money_display = 0;
     boss_attack_delay = 20;
 
+    // 전체 몬스터 수
+    MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS;
+    MAX_ENEMIES = MAX_KNIGHTS + MAX_BOSSES;
+
     // 몬스터 초기화
     for (int i = 0; i < MAX_ENEMIES; i++) {
         enemies[i].active = false;  // 모든 적 비활성화
-        enemies_boss[i].active = false;  // 모든 적 보스 비활성화
+      // 모든 적 보스 
+        enemies[i].matched_enemy = -1;
     }
 
     // 소환수 초기화
     for (int i = 0; i < MAX_SUMMONS; i++) {
         summons[i].active = false;  // 모든 소환수 비활성화
+        summons[i].matched_enemy = -1;
     }
 
     // 투사체 관련 초기화
     for (int i = 0; i < MAX_BULLETS; i++) {
         bullets[i].active = false;
     }
-    for (int i = 0; i < MAX_ENEMIES; i++) {
+    for (int i = 0; i < MAX_BOSSES; i++) {
         for (int j = 0; j < MAX_BULLETS; j++) {
             boss_bullets[i][j].active = false;
         }

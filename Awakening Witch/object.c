@@ -97,20 +97,20 @@ void fire_bullet() {
 }
 
 void move_summons() {
-    // Àû ÀÌµ¿ °ü·Ã
-    for (int i = 0; i < MAX_ENEMIES; i++) {
+    // ì  ì´ë™ ê´€ë ¨
+    for (int i = 0; i < MAX_KNIGHTS; i++) {
         if (enemies[i].active && !enemies[i].matched) {
             float dx = player.x - enemies[i].x;
             float dy = player.y - enemies[i].y;
             float distance = sqrt(dx * dx + dy * dy);
             if (distance > 30) {
-                enemies[i].x += dx / distance * ENEMY_SPEED;
-                enemies[i].y += dy / distance * ENEMY_SPEED;
+                enemies[i].x += dx / distance * enemies[i].speed;
+                enemies[i].y += dy / distance * enemies[i].speed;
             }
         }
     }
 
-    // ¼ÒÈ¯¼ö ÀÌµ¿ °ü·Ã
+    // ì†Œí™˜ìˆ˜ ì´ë™ ê´€ë ¨
     for (int i = 0; i < MAX_SUMMONS; i++) {
         if (summons[i].active && !summons[i].matched) {
             float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
@@ -131,12 +131,13 @@ void move_summons() {
                 float dy = enemies[closest_enemy].y - summons[i].y;
                 float distance = sqrt(dx * dx + dy * dy);
                 if (distance > 1) {
-                    summons[i].x += dx / distance * SUMMON_SPEED;
-                    summons[i].y += dy / distance * SUMMON_SPEED;
+                    summons[i].x += dx / distance * summons[i].speed;
+                    summons[i].y += dy / distance * summons[i].speed;
                 }
             }
         }
     }
+
 }
 
 void move_bullets() {
@@ -153,16 +154,47 @@ void move_bullets() {
 
 void spawn_summon(int number) {
     Summon* target_array = summons;
-    int max_summons = MAX_SUMMONS;
+    int i;
+    int temp;
+    int health;
+    int damage;
+    int credit;
+    double speed;
+    switch (number) {
+    case 11:
+        // ì¢€ë¹„
+        i = 0;
+        temp = i;
+        health = 3;
+        damage = 1;
+        credit = 50;
+        speed = 1.7;
+        break;
+    case 12:
+        // ê³ ë¸”ë¦°
+        i = MAX_ZOMBIES;
+        temp = MAX_GOBLINS;
+        health = 5;
+        damage = 2;
+        credit = 100;
+        speed = 2.0;
+        break;
+    default:
+        printf("ì˜ëª»ëœ ì…ë ¥ê°’: %d\n", number);
+        return;  // ì˜ëª»ëœ ê°’ì´ë©´ í•¨ìˆ˜ ì¢…ë£Œ
+    }
+    int max_summons = MAX_ZOMBIES;
 
-    for (int i = 0; i < max_summons; i++) {
-        if (!target_array[i].active && money_display >= 100) {
-            money_display -= 100;
+    for (; i < max_summons + temp; i++) {
+        if (!target_array[i].active && money_display >= credit) {
+            money_display -= credit;
             target_array[i].x = player.x + (rand() % 121 - 60);
             target_array[i].y = player.y + (rand() % 121 - 60);
             target_array[i].active = true;
             target_array[i].matched = false;
-            target_array[i].health = ENEMY_HEALTH;
+            target_array[i].health = health;
+            target_array[i].damage = damage;
+            target_array[i].speed = speed;
             target_array[i].invincible = 0;
             target_array[i].matched_enemy = -1;
             break;
@@ -171,25 +203,47 @@ void spawn_summon(int number) {
 }
 
 void spawn_enermy(int number) {
-    Summon* target_array;
+    Summon* target_array = enemies;
+    int i;
+    int health;
+    int damage;
+    int credit;
+    int score;
+    int speed;
+    int max_summons;
+    int temp;
     switch (number) {
     case 1:
-        target_array = enemies;
+        // knight
+        i = 0;
+        temp = 0;
+        health = 3;
+        damage = 1;
+        credit = 50;
+        score = 100;
+        speed = 2.0;
+        max_summons = 5;
         break;
     case 2:
+        // ë³´ìŠ¤
         target_array = enemies_boss;
         al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-
+        i = MAX_KNIGHTS;
+        temp = MAX_BOSSES;
+        health = 7;
+        damage = 1;
+        credit = 200;
+        score = 500;
+        speed = 0;
+        max_summons = 3;
         break;
     default:
-        printf("Àß¸øµÈ ÀÔ·Â°ª: %d\n", number);
-        return;  // Àß¸øµÈ °ªÀÌ¸é ÇÔ¼ö Á¾·á
+        return;  // ì˜ëª»ëœ ê°’ì´ë©´ í•¨ìˆ˜ ì¢…ë£Œ
     }
-
-    int max_summons = MAX_ENEMIES;
     const int SAFE_ZONE = 300;
+    int max_enemies = MAX_KNIGHTS;
 
-    for (int i = 0; i < max_summons; i++) {
+    for (; i < MAX_KNIGHTS + temp; i++) {
         if (!target_array[i].active) {
             int x, y;
             bool safe_position = false;
@@ -207,7 +261,11 @@ void spawn_enermy(int number) {
             target_array[i].y = y;
             target_array[i].active = true;
             target_array[i].matched = false;
-            target_array[i].health = ENEMY_HEALTH;
+            target_array[i].health = health;
+            target_array[i].damage = damage;
+            target_array[i].credit = credit;
+            target_array[i].score = score;
+            target_array[i].speed = speed;
             target_array[i].invincible = 0;
             target_array[i].matched_enemy = -1;
             break;
@@ -220,17 +278,17 @@ void clear_summons(int number) {
     Summon* target_array;
     int max_summons;
     switch (number) {
-    case 1:
+    case 11:
         target_array = summons;
         max_summons = MAX_SUMMONS;
         break;
-    case 11:
+    case 1:
         target_array = enemies;
         max_summons = MAX_ENEMIES;
         break;
     default:
-        printf("Àß¸øµÈ ÀÔ·Â°ª: %d\n", number);
-        return;  // Àß¸øµÈ °ªÀÌ¸é ÇÔ¼ö Á¾·á
+        printf("ì˜ëª»ëœ ì…ë ¥ê°’: %d\n", number);
+        return;  // ì˜ëª»ëœ ê°’ì´ë©´ í•¨ìˆ˜ ì¢…ë£Œ
     }
     for (int i = 0; i < max_summons; i++) {
         target_array[i].active = false;
@@ -259,13 +317,13 @@ void check_collision() {
         if (summons[j].matched_enemy != -1) {
             int i = summons[j].matched_enemy;
             if (enemies[i].invincible <= 0) {
-                enemies[i].health--;
-                summons[j].health--;
+                enemies[i].health-=summons[j].damage;
+                summons[j].health-=enemies[i].damage;
                 enemies[i].invincible = 120;
-                printf("Àû %dÀÇ Ã¼·Â : %d ¼ÒÈ¯¼ö %dÀÇ Ã¼·Â %d\n", i, enemies[i].health, j, summons[j].health);
+                printf("ì  %dì˜ ì²´ë ¥ : %d ì†Œí™˜ìˆ˜ %dì˜ ì²´ë ¥ %d\n", i, enemies[i].health, j, summons[j].health);
                 if (enemies[i].health <= 0) {
-                    money_display += 50;
-                    score_display += 100;
+                    money_display += enemies[i].credit;
+                    score_display += enemies[i].score;
                     enemies[i].active = false;
                     enemies[i].matched = false;
                     enemies[i].matched_enemy = -1;
@@ -287,7 +345,7 @@ void check_collision() {
 
 
 void check_player_collision() {
-    for (int j = 0; j < MAX_ENEMIES; j++) {
+    for (int j = 0; j < MAX_KNIGHTS; j++) {
         if (enemies[j].active) {
             float dx = player.x - enemies[j].x;
             float dy = player.y - enemies[j].y;
@@ -298,7 +356,7 @@ void check_player_collision() {
                     invincible_timer = 180;
                     
                     if (player.health <= 0) {
-                        name(font);  // ÀÌ¸§ ÀÔ·Â ¹Ş±â
+                        name(font);  // ì´ë¦„ ì…ë ¥ ë°›ê¸°
                         break;
                     }
                 }
@@ -316,12 +374,12 @@ void check_bullet_collision() {
                     float dx = bullets[i].x - enemies[j].x;
                     float dy = bullets[i].y - enemies[j].y;
                     float distance = sqrt(dx * dx + dy * dy);
-                    if (distance < COLLISION_DISTANCE) {
+                    if (distance < BULLET_COLLISION_DISTANCE) {
                         enemies[j].health -= player.damage;
                         al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
                         if (enemies[j].health <= 0) {
-                            score_display += 100;
-                            money_display += 50;
+                            score_display += enemies[j].score;
+                            money_display += enemies[j].credit;
                             enemies[j].active = false;
                             enemies[j].matched_enemy = -1;
 
@@ -342,13 +400,15 @@ void check_bullet_collision() {
 }
 
 void boss_shoot(int j) {
+    int k = j + MAX_KNIGHTS;
     for (int i = 0; i < MAX_BULLETS; i++) {
-        if (!boss_bullets[j][i].active && enemies_boss[j].active) {
-            boss_bullets[j][i].x = enemies_boss[j].x;
-            boss_bullets[j][i].y = enemies_boss[j].y;
+        if (!boss_bullets[j][i].active && enemies[k].active) {
+            printf("ë³´ìŠ¤ %d : %d\n", j, i);
+            boss_bullets[j][i].x = enemies[k].x;
+            boss_bullets[j][i].y = enemies[k].y;
             boss_bullets[j][i].active = true;
-            float dx = player.x - enemies_boss[j].x;
-            float dy = player.y - enemies_boss[j].y;
+            float dx = player.x - enemies[k].x;
+            float dy = player.y - enemies[k].y;
             float length = sqrt(dx * dx + dy * dy);
             if (length != 0) {
                 boss_bullets[j][i].direction_x = (dx / length) * 5;
@@ -365,7 +425,7 @@ void boss_shoot(int j) {
 }
 
 void move_boss_bullets() {
-    for (int j = 0; j < MAX_ENEMIES; ++j) {
+    for (int j = 0; j < MAX_BOSSES; ++j) {
         for (int i = 0; i < MAX_BULLETS; i++) {
             if (boss_bullets[j][i].active) {
                 boss_bullets[j][i].x += boss_bullets[j][i].direction_x;
@@ -380,8 +440,8 @@ void move_boss_bullets() {
 }
 
 void attack_boss() {
-    for (int i = 0; i < MAX_ENEMIES; ++i) {
-        if (enemies_boss[i].active) {
+    for (int i = 0; i < MAX_BOSSES; ++i) {
+        if (enemies[i + MAX_KNIGHTS].active) {
             boss_shoot_timer[i]++;
             if (boss_shoot_timer[i] > boss_attack_delay) {
                 boss_shoot(i);
