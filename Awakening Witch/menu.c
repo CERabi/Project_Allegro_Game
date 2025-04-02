@@ -54,7 +54,7 @@ void show_rankings(ALLEGRO_FONT* font) {
         sprintf_s(ranking_text, sizeof(ranking_text), "%d. %s - %d", i + 1, players[i].name, players[i].score);
 
         // 각 랭킹을 화면에 그립니다.
-        al_draw_text(font, al_map_rgb(255, 255, 255), 1500 / 2, 200 + (i * 50), ALLEGRO_ALIGN_CENTER, ranking_text);
+        al_draw_text(font, al_map_rgb(255, 255, 255), 1500 / 2, 300 + (i * 70), ALLEGRO_ALIGN_CENTER, ranking_text);
     }
 
     al_flip_display();  // 화면에 그린 내용을 표시

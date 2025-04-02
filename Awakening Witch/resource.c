@@ -71,7 +71,7 @@ void load_resource(void) {
     }
 
     // 폰트 로드
-    font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 20, 0);
+    font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
     if (!font) {
         fprintf(stderr, "font 로드 실패!\n");
         return;

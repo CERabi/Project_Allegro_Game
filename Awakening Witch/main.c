@@ -22,7 +22,7 @@ int main(void) {
 
         if (!strcmp(state, "game")) {
             gamescreen();
-            strcpy(state, "menu");
+            strcpy(state, "rank");
             reset_game_state();
         }
         else if (!strcmp(state, "rank")) rank();
