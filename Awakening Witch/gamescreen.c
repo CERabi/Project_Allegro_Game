@@ -31,13 +31,15 @@ void gamescreen(void) {
             spawn_enermy(true);
         }
 
-        move_player();
-        move_bullets();
-        move_summons();
-        check_collision();
-        check_bullet_collision();
-        check_player_collision();
-        if (player.health <= 0) break;
+        if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == timer) {
+            move_player();
+            move_bullets();
+            move_summons();
+            check_collision();
+            check_bullet_collision();
+            check_player_collision();
+            if (player.health <= 0) break;
+        }
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
@@ -154,7 +156,6 @@ void gamescreen(void) {
             }
         }
         hud_draw();
-
         al_flip_display();
     }
 }
