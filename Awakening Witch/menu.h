@@ -29,4 +29,7 @@ int compare_players(const void* a, const void* b);
 void rank(void);
 void name(ALLEGRO_FONT*);
 void save_score(const char*, long);
+void clear_rankings();
+void handle_button_click(ALLEGRO_EVENT event);
+
 #endif

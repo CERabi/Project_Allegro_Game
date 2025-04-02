@@ -166,6 +166,7 @@
     <Image Include="Resource\pic\boss_l.png" />
     <Image Include="Resource\pic\boss_r.png" />
     <Image Include="Resource\pic\fireball.png" />
+    <Image Include="Resource\pic\fireball_boss.png" />
     <Image Include="Resource\pic\goblin_l.png" />
     <Image Include="Resource\pic\goblin_r.png" />
     <Image Include="Resource\pic\knight_l.png" />
@@ -178,6 +179,7 @@
     <Image Include="Resource\pic\score.png" />
     <Image Include="Resource\pic\zombie_l.png" />
     <Image Include="Resource\pic\zombie_r.png" />
+    <Image Include="Resource\pic\shop_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\rank_db\rank.txt" />

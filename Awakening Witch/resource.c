@@ -68,8 +68,14 @@ void load_resource(void) {
         return;
     }
 
+    // 투사체 이미지 로드
     fireball_img = al_load_bitmap("Resource/pic/fireball.png");
-    if(!fireball_img) {
+    if (!fireball_img) {
+        fprintf(stderr, "fireball.png 로드 실패!\n");
+        return;
+    }
+    fireball_boss_img = al_load_bitmap("Resource/pic/fireball_boss.png");
+    if (!fireball_boss_img) {
         fprintf(stderr, "fireball.png 로드 실패!\n");
         return;
     }
@@ -90,6 +96,13 @@ void load_resource(void) {
         printf("이미지를 불러오지 못했습니다!\n");
         return;
     }
+
+    // 상점 이미지 로드
+    SHOP_ORIGIN = al_load_bitmap("Resource/pic/shop_icon.png");
+    SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
+    SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
+    SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
+    SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
 
     // 폰트 로드
     font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
@@ -133,4 +146,34 @@ void destroy_resource(void) {
     al_destroy_font(title_font);
     al_destroy_font(button_font);
     al_destroy_font(hud_font);
+}
+
+ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original) {
+    int width = al_get_bitmap_width(original);
+    int height = al_get_bitmap_height(original);
+
+    ALLEGRO_BITMAP* gray_bitmap = al_create_bitmap(width, height);
+    if (!gray_bitmap) {
+        printf("그레이스케일 비트맵 생성 실패!\n");
+        return NULL;
+    }
+
+    al_set_target_bitmap(gray_bitmap);
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            ALLEGRO_COLOR color = al_get_pixel(original, x, y);
+            unsigned char r, g, b;
+            al_unmap_rgb(color, &r, &g, &b);
+
+            // ITU-R BT.601 가중치를 적용한 그레이스케일 변환
+            unsigned char gray = (unsigned char)(0.299 * r + 0.587 * g + 0.114 * b);
+
+            al_put_pixel(x, y, al_map_rgb(gray, gray, gray));
+        }
+    }
+
+    al_set_target_backbuffer(al_get_current_display());
+
+    return gray_bitmap;
 }

@@ -47,27 +47,24 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-        al_draw_scaled_bitmap(HUD_score, 0, 0, al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
-            50, 55, 40, 40, 0);
-        al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
-            50, 105, 40, 40, 0);
-
+        
+        int player_size = 70;
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {
                 if (player.sees_left) {
                     al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
-                        player.x - 50, player.y - 50, 100, 100, 0);
+                        player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
                 }
                 else {
                     al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
-                        player.x - 50, player.y - 50, 100, 100, 0);
+                        player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
                 }
             }
         }
         else {
             if (player.sees_left) {
                 al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
-                    player.x - 50, player.y - 50, 100, 100, 0);
+                    player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
             }
             else {
                 al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
@@ -75,24 +72,25 @@ void gamescreen(void) {
             }
         }
 
+        int enemy_size = 70;
 
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
-                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
                 }
                 else if (enemies[i].matched_enemy == -1 && enemies[i].x >= player.x) {
                     al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
-                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
                 }
                 else if (enemies[i].x >= summons[enemies[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
-                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
                 }
                 else {
                     al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
-                        enemies[i].x - 50, enemies[i].y - 50, 100, 100, 0);
+                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
                 }
             }
         }
@@ -186,18 +184,19 @@ void gamescreen(void) {
             }
         }
 
+        int bullet_size = 80;
         for (int i = 0; i < MAX_BULLETS; i++) {
             if (bullets[i].active) {
                 al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
-                    bullets[i].x - 50, bullets[i].y - 50, 100, 100, 0);
+                    bullets[i].x - bullet_size / 2, bullets[i].y - bullet_size / 2, bullet_size, bullet_size, 0);
             }
         }
 
         for (int j = 0; j < MAX_BOSSES; ++j) {
             for (int i = 0; i < MAX_BULLETS; i++) {
                 if (boss_bullets[j][i].active) {
-                    al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
-                        boss_bullets[j][i].x - 50, boss_bullets[j][i].y - 50, 100, 100, 0);
+                    al_draw_scaled_bitmap(fireball_boss_img, 0, 0, al_get_bitmap_width(fireball_boss_img), al_get_bitmap_height(fireball_boss_img),
+                        boss_bullets[j][i].x - 35, boss_bullets[j][i].y - 35, 70, 70, 0);
                 }
             }
         }

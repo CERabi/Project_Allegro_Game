@@ -17,6 +17,7 @@
 #define MAX_GOBLINS 5
 #define MAX_BULLETS 10
 #define COLLISION_DISTANCE 50
+#define BULLET_COLLISION_DISTANCE 30
 #define BULLET_DAMAGE 1
 #define ENERMY_DAMAGE 1
 #define ENEMY_HEALTH 3
@@ -36,9 +37,16 @@ ALLEGRO_BITMAP* enemy_boss_img_r;
 ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
+ALLEGRO_BITMAP* fireball_boss_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
+ALLEGRO_BITMAP* SHOP_ORIGIN;
+ALLEGRO_BITMAP* SHOP_UP_ATT;
+ALLEGRO_BITMAP* SHOP_UP_ATT_NO;
+ALLEGRO_BITMAP* SHOP_UP_SPD;
+ALLEGRO_BITMAP* SHOP_UP_SPD_NO;
+//ALLEGRO_BITMAP* SHOP_FRIENDLY;
 
 
 ALLEGRO_EVENT_QUEUE* event_queue;
@@ -65,5 +73,6 @@ int MAX_SUMMONS;
 int MAX_ENEMIES;
 
 void load_resource(void);
-void destroy_resource(void);
+void destroy_resource(void); 
+ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original);
 #endif
