@@ -48,6 +48,10 @@ void gamescreen(void) {
             50, 55, 40, 40, 0);
         al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
             50, 105, 40, 40, 0);
+        al_draw_scaled_bitmap(HUD_speed, 0, 0, al_get_bitmap_width(HUD_speed), al_get_bitmap_height(HUD_speed),
+            50, 210, 40, 40, 0);
+        al_draw_scaled_bitmap(HUD_damage, 0, 0, al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
+            140, 210, 40, 40, 0);
 
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {

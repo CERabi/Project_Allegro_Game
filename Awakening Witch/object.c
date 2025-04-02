@@ -293,7 +293,7 @@ void check_player_collision() {
                 if (invincible_timer <= 0) {
                     player.health -= ENERMY_DAMAGE;
                     invincible_timer = 180;
-                    printf("플레이어 남은 체력 : %d\n", player.health);
+                    
                     if (player.health <= 0) {
                         name(font);  // 이름 입력 받기
                         break;
