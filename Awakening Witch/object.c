@@ -226,7 +226,6 @@ void spawn_enermy(int number) {
         break;
     case 2:
         // 보스
-        target_array = enemies_boss;
         al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
         i = MAX_KNIGHTS;
         temp = MAX_BOSSES;
@@ -320,7 +319,6 @@ void check_collision() {
                 enemies[i].health-=summons[j].damage;
                 summons[j].health-=enemies[i].damage;
                 enemies[i].invincible = 120;
-                printf("적 %d의 체력 : %d 소환수 %d의 체력 %d\n", i, enemies[i].health, j, summons[j].health);
                 if (enemies[i].health <= 0) {
                     money_display += enemies[i].credit;
                     score_display += enemies[i].score;
@@ -403,7 +401,6 @@ void boss_shoot(int j) {
     int k = j + MAX_KNIGHTS;
     for (int i = 0; i < MAX_BULLETS; i++) {
         if (!boss_bullets[j][i].active && enemies[k].active) {
-            printf("보스 %d : %d\n", j, i);
             boss_bullets[j][i].x = enemies[k].x;
             boss_bullets[j][i].y = enemies[k].y;
             boss_bullets[j][i].active = true;
