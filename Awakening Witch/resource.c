@@ -14,24 +14,34 @@ void load_resource(void) {
     }
 
     // 소환수 이미지 로드
-    summon_img_l = al_load_bitmap("Resource/pic/knight_l.png");
+    summon_img_l = al_load_bitmap("Resource/pic/zombie_l.png");
     if (!summon_img_l) {
+        fprintf(stderr, "zombie_l.png 로드 실패!\n");
+        return;
+    }
+    summon_img_r = al_load_bitmap("Resource/pic/zombie_r.png");
+    if (!summon_img_r) {
+        fprintf(stderr, "zombie_r.png 로드 실패!\n");
+        return;
+    }
+    summon2_img_l = al_load_bitmap("Resource/pic/goblin_l.png");
+    if (!summon_img_l) {
+        fprintf(stderr, "goblin_l.png 로드 실패\n");
+        return;
+    }
+    summon2_img_r = al_load_bitmap("Resource/pic/goblin_r.png");
+    if (!summon_img_r) {
+        fprintf(stderr, "goblin_r.png 로드 실패!\n");
+        return;
+    }
+    enermy_img_l = al_load_bitmap("Resource/pic/knight_l.png");
+    if (!enermy_img_l) {
         fprintf(stderr, "knight_l.png 로드 실패!\n");
         return;
     }
-    summon_img_r = al_load_bitmap("Resource/pic/knight_r.png");
-    if (!summon_img_r) {
-        fprintf(stderr, "knight_r.png 로드 실패!\n");
-        return;
-    }
-    enermy_img_l = al_load_bitmap("Resource/pic/goblin_l.png");
-    if (!enermy_img_l) {
-        fprintf(stderr, "goblin_l.png 로드 실패!\n");
-        return;
-    }
-    enermy_img_r = al_load_bitmap("Resource/pic/goblin_r.png");
+    enermy_img_r = al_load_bitmap("Resource/pic/knight_r.png");
     if (!enermy_img_r) {
-        fprintf(stderr, "goblin_r.png 로드 실패!\n");
+        fprintf(stderr, "knight_r.png 로드 실패!\n");
         return;
     }
     enemy_boss_img_l = al_load_bitmap("Resource/pic/boss_l.png");

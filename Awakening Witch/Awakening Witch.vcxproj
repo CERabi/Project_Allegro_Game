@@ -176,6 +176,8 @@
     <Image Include="Resource\pic\player_l.png" />
     <Image Include="Resource\pic\player_r.png" />
     <Image Include="Resource\pic\score.png" />
+    <Image Include="Resource\pic\zombie_l.png" />
+    <Image Include="Resource\pic\zombie_r.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\rank_db\rank.txt" />

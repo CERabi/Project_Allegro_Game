@@ -11,8 +11,10 @@
 #define PLAYER_SPEED 5
 #define ENEMY_SPEED 1.5f
 #define SUMMON_SPEED 1.7f
-#define MAX_ENEMIES 5
-#define MAX_SUMMONS 5
+#define MAX_KNIGHTS 5
+#define MAX_BOSSES 3
+#define MAX_ZOMBIES 5
+#define MAX_GOBLINS 5
 #define MAX_BULLETS 10
 #define COLLISION_DISTANCE 50
 #define BULLET_DAMAGE 1
@@ -25,6 +27,8 @@
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
+ALLEGRO_BITMAP* summon2_img_l;
+ALLEGRO_BITMAP* summon2_img_r;
 ALLEGRO_BITMAP* enermy_img_l;
 ALLEGRO_BITMAP* enermy_img_r;
 ALLEGRO_BITMAP* enemy_boss_img_l;
@@ -55,8 +59,10 @@ double last_att;
 char state[20];
 long score_display;
 int money_display;
-int boss_shoot_timer[MAX_ENEMIES];
+int boss_shoot_timer[MAX_BOSSES];
 int boss_attack_delay;
+int MAX_SUMMONS;
+int MAX_ENEMIES;
 
 void load_resource(void);
 void destroy_resource(void);
