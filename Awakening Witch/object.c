@@ -15,7 +15,7 @@ void move_player() {
         player.sees_left = true;
     }
     if (key[ALLEGRO_KEY_RIGHT]) {
-        player.x += player.speed; // 고치기
+        player.x += player.speed; // 고치
         player_direction = RIGHT;
         player.sees_left = false;
     }
