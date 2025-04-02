@@ -23,6 +23,7 @@ int main(void) {
         if (!strcmp(state, "game")) {
             gamescreen();
             strcpy(state, "menu");
+            reset_game_state();
         }
         else if (!strcmp(state, "rank")) rank();
         else { // 마우스 이벤트 업데이트
