@@ -14,15 +14,6 @@ void draw_menu() {
     int button_x = 1500 / 2 - button_width / 2;  // 버튼을 가운데에 정렬
     int button_y = 400;  // 첫 번째 버튼의 y 좌표
 
-    // 버튼을 그리기
-    //al_draw_filled_rectangle(button_x, button_y, button_x + button_width, button_y + button_height, al_map_rgb(255, 255, 255));
-    //al_draw_filled_rectangle(button_x, button_y + 100, button_x + button_width, button_y + 100 + button_height, al_map_rgb(255, 255, 255));
-    //al_draw_filled_rectangle(button_x, button_y + 200, button_x + button_width, button_y + 200 + button_height, al_map_rgb(255, 255, 255));
-
-    // 버튼 경계선 그리기
-    //al_draw_rectangle(button_x, button_y, button_x + button_width, button_y + button_height, al_map_rgb(0, 0, 0), 3);
-    //al_draw_rectangle(button_x, button_y + 100, button_x + button_width, button_y + 100 + button_height, al_map_rgb(0, 0, 0), 3);
-    //al_draw_rectangle(button_x, button_y + 200, button_x + button_width, button_y + 200 + button_height, al_map_rgb(0, 0, 0), 3);
 
     // 텍스트 크기 설정
     int text_size = 70;  // 텍스트 크기 키움

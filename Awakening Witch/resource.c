@@ -64,7 +64,11 @@ void load_resource(void) {
         printf("이미지를 불러오지 못했습니다!\n");
         return;
     }
-
+    HUD_life = al_load_bitmap("Resource/pic/life.png");
+    if (!HUD_life) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
 
     // 폰트 로드
     font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 20, 0);
@@ -100,6 +104,7 @@ void destroy_resource(void) {
     al_destroy_bitmap(fireball_img);
     al_destroy_bitmap(HUD_score);
     al_destroy_bitmap(HUD_money);
+    al_destroy_bitmap(HUD_life);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
     al_destroy_timer(timer);

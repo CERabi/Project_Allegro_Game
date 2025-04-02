@@ -32,6 +32,8 @@ ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
+ALLEGRO_BITMAP* HUD_life;
+
 
 ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
