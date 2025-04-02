@@ -166,6 +166,7 @@
     <Image Include="Resource\pic\boss_l.png" />
     <Image Include="Resource\pic\boss_r.png" />
     <Image Include="Resource\pic\fireball.png" />
+    <Image Include="Resource\pic\fireball_boss.png" />
     <Image Include="Resource\pic\goblin_l.png" />
     <Image Include="Resource\pic\goblin_r.png" />
     <Image Include="Resource\pic\knight_l.png" />

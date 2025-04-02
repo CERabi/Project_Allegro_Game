@@ -159,8 +159,8 @@ void gamescreen(void) {
         for (int j = 0; j < MAX_ENEMIES; ++j) {
             for (int i = 0; i < MAX_BULLETS; i++) {
                 if (boss_bullets[j][i].active) {
-                    al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
-                        boss_bullets[j][i].x - 50, boss_bullets[j][i].y - 50, 100, 100, 0);
+                    al_draw_scaled_bitmap(fireball_boss_img, 0, 0, al_get_bitmap_width(fireball_boss_img), al_get_bitmap_height(fireball_boss_img),
+                        boss_bullets[j][i].x - 35, boss_bullets[j][i].y - 35, 70, 70, 0);
                 }
             }
         }

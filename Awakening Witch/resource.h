@@ -32,6 +32,7 @@ ALLEGRO_BITMAP* enemy_boss_img_r;
 ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
+ALLEGRO_BITMAP* fireball_boss_img;
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;

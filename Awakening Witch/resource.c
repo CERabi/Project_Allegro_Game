@@ -58,8 +58,14 @@ void load_resource(void) {
         return;
     }
 
+    // 투사체 이미지 로드
     fireball_img = al_load_bitmap("Resource/pic/fireball.png");
-    if(!fireball_img) {
+    if (!fireball_img) {
+        fprintf(stderr, "fireball.png 로드 실패!\n");
+        return;
+    }
+    fireball_boss_img = al_load_bitmap("Resource/pic/fireball_boss.png");
+    if (!fireball_boss_img) {
         fprintf(stderr, "fireball.png 로드 실패!\n");
         return;
     }
