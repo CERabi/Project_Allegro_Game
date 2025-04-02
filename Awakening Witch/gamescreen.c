@@ -48,7 +48,7 @@ void gamescreen(void) {
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
         
-        int player_size = 80;
+        int player_size = 100;
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {
                 if (player.sees_left) {
@@ -72,7 +72,7 @@ void gamescreen(void) {
             }
         }
 
-        int enemy_size = 80;
+        int enemy_size = 100;
 
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
@@ -115,7 +115,7 @@ void gamescreen(void) {
                 }
             }
         }
-
+        int summon_size = 90;
         for (int i = 0; i < MAX_ZOMBIES; i++) {
             if (summons[i].active) {
                 int closest_enemy = -1;
@@ -133,19 +133,19 @@ void gamescreen(void) {
                 }
                 if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(summon_img_r, 0, 0, al_get_bitmap_width(summon_img_r), al_get_bitmap_height(summon_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
                 }
                 else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(summon_img_l, 0, 0, al_get_bitmap_width(summon_img_l), al_get_bitmap_height(summon_img_l),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
                 }
                 else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
                     al_draw_scaled_bitmap(summon_img_r, 0, 0, al_get_bitmap_width(summon_img_r), al_get_bitmap_height(summon_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
                 }
                 else {
                     al_draw_scaled_bitmap(summon_img_l, 0, 0, al_get_bitmap_width(summon_img_l), al_get_bitmap_height(summon_img_l),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
                 }
             }
         }
