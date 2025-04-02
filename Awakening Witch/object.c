@@ -313,7 +313,7 @@ void check_bullet_collision() {
                     float dx = bullets[i].x - enemies[j].x;
                     float dy = bullets[i].y - enemies[j].y;
                     float distance = sqrt(dx * dx + dy * dy);
-                    if (distance < COLLISION_DISTANCE) {
+                    if (distance < BULLET_COLLISION_DISTANCE) {
                         enemies[j].health -= player.damage;
                         if (enemies[j].health <= 0) {
                             score_display += 100;
