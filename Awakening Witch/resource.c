@@ -34,6 +34,11 @@ void load_resource(void) {
         fprintf(stderr, "goblin_r.png 로드 실패!\n");
         return;
     }
+    summon3_img_r = al_load_bitmap("Resource/pic/bat.png");
+    if (!summon_img_r) {
+        fprintf(stderr, "goblin_r.png 로드 실패!\n");
+        return;
+    }
     enermy_img_l = al_load_bitmap("Resource/pic/knight_l.png");
     if (!enermy_img_l) {
         fprintf(stderr, "knight_l.png 로드 실패!\n");
@@ -162,10 +167,13 @@ void load_resource(void) {
 
 void destroy_resource(void) {
     al_destroy_bitmap(background);
-    al_destroy_bitmap(summon_img_l);
-    al_destroy_bitmap(summon_img_r);
     al_destroy_bitmap(enermy_img_l);
     al_destroy_bitmap(enermy_img_r);
+    al_destroy_bitmap(summon_img_l);
+    al_destroy_bitmap(summon_img_r);
+    al_destroy_bitmap(summon2_img_l);
+    al_destroy_bitmap(summon2_img_r);
+    al_destroy_bitmap(summon3_img_r);
     al_destroy_bitmap(player_img_l);
     al_destroy_bitmap(player_img_r);
     al_destroy_bitmap(fireball_img);

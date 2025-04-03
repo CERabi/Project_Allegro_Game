@@ -179,11 +179,20 @@ void spawn_summon(int number) {
         credit = 100;
         speed = 2.0;
         break;
+    case 13:
+        // 박쥐
+        i = MAX_ZOMBIES + MAX_GOBLINS;
+        temp = MAX_BATS;
+        health = 5;
+        damage = 2;
+        credit = 100;
+        speed = 3.0;
+        break;
     default:
         printf("잘못된 입력값: %d\n", number);
         return;  // 잘못된 값이면 함수 종료
     }
-    int max_summons = MAX_ZOMBIES;
+    int max_summons = i;
 
     for (; i < max_summons + temp; i++) {
         if (!target_array[i].active && money_display >= credit) {
@@ -226,7 +235,6 @@ void spawn_enermy(int number) {
         break;
     case 2:
         // 보스
-        target_array = enemies_boss;
         al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
         i = MAX_KNIGHTS;
         temp = MAX_BOSSES;
@@ -287,8 +295,7 @@ void clear_summons(int number) {
         max_summons = MAX_ENEMIES;
         break;
     default:
-        printf("잘못된 입력값: %d\n", number);
-        return;  // 잘못된 값이면 함수 종료
+        return;
     }
     for (int i = 0; i < max_summons; i++) {
         target_array[i].active = false;
@@ -320,7 +327,6 @@ void check_collision() {
                 enemies[i].health-=summons[j].damage;
                 summons[j].health-=enemies[i].damage;
                 enemies[i].invincible = 120;
-                printf("적 %d의 체력 : %d 소환수 %d의 체력 %d\n", i, enemies[i].health, j, summons[j].health);
                 if (enemies[i].health <= 0) {
                     money_display += enemies[i].credit;
                     score_display += enemies[i].score;
@@ -438,6 +444,8 @@ void move_boss_bullets() {
         }
     }
 }
+
+
 
 void attack_boss() {
     for (int i = 0; i < MAX_BOSSES; ++i) {
