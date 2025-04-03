@@ -164,7 +164,7 @@ void spawn_summon(int number) {
     case 11:
         // 좀비
         i = 0;
-        temp = i;
+        temp = MAX_ZOMBIES;
         health = 3;
         damage = 1;
         credit = 50;
