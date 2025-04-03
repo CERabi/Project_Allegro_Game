@@ -112,6 +112,7 @@ int MAX_SUMMONS;
 int MAX_ENEMIES;
 int shake_amount;
 int shake_duration;
+int prev_score;
 double score_multiplier;
 
 int current_frame[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];

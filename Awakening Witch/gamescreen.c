@@ -44,7 +44,6 @@ void gamescreen(void) {
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == timer) {
-            
             move_player();
             move_bullets();
             move_summons();
@@ -54,9 +53,11 @@ void gamescreen(void) {
             check_boss_bullet_collision();
             check_player_collision();
             attack_boss();
-            
         }
         
+        if (score_display - prev_score >= 1000) {
+            level_up();
+        }
 
         update_animation();
         update_animation2();

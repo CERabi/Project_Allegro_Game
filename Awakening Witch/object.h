@@ -49,6 +49,7 @@ void render_screen();
 void move_player();
 void player_enhance_sp(void);
 void player_enhance_dm(void);
+void player_enhance_bu(void);
 void fire_bullet();
 void boss_shoot(int);
 void move_summons();
