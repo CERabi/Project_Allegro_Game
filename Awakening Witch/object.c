@@ -397,6 +397,56 @@ void check_bullet_collision() {
     }
 }
 
+void check_boss_bullet_collision(void) {
+    for (int j = 0; j < MAX_BOSSES; ++j) {
+        for (int i = 0; i < MAX_BULLETS; i++) {
+            if (boss_bullets[j][i].active) {
+                for (int k = 0; k < MAX_SUMMONS; k++) {
+                    if (summons[k].active) {
+                        float dx = boss_bullets[j][i].x - summons[k].x;
+                        float dy = boss_bullets[j][i].y - summons[k].y;
+                        float distance = sqrt(dx * dx + dy * dy);
+                        if (distance < BULLET_COLLISION_DISTANCE) {
+                            summons[k].health -= enemies[MAX_KNIGHTS+j].damage;
+                            al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+                            if (summons[k].health <= 0) {
+                                summons[k].active = false;
+                                summons[k].matched_enemy = -1;
+
+                                for (int l = 0; l < MAX_SUMMONS; l++) {
+                                    if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
+                                        enemies[l].matched = false;
+                                        summons[l].matched_enemy = -1;
+                                        break;
+                                    }
+                                }
+                            }
+                            boss_bullets[j][i].active = false;
+                        }
+                    }
+                }
+            }
+            if (boss_bullets[j][i].active) {
+                float dx = boss_bullets[j][i].x - player.x;
+                float dy = boss_bullets[j][i].y - player.y;
+                float distance = sqrt(dx * dx + dy * dy);
+                if (distance < BULLET_COLLISION_DISTANCE) {
+                    if (invincible_timer <= 0) {
+                        player.health--;
+                        invincible_timer = 180;
+                        al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+                    }
+                    if (player.health <= 0) {
+                        name(font);  // 이름 입력 받기
+                        break;
+                    }
+                    boss_bullets[j][i].active = false;
+                }
+            }
+        }
+    }
+}
+
 void boss_shoot(int j) {
     int k = j + MAX_KNIGHTS;
     for (int i = 0; i < MAX_BULLETS; i++) {

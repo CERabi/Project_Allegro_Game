@@ -55,5 +55,6 @@ void spawn_enermy(int);
 void clear_summons(int);
 void check_collision(); 
 void check_bullet_collision();
+void check_boss_bullet_collision(void);
 void check_player_collision();
 #endif

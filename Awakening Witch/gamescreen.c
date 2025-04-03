@@ -40,6 +40,7 @@ void gamescreen(void) {
             move_boss_bullets();
             check_collision();
             check_bullet_collision();
+            check_boss_bullet_collision();
             check_player_collision();
             attack_boss();
         }
