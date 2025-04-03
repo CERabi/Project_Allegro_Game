@@ -55,6 +55,7 @@ void attack_boss(void);
 void spawn_summon(int);
 void spawn_enermy(int);
 void clear_summons(int);
+void Special_moves(int);
 void check_collision();
 void check_bullet_collision();
 void check_boss_bullet_collision(void);

@@ -14,10 +14,13 @@ void gamescreen(void) {
             // 적 삭제
             if (key[ALLEGRO_KEY_E]) clear_summons(1);
             
+            // 필살기
+            if (key[ALLEGRO_KEY_G]) Special_moves(1);
+
             // 아군 생성
-            if (key[ALLEGRO_KEY_A]) spawn_summon(11);
-            if (key[ALLEGRO_KEY_S]) spawn_summon(12);
-            if (key[ALLEGRO_KEY_D]) spawn_summon(13);
+            if (key[ALLEGRO_KEY_1]) spawn_summon(11);
+            if (key[ALLEGRO_KEY_2]) spawn_summon(12);
+            if (key[ALLEGRO_KEY_3]) spawn_summon(13);
 
             // 아군 삭제
             if (key[ALLEGRO_KEY_F]) clear_summons(11);
@@ -26,8 +29,8 @@ void gamescreen(void) {
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
             // 본인 강화(상점)
-            if (key[ALLEGRO_KEY_F]) player_enhance_dm();
-            if (key[ALLEGRO_KEY_G]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_A]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_S]) player_enhance_sp();
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {

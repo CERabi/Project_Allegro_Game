@@ -288,21 +288,71 @@ void spawn_enermy(int number) {
 
 void clear_summons(int number) {
     Summon* target_array;
-    int max_summons;
+    Summon* target_array2;
+    int max;
+    int max2;
     switch (number) {
-    case 11:
-        target_array = summons;
-        max_summons = MAX_SUMMONS;
-        break;
     case 1:
         target_array = enemies;
-        max_summons = MAX_ENEMIES;
+        target_array2 = summons;
+        max = MAX_ENEMIES;
+        max2 = MAX_SUMMONS;
+        break;
+    case 11:
+        target_array = summons;
+        target_array2 = enemies;
+        max = MAX_SUMMONS;
+        max2 = MAX_ENEMIES;
         break;
     default:
         return;
     }
-    for (int i = 0; i < max_summons; i++) {
+    for (int i = 0; i < max; i++) {
         target_array[i].active = false;
+        for (int k = 0; k < max2; k++) {
+            if (target_array2[k].active && target_array2[k].matched && target_array2[k].matched_enemy == i) {
+                target_array2[k].matched = false;
+                target_array2[k].matched_enemy = -1;
+                break;
+            }
+        }
+    }
+}
+
+void Special_moves(int number) {
+    Summon* target_array;
+    Summon* target_array2;
+    int max;
+    int max2;
+    switch (number) {
+    case 1:
+        target_array = enemies;
+        target_array2 = summons;
+        max = MAX_ENEMIES;
+        max2 = MAX_SUMMONS;
+        break;
+    case 11:
+        target_array = summons;
+        target_array2 = enemies;
+        max = MAX_SUMMONS;
+        max2 = MAX_ENEMIES;
+        break;
+    default:
+        return;
+    }
+    for (int i = 0; i < max; i++) {
+        target_array[i].health -= 5;
+        invincible_timer = 120;
+        if (target_array[i].health <= 0) {
+            target_array[i].active = false;
+            for (int k = 0; k < max2; k++) {
+                if (target_array2[k].active && target_array2[k].matched && target_array2[k].matched_enemy == i) {
+                    target_array2[k].matched = false;
+                    target_array2[k].matched_enemy = -1;
+                    break;
+                }
+            }
+        }
     }
 }
 
