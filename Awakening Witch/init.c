@@ -20,6 +20,12 @@ void reset_game_state() {
     score_display = 0;
     money_display = 100000;
     boss_attack_delay = 20;
+    for (int i = 0; i < MAX_GOBLINS; ++i) {
+        current_frame[i] = 0;
+        current_enemies_frame[i] = 0;
+        last_update_time[i] = 0;
+        last_update_enemies_time[i] = 0;
+    }
 
     // 전체 몬스터 수
     MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS;

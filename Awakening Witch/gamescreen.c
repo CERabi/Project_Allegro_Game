@@ -1,5 +1,6 @@
 #include "gamescreen.h"
 
+
 void gamescreen(void) {
     while (player.health > 0) {
         ALLEGRO_EVENT event;
@@ -42,6 +43,7 @@ void gamescreen(void) {
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == timer) {
+            
             move_player();
             move_bullets();
             move_summons();
@@ -52,6 +54,8 @@ void gamescreen(void) {
             check_player_collision();
             attack_boss();
         }
+        update_animation();
+        update_animation2();
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
@@ -85,21 +89,22 @@ void gamescreen(void) {
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
-                    al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
-                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
+                    al_draw_scaled_bitmap(knight_sword[current_enemies_frame[i]], 0, 0, al_get_bitmap_width(knight_sword[current_enemies_frame[i]]), al_get_bitmap_height(knight_sword[current_enemies_frame[i]]),
+                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, ALLEGRO_FLIP_HORIZONTAL);
                 }
                 else if (enemies[i].matched_enemy == -1 && enemies[i].x >= player.x) {
-                    al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
+                    al_draw_scaled_bitmap(knight_sword[current_enemies_frame[i]], 0, 0, al_get_bitmap_width(knight_sword[current_enemies_frame[i]]), al_get_bitmap_height(knight_sword[current_enemies_frame[i]]),
                         enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
                 }
                 else if (enemies[i].x >= summons[enemies[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(enermy_img_l, 0, 0, al_get_bitmap_width(enermy_img_l), al_get_bitmap_height(enermy_img_l),
+                    al_draw_scaled_bitmap(knight_sword[current_enemies_frame[i]], 0, 0, al_get_bitmap_width(knight_sword[current_enemies_frame[i]]), al_get_bitmap_height(knight_sword[current_enemies_frame[i]]),
                         enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
                 }
                 else {
-                    al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
-                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
+                    al_draw_scaled_bitmap(knight_sword[current_enemies_frame[i]], 0, 0, al_get_bitmap_width(knight_sword[current_enemies_frame[i]]), al_get_bitmap_height(knight_sword[current_enemies_frame[i]]),
+                        enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, ALLEGRO_FLIP_HORIZONTAL);
                 }
+                if (enemies[i].matched_enemy == -1)  current_enemies_frame[i] = 0;
             }
         }
 
@@ -141,23 +146,26 @@ void gamescreen(void) {
                     }
                 }
                 if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(summon_img_r, 0, 0, al_get_bitmap_width(summon_img_r), al_get_bitmap_height(summon_img_r),
+                    al_draw_scaled_bitmap(zombie_sword[current_frame[i]], 0, 0, al_get_bitmap_width(zombie_sword[current_frame[i]]), al_get_bitmap_height(zombie_sword[current_frame[i]]),
                         summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
+
                 }
                 else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(summon_img_l, 0, 0, al_get_bitmap_width(summon_img_l), al_get_bitmap_height(summon_img_l),
-                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
+                    al_draw_scaled_bitmap(zombie_sword[current_frame[i]], 0, 0, al_get_bitmap_width(zombie_sword[current_frame[i]]), al_get_bitmap_height(zombie_sword[current_frame[i]]),
+                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, ALLEGRO_FLIP_HORIZONTAL);
                 }
                 else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
-                    al_draw_scaled_bitmap(summon_img_r, 0, 0, al_get_bitmap_width(summon_img_r), al_get_bitmap_height(summon_img_r),
+                    al_draw_scaled_bitmap(zombie_sword[current_frame[i]], 0, 0, al_get_bitmap_width(zombie_sword[current_frame[i]]), al_get_bitmap_height(zombie_sword[current_frame[i]]),
                         summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
                 }
                 else {
-                    al_draw_scaled_bitmap(summon_img_l, 0, 0, al_get_bitmap_width(summon_img_l), al_get_bitmap_height(summon_img_l),
-                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, 0);
+                    al_draw_scaled_bitmap(zombie_sword[current_frame[i]], 0, 0, al_get_bitmap_width(zombie_sword[current_frame[i]]), al_get_bitmap_height(zombie_sword[current_frame[i]]),
+                        summons[i].x - summon_size / 2, summons[i].y - summon_size / 2, summon_size, summon_size, ALLEGRO_FLIP_HORIZONTAL);
                 }
+                if (summons[i].matched_enemy == -1)  current_frame[i] = 0;
             }
         }
+
         int summon_size1 = 120;
         for (int i = MAX_ZOMBIES; i < MAX_ZOMBIES+MAX_GOBLINS; i++) {
             if (summons[i].active) {
@@ -174,22 +182,26 @@ void gamescreen(void) {
                         }
                     }
                 }
+            
+                //오른쪽 바라보기(1,3) 
                 if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(summon2_img_r, 0, 0, al_get_bitmap_width(summon2_img_r), al_get_bitmap_height(summon2_img_r),
-                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
+                    al_draw_scaled_bitmap(goblin_sword[current_frame[i]], 0, 0, al_get_bitmap_width(goblin_sword[current_frame[i]]), al_get_bitmap_height(goblin_sword[current_frame[i]]),
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, ALLEGRO_FLIP_HORIZONTAL);
+               
                 }
                 else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(summon2_img_l, 0, 0, al_get_bitmap_width(summon2_img_l), al_get_bitmap_height(summon2_img_l),
-                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
+                    al_draw_scaled_bitmap(goblin_sword[current_frame[i]], 0, 0, al_get_bitmap_width(goblin_sword[current_frame[i]]), al_get_bitmap_height(goblin_sword[current_frame[i]]),
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1,0);
                 }
                 else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
-                    al_draw_scaled_bitmap(summon2_img_r, 0, 0, al_get_bitmap_width(summon2_img_r), al_get_bitmap_height(summon2_img_r),
-                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
+                    al_draw_scaled_bitmap(goblin_sword[current_frame[i]], 0, 0, al_get_bitmap_width(goblin_sword[current_frame[i]]), al_get_bitmap_height(goblin_sword[current_frame[i]]),
+                        summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, ALLEGRO_FLIP_HORIZONTAL);
                 }
                 else {
-                    al_draw_scaled_bitmap(summon2_img_l, 0, 0, al_get_bitmap_width(summon2_img_l), al_get_bitmap_height(summon2_img_l),
+                    al_draw_scaled_bitmap(goblin_sword[current_frame[i]], 0, 0, al_get_bitmap_width(goblin_sword[current_frame[i]]), al_get_bitmap_height(goblin_sword[current_frame[i]]),
                         summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
                 }
+                if (summons[i].matched_enemy == -1)  current_frame[i] = 0;
             }
         }
 
@@ -210,22 +222,25 @@ void gamescreen(void) {
                     }
                 }
                 if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                    al_draw_scaled_bitmap(bat_sword[current_frame[i]], 0, 0, al_get_bitmap_width(bat_sword[current_frame[i]]), al_get_bitmap_height(bat_sword[current_frame[i]]),
                         summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, 0);
+
                 }
                 else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
-                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                    al_draw_scaled_bitmap(bat_sword[current_frame[i]], 0, 0, al_get_bitmap_width(bat_sword[current_frame[i]]), al_get_bitmap_height(bat_sword[current_frame[i]]),
                         summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, ALLEGRO_FLIP_HORIZONTAL);
                 }
                 else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
-                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                    al_draw_scaled_bitmap(bat_sword[current_frame[i]], 0, 0, al_get_bitmap_width(bat_sword[current_frame[i]]), al_get_bitmap_height(bat_sword[current_frame[i]]),
                         summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, 0);
                 }
                 else {
-                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                    al_draw_scaled_bitmap(bat_sword[current_frame[i]], 0, 0, al_get_bitmap_width(bat_sword[current_frame[i]]), al_get_bitmap_height(bat_sword[current_frame[i]]),
                         summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, ALLEGRO_FLIP_HORIZONTAL);
                 }
+                if (summons[i].matched_enemy == -1)  current_frame[i] = 0;
             }
+        
         }
 
         int bullet_size = 80;

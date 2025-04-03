@@ -28,6 +28,8 @@
 #define PLAYER_HEALTH 5
 #define BULLET_SPEED 7
 #define ATTACK_DELAY 0.5
+#define FRAME_COUNT 3
+#define FRAME_DELAY 0.2
 
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP* summon_img_l;
@@ -56,6 +58,12 @@ ALLEGRO_BITMAP* SHOP_UP_SPD_NO;
 ALLEGRO_BITMAP* SHOP_UP_SPD_MAX;
 //ALLEGRO_BITMAP* SHOP_FRIENDLY;
 
+ALLEGRO_BITMAP* goblin_sword[FRAME_COUNT];
+ALLEGRO_BITMAP* bat_sword[FRAME_COUNT];
+ALLEGRO_BITMAP* zombie_sword[FRAME_COUNT];
+ALLEGRO_BITMAP* knight_sword[FRAME_COUNT];
+
+
 ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
 ALLEGRO_TIMER* timer;
@@ -71,6 +79,7 @@ ALLEGRO_SAMPLE* monster_hit;
 ALLEGRO_SAMPLE* player_attack;
 ALLEGRO_SAMPLE* boss_summon;
 
+
 float player_x;
 float player_y;
 float player_size; 
@@ -84,6 +93,16 @@ int boss_shoot_timer[MAX_BOSSES];
 int boss_attack_delay;
 int MAX_SUMMONS;
 int MAX_ENEMIES;
+
+int current_frame[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
+double last_update_time[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
+double current_time[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
+
+int current_enemies_frame[MAX_KNIGHTS];
+double last_update_enemies_time[MAX_KNIGHTS];
+double current_enemies_time[MAX_KNIGHTS];
+
+
 
 void load_resource(void);
 void destroy_resource(void); 
