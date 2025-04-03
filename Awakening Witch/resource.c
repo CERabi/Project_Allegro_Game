@@ -60,6 +60,42 @@ void load_resource(void) {
         return;
     }
 
+	char goblin_motion[50];
+	for (int i = 0; i < FRAME_COUNT; i++) {
+		sprintf_s(goblin_motion, sizeof(goblin_motion), "Resource/pic/goblin_sword_%d.png", i + 1);
+		goblin_sword[i] = al_load_bitmap(goblin_motion);
+		if (!goblin_sword[i]) {
+			printf("Failed to load image: %s\n", goblin_motion);
+		}
+	}
+
+	char bat_motion[50];
+	for (int i = 0; i < FRAME_COUNT; i++) {
+		sprintf_s(bat_motion, sizeof(bat_motion), "Resource/pic/bat_%d.png", i + 1);
+		bat_sword[i] = al_load_bitmap(bat_motion);
+		if (!bat_sword[i]) {
+			printf("Failed to load image: %s\n", bat_motion);
+		}
+	}
+
+	char zombie_motion[50];
+	for (int i = 0; i < FRAME_COUNT; i++) {
+		sprintf_s(zombie_motion, sizeof(zombie_motion), "Resource/pic/zombie_sword_%d.png", i + 1);
+		zombie_sword[i] = al_load_bitmap(zombie_motion);
+		if (!zombie_sword[i]) {
+			printf("Failed to load image: %s\n", zombie_motion);
+		}
+	}
+
+	char knight_motion[50];
+	for (int i = 0; i < FRAME_COUNT; i++) {
+		sprintf_s(knight_motion, sizeof(knight_motion), "Resource/pic/knight_sword_%d.png", i + 1);
+		knight_sword[i] = al_load_bitmap(knight_motion);
+		if (!knight_sword[i]) {
+			printf("Failed to load image: %s\n", knight_motion);
+		}
+	}
+
 
     // 플레이어 이미지 로드
     player_img_l = al_load_bitmap("Resource/pic/player_l.png");
@@ -175,13 +211,16 @@ void load_resource(void) {
         fprintf(stderr, "player_attack 로드 실패!\n");
         return;
     }
-
 }
 
 void destroy_resource(void) {
     al_destroy_bitmap(background);
     al_destroy_bitmap(summon_img_l);
     al_destroy_bitmap(summon_img_r);
+    al_destroy_bitmap(goblin_sword[0]);
+    al_destroy_bitmap(goblin_sword[1]);
+    al_destroy_bitmap(goblin_sword[2]);
+    al_destroy_bitmap(goblin_sword[3]);
     al_destroy_bitmap(summon2_img_l);
     al_destroy_bitmap(summon2_img_r);
     al_destroy_bitmap(summon3_img_r);
@@ -228,32 +267,33 @@ void destroy_resource(void) {
     al_destroy_sample(boss_summon);
 }
 
+
 ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original) {
-    int width = al_get_bitmap_width(original);
-    int height = al_get_bitmap_height(original);
+	int width = al_get_bitmap_width(original);
+	int height = al_get_bitmap_height(original);
 
-    ALLEGRO_BITMAP* gray_bitmap = al_create_bitmap(width, height);
-    if (!gray_bitmap) {
-        printf("그레이스케일 비트맵 생성 실패!\n");
-        return NULL;
-    }
+	ALLEGRO_BITMAP* gray_bitmap = al_create_bitmap(width, height);
+	if (!gray_bitmap) {
+		printf("그레이스케일 비트맵 생성 실패!\n");
+		return NULL;
+	}
 
-    al_set_target_bitmap(gray_bitmap);
+	al_set_target_bitmap(gray_bitmap);
 
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            ALLEGRO_COLOR color = al_get_pixel(original, x, y);
-            unsigned char r, g, b;
-            al_unmap_rgb(color, &r, &g, &b);
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			ALLEGRO_COLOR color = al_get_pixel(original, x, y);
+			unsigned char r, g, b;
+			al_unmap_rgb(color, &r, &g, &b);
 
-            // ITU-R BT.601 가중치를 적용한 그레이스케일 변환
-            unsigned char gray = (unsigned char)(0.299 * r + 0.587 * g + 0.114 * b);
+			// ITU-R BT.601 가중치를 적용한 그레이스케일 변환
+			unsigned char gray = (unsigned char)(0.299 * r + 0.587 * g + 0.114 * b);
 
-            al_put_pixel(x, y, al_map_rgb(gray, gray, gray));
-        }
-    }
+			al_put_pixel(x, y, al_map_rgb(gray, gray, gray));
+		}
+	}
 
-    al_set_target_backbuffer(al_get_current_display());
+	al_set_target_backbuffer(al_get_current_display());
 
-    return gray_bitmap;
+	return gray_bitmap;
 }
