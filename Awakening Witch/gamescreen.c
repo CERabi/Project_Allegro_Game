@@ -8,29 +8,29 @@ void gamescreen(void) {
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             // 적 생성
-            if (key[ALLEGRO_KEY_Q]) spawn_enermy(1);
-            if (key[ALLEGRO_KEY_W]) spawn_enermy(2);
-            
-            // 적 삭제
-            if (key[ALLEGRO_KEY_E]) clear_summons(1);
+            if (key[ALLEGRO_KEY_1]) spawn_enermy(1);
+            if (key[ALLEGRO_KEY_2]) spawn_enermy(2);
             
             // 필살기
-            if (key[ALLEGRO_KEY_G]) Special_moves(1);
+            if (key[ALLEGRO_KEY_R]) Special_moves(1);
 
             // 아군 생성
-            if (key[ALLEGRO_KEY_1]) spawn_summon(11);
-            if (key[ALLEGRO_KEY_2]) spawn_summon(12);
-            if (key[ALLEGRO_KEY_3]) spawn_summon(13);
+            if (key[ALLEGRO_KEY_Q]) spawn_summon(11);
+            if (key[ALLEGRO_KEY_W]) spawn_summon(12);
+            if (key[ALLEGRO_KEY_E]) spawn_summon(13);
 
-            // 아군 삭제
-            if (key[ALLEGRO_KEY_F]) clear_summons(11);
+            // 적 삭제(디버그용)
+            if (key[ALLEGRO_KEY_5]) clear_summons(1);
+            
+            // 아군 삭제(디버그용)
+            if (key[ALLEGRO_KEY_6]) clear_summons(11);
 
             // 공격
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
             // 본인 강화(상점)
-            if (key[ALLEGRO_KEY_A]) player_enhance_dm();
-            if (key[ALLEGRO_KEY_S]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_A]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_S]) player_enhance_dm();
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
