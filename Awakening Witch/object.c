@@ -37,7 +37,7 @@ void player_enhance_sp() {
 
 void player_enhance_dm() {
     if (money_display < 50) return;
-    player.damage += 1;
+    player.damage += 0.1;
     money_display -= 50;
 }
 

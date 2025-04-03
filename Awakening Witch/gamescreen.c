@@ -19,8 +19,6 @@ void gamescreen(void) {
             // 아군 삭제
             if (key[ALLEGRO_KEY_D]) clear_summons(11);
 
-            
-            
             // 공격
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 

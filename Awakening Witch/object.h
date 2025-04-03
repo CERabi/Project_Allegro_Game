@@ -11,7 +11,7 @@ typedef struct Player {
     float x, y;
     int speed;
     double player_att_delay;
-    int damage;
+    double damage;
     int health;
     bool sees_left;
 } Player;

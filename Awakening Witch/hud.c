@@ -45,7 +45,7 @@ void hud_draw() {
 		al_map_rgb_f(1, 1, 1),
 		270, 200,
 		0,
-		"%d",
+		"%.1f",
 		player.damage
 	);
 	for (int i = 0; i < player.health; ++i) {
