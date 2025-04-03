@@ -31,9 +31,12 @@
 #define ATTACK_DELAY 0.5
 #define KNIGHT_MAX_HEALTH 3.0f
 #define BOSS_MAX_HEALTH 10.0f
-#define BAT_MAX_HEALTH 1.0f
-#define ZOMBIE_MAX_HEALTH 3.0f
-#define GOBLIN_MAX_HEALTH 5.0f
+#define BAT_MAX_HEALTH 2.0f
+#define ZOMBIE_MAX_HEALTH 6.0f
+#define GOBLIN_MAX_HEALTH 10.0f
+#define COST_ATT 300
+#define COST_SPD 100
+#define COST_BU 500
 
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP* summon_img_l;
@@ -67,10 +70,13 @@ ALLEGRO_BITMAP* SHOP_UP_BU_MAX;
 //ALLEGRO_BITMAP* SHOP_FRIENDLY;
 
 ALLEGRO_EVENT_QUEUE* event_queue;
+
 ALLEGRO_DISPLAY* display;
+
 ALLEGRO_TIMER* timer;
 ALLEGRO_TIMER* spawn_timer;
 ALLEGRO_TIMER* spawn_timer_boss;
+
 ALLEGRO_FONT* font;
 ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;

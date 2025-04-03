@@ -180,29 +180,48 @@ void load_resource(void) {
 
 void destroy_resource(void) {
     al_destroy_bitmap(background);
-    al_destroy_bitmap(enermy_img_l);
-    al_destroy_bitmap(enermy_img_r);
     al_destroy_bitmap(summon_img_l);
     al_destroy_bitmap(summon_img_r);
     al_destroy_bitmap(summon2_img_l);
     al_destroy_bitmap(summon2_img_r);
     al_destroy_bitmap(summon3_img_r);
+    al_destroy_bitmap(enermy_img_l);
+    al_destroy_bitmap(enermy_img_r);
+    al_destroy_bitmap(enemy_boss_img_l);
+    al_destroy_bitmap(enemy_boss_img_r);
     al_destroy_bitmap(player_img_l);
     al_destroy_bitmap(player_img_r);
     al_destroy_bitmap(fireball_img);
+    al_destroy_bitmap(fireball_boss_img);
     al_destroy_bitmap(HUD_score);
     al_destroy_bitmap(HUD_money);
     al_destroy_bitmap(HUD_life);
     al_destroy_bitmap(HUD_speed);
     al_destroy_bitmap(HUD_damage);
     al_destroy_bitmap(HUD_bullets);
+    al_destroy_bitmap(SHOP_ORIGIN);
+    al_destroy_bitmap(SHOP_UP_ATT);
+    al_destroy_bitmap(SHOP_UP_ATT_NO);
+    al_destroy_bitmap(SHOP_UP_SPD);
+    al_destroy_bitmap(SHOP_UP_SPD_NO);
+    al_destroy_bitmap(SHOP_UP_SPD_MAX);
+    al_destroy_bitmap(SHOP_UP_BU);
+    al_destroy_bitmap(SHOP_UP_BU_NO);
+    al_destroy_bitmap(SHOP_UP_BU_MAX);
+
     al_destroy_display(display);
+
     al_destroy_event_queue(event_queue);
+
     al_destroy_timer(timer);
+    al_destroy_timer(spawn_timer);
+    al_destroy_timer(spawn_timer_boss);
+
     al_destroy_font(font);
     al_destroy_font(title_font);
     al_destroy_font(button_font);
     al_destroy_font(hud_font);
+
     al_destroy_sample(BGM);
     al_destroy_sample(monster_hit);
     al_destroy_sample(player_attack);

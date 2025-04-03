@@ -19,8 +19,8 @@ void reset_game_state() {
 
     // 점수 및 재화 초기화
     score_display = 0;
-    money_display = 100000;
-    boss_attack_delay = 20;
+    money_display = 0;
+    boss_attack_delay = 50;
 
     // 전체 몬스터 수
     MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS;
@@ -110,7 +110,7 @@ void init(void) {
 
     timer = al_create_timer(1.0 / 60.0);
     spawn_timer = al_create_timer(3.0);
-    spawn_timer_boss = al_create_timer(12.0);
+    spawn_timer_boss = al_create_timer(15.0);
     event_queue = al_create_event_queue();
 
     al_register_event_source(event_queue, al_get_timer_event_source(timer));

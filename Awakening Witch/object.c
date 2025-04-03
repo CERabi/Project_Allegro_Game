@@ -30,21 +30,21 @@ void move_player() {
 }
 
 void player_enhance_bu() {
-    if (money_display < 50 || player.bullets >= MAX_PLAYER_BULLETS) return;
+    if (money_display < COST_ATT || player.bullets >= MAX_PLAYER_BULLETS) return;
     player.bullets += 1;
-    money_display -= 500;
+    money_display -= COST_ATT;
 }
 
 void player_enhance_sp() {
-    if (money_display < 50 || player.player_att_delay <= 0.01) return;
+    if (money_display < COST_SPD || player.player_att_delay <= 0.01) return;
     player.player_att_delay -= 0.01;
-    money_display -= 200;
+    money_display -= COST_SPD;
 }
 
 void player_enhance_dm() {
-    if (money_display < 50) return;
+    if (money_display < COST_BU) return;
     player.damage += 0.1;
-    money_display -= 500;
+    money_display -= COST_BU;
 }
 
 void fire_bullet() {
