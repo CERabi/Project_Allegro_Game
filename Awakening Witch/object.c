@@ -241,7 +241,7 @@ void spawn_enermy(int number) {
         health = KNIGHT_MAX_HEALTH;
         damage = 1;
         credit = 50;
-        score = 100;
+        score = (int)(100.0 * score_multiplier);
         speed = 2.0;
         max_summons = 5;
         size = 35;
@@ -253,7 +253,7 @@ void spawn_enermy(int number) {
         health = BOSS_MAX_HEALTH;
         damage = 1;
         credit = 200;
-        score = 500;
+        score = (int)(500.0 * score_multiplier);
         speed = 0;
         max_summons = 3;
         size = 80;
