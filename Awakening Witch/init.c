@@ -10,6 +10,7 @@ void reset_game_state() {
     player.x = SCREEN_WIDTH / 2;
     player.y = SCREEN_HEIGHT / 2;
     invincible_timer = 0;
+    player.player_att_delay = ATTACK_DELAY;
     /*for (int i = 0; i < ALLEGRO_KEY_MAX; ++i) {
         key[i] = 0;
     }*/

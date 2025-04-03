@@ -10,6 +10,7 @@
 typedef struct Player {
     float x, y;
     int speed;
+    double player_att_delay;
     int damage;
     int health;
     bool sees_left;
@@ -25,6 +26,7 @@ typedef struct Summon {
     int damage;
     int credit;
     int score;
+    int size;
     double speed;
     int invincible; // 몬스터 소환수 무적 시간
 } Summon;

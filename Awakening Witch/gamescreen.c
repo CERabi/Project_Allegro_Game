@@ -51,15 +51,6 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-        al_draw_scaled_bitmap(HUD_score, 0, 0, al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
-            50, 55, 40, 40, 0);
-        al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
-            50, 105, 40, 40, 0);
-        al_draw_scaled_bitmap(HUD_speed, 0, 0, al_get_bitmap_width(HUD_speed), al_get_bitmap_height(HUD_speed),
-            50, 210, 40, 40, 0);
-        al_draw_scaled_bitmap(HUD_damage, 0, 0, al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
-            140, 210, 40, 40, 0);
-
         
         int player_size = 80;
         if (invincible_timer > 0) {
@@ -86,7 +77,6 @@ void gamescreen(void) {
         }
 
         int enemy_size = 100;
-
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
@@ -108,23 +98,24 @@ void gamescreen(void) {
             }
         }
 
+        int enermy_boss_size = 200;
         for (int i = MAX_KNIGHTS; i < MAX_ENEMIES; i++) {
             if (enemies[i].active) {
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(enemy_boss_img_r, 0, 0, al_get_bitmap_width(enemy_boss_img_r), al_get_bitmap_height(enemy_boss_img_r),
-                        enemies[i].x - 50, enemies[i].y - 100, 200, 200, 0);
+                        enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
                 }
                 else if (enemies[i].matched_enemy == -1 && enemies[i].x >= player.x) {
                     al_draw_scaled_bitmap(enemy_boss_img_l, 0, 0, al_get_bitmap_width(enemy_boss_img_l), al_get_bitmap_height(enemy_boss_img_l),
-                        enemies[i].x - 50, enemies[i].y - 100, 200, 200, 0);
+                        enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
                 }
                 else if (enemies[i].x >= summons[enemies[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(enemy_boss_img_l, 0, 0, al_get_bitmap_width(enemy_boss_img_l), al_get_bitmap_height(enemy_boss_img_l),
-                        enemies[i].x - 50, enemies[i].y - 100, 200, 200, 0);
+                        enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
                 }
                 else {
                     al_draw_scaled_bitmap(enemy_boss_img_r, 0, 0, al_get_bitmap_width(enemy_boss_img_r), al_get_bitmap_height(enemy_boss_img_r),
-                        enemies[i].x - 50, enemies[i].y - 100, 200, 200, 0);
+                        enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
                 }
             }
         }
