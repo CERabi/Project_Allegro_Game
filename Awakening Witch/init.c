@@ -22,7 +22,7 @@ void reset_game_state() {
     boss_attack_delay = 20;
 
     // 전체 몬스터 수
-    MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS;
+    MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS;
     MAX_ENEMIES = MAX_KNIGHTS + MAX_BOSSES;
 
     // 몬스터 초기화
