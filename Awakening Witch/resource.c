@@ -1,64 +1,64 @@
 #include "resource.h"
 
 void load_resource(void) {
-	player_x = SCREEN_WIDTH / 2;
-	player_y = SCREEN_HEIGHT / 2;
-	player_health = 5;
-	player_size = 30;
-	invincible_timer = 120;
-	// 배경 이미지 로드
-	background = al_load_bitmap("Resource/pic/battleback1.png");
-	if (!background) {
-		printf("이미지를 불러오지 못했습니다!\n");
-		return;
-	}
+    player_x = SCREEN_WIDTH / 2;
+    player_y = SCREEN_HEIGHT / 2;
+    player_health = 5;
+    player_size = 30;
+    invincible_timer = 120;
+    // 배경 이미지 로드
+    background = al_load_bitmap("Resource/pic/battleback1.png");
+    if (!background) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
 
-	// 소환수 이미지 로드
-	summon_img_l = al_load_bitmap("Resource/pic/zombie_l.png");
-	if (!summon_img_l) {
-		fprintf(stderr, "zombie_l.png 로드 실패!\n");
-		return;
-	}
-	summon_img_r = al_load_bitmap("Resource/pic/zombie_r.png");
-	if (!summon_img_r) {
-		fprintf(stderr, "zombie_r.png 로드 실패!\n");
-		return;
-	}
-	summon2_img_l = al_load_bitmap("Resource/pic/goblin_l.png");
-	if (!summon_img_l) {
-		fprintf(stderr, "goblin_l.png 로드 실패\n");
-		return;
-	}
-	summon2_img_r = al_load_bitmap("Resource/pic/goblin_r.png");
-	if (!summon_img_r) {
-		fprintf(stderr, "goblin_r.png 로드 실패!\n");
-		return;
-	}
-	summon3_img_r = al_load_bitmap("Resource/pic/bat.png");
-	if (!summon_img_r) {
-		fprintf(stderr, "goblin_r.png 로드 실패!\n");
-		return;
-	}
-	enermy_img_l = al_load_bitmap("Resource/pic/knight_l.png");
-	if (!enermy_img_l) {
-		fprintf(stderr, "knight_l.png 로드 실패!\n");
-		return;
-	}
-	enermy_img_r = al_load_bitmap("Resource/pic/knight_r.png");
-	if (!enermy_img_r) {
-		fprintf(stderr, "knight_r.png 로드 실패!\n");
-		return;
-	}
-	enemy_boss_img_l = al_load_bitmap("Resource/pic/boss_l.png");
-	if (!enemy_boss_img_l) {
-		fprintf(stderr, "boss_l.png 로드 실패!\n");
-		return;
-	}
-	enemy_boss_img_r = al_load_bitmap("Resource/pic/boss_r.png");
-	if (!enemy_boss_img_r) {
-		fprintf(stderr, "boss_r.png 로드 실패!\n");
-		return;
-	}
+    // 소환수 이미지 로드
+    summon_img_l = al_load_bitmap("Resource/pic/zombie_l.png");
+    if (!summon_img_l) {
+        fprintf(stderr, "zombie_l.png 로드 실패!\n");
+        return;
+    }
+    summon_img_r = al_load_bitmap("Resource/pic/zombie_r.png");
+    if (!summon_img_r) {
+        fprintf(stderr, "zombie_r.png 로드 실패!\n");
+        return;
+    }
+    summon2_img_l = al_load_bitmap("Resource/pic/goblin_l.png");
+    if (!summon_img_l) {
+        fprintf(stderr, "goblin_l.png 로드 실패\n");
+        return;
+    }
+    summon2_img_r = al_load_bitmap("Resource/pic/goblin_r.png");
+    if (!summon_img_r) {
+        fprintf(stderr, "goblin_r.png 로드 실패!\n");
+        return;
+    }
+    summon3_img_r = al_load_bitmap("Resource/pic/bat.png");
+    if (!summon_img_r) {
+        fprintf(stderr, "goblin_r.png 로드 실패!\n");
+        return;
+    }
+    enermy_img_l = al_load_bitmap("Resource/pic/knight_l.png");
+    if (!enermy_img_l) {
+        fprintf(stderr, "knight_l.png 로드 실패!\n");
+        return;
+    }
+    enermy_img_r = al_load_bitmap("Resource/pic/knight_r.png");
+    if (!enermy_img_r) {
+        fprintf(stderr, "knight_r.png 로드 실패!\n");
+        return;
+    }
+    enemy_boss_img_l = al_load_bitmap("Resource/pic/boss_l.png");
+    if (!enemy_boss_img_l) {
+        fprintf(stderr, "boss_l.png 로드 실패!\n");
+        return;
+    }
+    enemy_boss_img_r = al_load_bitmap("Resource/pic/boss_r.png");
+    if (!enemy_boss_img_r) {
+        fprintf(stderr, "boss_r.png 로드 실패!\n");
+        return;
+    }
 
 	char goblin_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
@@ -96,143 +96,175 @@ void load_resource(void) {
 		}
 	}
 
-	// 플레이어 이미지 로드
-	player_img_l = al_load_bitmap("Resource/pic/player_l.png");
-	if (!player_img_l) {
-		fprintf(stderr, "player_l.png 로드 실패!\n");
-		return;
-	}
-	player_img_r = al_load_bitmap("Resource/pic/player_r.png");
-	if (!player_img_r) {
-		fprintf(stderr, "player_r.png 로드 실패!\n");
-		return;
-	}
 
-	// 투사체 이미지 로드
-	fireball_img = al_load_bitmap("Resource/pic/fireball.png");
-	if (!fireball_img) {
-		fprintf(stderr, "fireball.png 로드 실패!\n");
-		return;
-	}
-	fireball_boss_img = al_load_bitmap("Resource/pic/fireball_boss.png");
-	if (!fireball_boss_img) {
-		fprintf(stderr, "fireball.png 로드 실패!\n");
-		return;
-	}
+    // 플레이어 이미지 로드
+    player_img_l = al_load_bitmap("Resource/pic/player_l.png");
+    if (!player_img_l) {
+        fprintf(stderr, "player_l.png 로드 실패!\n");
+        return;
+    }
+    player_img_r = al_load_bitmap("Resource/pic/player_r.png");
+    if (!player_img_r) {
+        fprintf(stderr, "player_r.png 로드 실패!\n");
+        return;
+    }
 
-	// HUD 이미지 로드
-	HUD_score = al_load_bitmap("Resource/pic/score.png");
-	if (!HUD_score) {
-		printf("이미지를 불러오지 못했습니다!\n");
-		return;
-	}
-	HUD_money = al_load_bitmap("Resource/pic/money.png");
-	if (!HUD_money) {
-		printf("이미지를 불러오지 못했습니다!\n");
-		return;
-	}
-	HUD_life = al_load_bitmap("Resource/pic/life.png");
-	if (!HUD_life) {
-		printf("이미지를 불러오지 못했습니다!\n");
-		return;
-	}
-	HUD_speed = al_load_bitmap("Resource/pic/speed.png");
-	if (!HUD_speed) {
-		printf("이미지를 불러오지 못했습니다!\n");
-		return;
-	}
-	HUD_damage = al_load_bitmap("Resource/pic/damage.png");
-	if (!HUD_damage) {
-		printf("이미지를 불러오지 못했습니다!\n");
-		return;
-	}
+    // 투사체 이미지 로드
+    fireball_img = al_load_bitmap("Resource/pic/fireball.png");
+    if (!fireball_img) {
+        fprintf(stderr, "fireball.png 로드 실패!\n");
+        return;
+    }
+    fireball_boss_img = al_load_bitmap("Resource/pic/fireball_boss.png");
+    if (!fireball_boss_img) {
+        fprintf(stderr, "fireball.png 로드 실패!\n");
+        return;
+    }
 
-	// 상점 이미지 로드
-	SHOP_ORIGIN = al_load_bitmap("Resource/pic/shop_icon.png");
-	SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
-	SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
-	SHOP_UP_SPD_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 48, 24, 24));
-	SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
-	SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
+    // HUD 이미지 로드
+    HUD_score = al_load_bitmap("Resource/pic/score.png");
+    if (!HUD_score) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    HUD_money = al_load_bitmap("Resource/pic/money.png");
+    if (!HUD_money) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    HUD_life = al_load_bitmap("Resource/pic/life.png");
+    if (!HUD_life) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    HUD_speed = al_load_bitmap("Resource/pic/speed.png");
+    if (!HUD_speed) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    HUD_damage = al_load_bitmap("Resource/pic/damage.png");
+    if (!HUD_damage) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    HUD_bullets = al_load_bitmap("Resource/pic/bullets.png");
+    if (!HUD_bullets) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
 
-	// 폰트 로드
-	font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
-	if (!font) {
-		fprintf(stderr, "font 로드 실패!\n");
-		return;
-	}
-	title_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 120, 0);
-	if (!title_font) {
-		fprintf(stderr, "title_font 로드 실패!\n");
-		return;
-	}
-	button_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
-	if (!button_font) {
-		fprintf(stderr, "button_font 로드 실패!\n");
-		return;
-	}
-	hud_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 50, 0);
-	if (!hud_font) {
-		fprintf(stderr, "hud_font 로드 실패!\n");
-		return;
-	}
+    // 상점 이미지 로드
+    SHOP_ORIGIN = al_load_bitmap("Resource/pic/shop_icon.png");
+    if (!SHOP_ORIGIN) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
+    SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
+    SHOP_UP_BU = al_create_sub_bitmap(SHOP_ORIGIN, 48, 72, 24, 24);
+    SHOP_UP_SPD_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 48, 24, 24));
+    SHOP_UP_BU_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 72, 24, 24));
+    SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
+    SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
+    SHOP_UP_BU_NO = convert_to_grayscale(SHOP_UP_BU);
 
-	// 오디오 로드
-	BGM = al_load_sample("Resource/audio/bgm.ogg");
-	if (!BGM) {
-		fprintf(stderr, "BGM 로드 실패!\n");
-		return;
-	}
-	monster_hit = al_load_sample("Resource/audio/monster_hit.ogg");
-	if (!monster_hit) {
-		fprintf(stderr, "monster_hit 로드 실패!\n");
-		return;
-	}
-	player_attack = al_load_sample("Resource/audio/player_attack.ogg");
-	if (!player_attack) {
-		fprintf(stderr, "player_attack 로드 실패!\n");
-		return;
-	}
-	boss_summon = al_load_sample("Resource/audio/boss_summon.ogg");
-	if (!player_attack) {
-		fprintf(stderr, "player_attack 로드 실패!\n");
-		return;
-	}
+    // 폰트 로드
+    font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
+    if (!font) {
+        fprintf(stderr, "font 로드 실패!\n");
+        return;
+    }
+    title_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 120, 0);
+    if (!title_font) {
+        fprintf(stderr, "title_font 로드 실패!\n");
+        return;
+    }
+    button_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
+    if (!button_font) {
+        fprintf(stderr, "button_font 로드 실패!\n");
+        return;
+    }
+    hud_font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 50, 0);
+    if (!hud_font) {
+        fprintf(stderr, "hud_font 로드 실패!\n");
+        return;
+    }
 
+    // 오디오 로드
+    BGM = al_load_sample("Resource/audio/bgm.ogg");
+    if (!BGM) {
+        fprintf(stderr, "BGM 로드 실패!\n");
+        return;
+    }
+    monster_hit = al_load_sample("Resource/audio/monster_hit.ogg");
+    if (!monster_hit) {
+        fprintf(stderr, "monster_hit 로드 실패!\n");
+        return;
+    }
+    player_attack = al_load_sample("Resource/audio/player_attack.ogg");
+    if (!player_attack) {
+        fprintf(stderr, "player_attack 로드 실패!\n");
+        return;
+    }
+    boss_summon = al_load_sample("Resource/audio/boss_summon.ogg");
+    if (!player_attack) {
+        fprintf(stderr, "player_attack 로드 실패!\n");
+        return;
+    }
 }
 
 void destroy_resource(void) {
-	al_destroy_bitmap(background);
-	al_destroy_bitmap(enermy_img_l);
-	al_destroy_bitmap(enermy_img_r);
-	al_destroy_bitmap(summon_img_l);
-	al_destroy_bitmap(summon_img_r);
-	al_destroy_bitmap(summon2_img_l);
-	al_destroy_bitmap(summon2_img_r);
-	al_destroy_bitmap(summon3_img_r);
-	al_destroy_bitmap(player_img_l);
-	al_destroy_bitmap(player_img_r);
-	al_destroy_bitmap(goblin_sword[0]);
-	al_destroy_bitmap(goblin_sword[1]);
-	al_destroy_bitmap(goblin_sword[2]);
-	al_destroy_bitmap(goblin_sword[3]);
-	al_destroy_bitmap(fireball_img);
-	al_destroy_bitmap(HUD_score);
-	al_destroy_bitmap(HUD_money);
-	al_destroy_bitmap(HUD_life);
-	al_destroy_bitmap(HUD_speed);
-	al_destroy_bitmap(HUD_damage);
-	al_destroy_display(display);
-	al_destroy_event_queue(event_queue);
-	al_destroy_timer(timer);
-	al_destroy_font(font);
-	al_destroy_font(title_font);
-	al_destroy_font(button_font);
-	al_destroy_font(hud_font);
-	al_destroy_sample(BGM);
-	al_destroy_sample(monster_hit);
-	al_destroy_sample(player_attack);
-	al_destroy_sample(boss_summon);
+    al_destroy_bitmap(background);
+    al_destroy_bitmap(summon_img_l);
+    al_destroy_bitmap(summon_img_r);
+    al_destroy_bitmap(goblin_sword[0]);
+    al_destroy_bitmap(goblin_sword[1]);
+    al_destroy_bitmap(goblin_sword[2]);
+    al_destroy_bitmap(goblin_sword[3]);
+    al_destroy_bitmap(summon2_img_l);
+    al_destroy_bitmap(summon2_img_r);
+    al_destroy_bitmap(summon3_img_r);
+    al_destroy_bitmap(enermy_img_l);
+    al_destroy_bitmap(enermy_img_r);
+    al_destroy_bitmap(enemy_boss_img_l);
+    al_destroy_bitmap(enemy_boss_img_r);
+    al_destroy_bitmap(player_img_l);
+    al_destroy_bitmap(player_img_r);
+    al_destroy_bitmap(fireball_img);
+    al_destroy_bitmap(fireball_boss_img);
+    al_destroy_bitmap(HUD_score);
+    al_destroy_bitmap(HUD_money);
+    al_destroy_bitmap(HUD_life);
+    al_destroy_bitmap(HUD_speed);
+    al_destroy_bitmap(HUD_damage);
+    al_destroy_bitmap(HUD_bullets);
+    al_destroy_bitmap(SHOP_ORIGIN);
+    al_destroy_bitmap(SHOP_UP_ATT);
+    al_destroy_bitmap(SHOP_UP_ATT_NO);
+    al_destroy_bitmap(SHOP_UP_SPD);
+    al_destroy_bitmap(SHOP_UP_SPD_NO);
+    al_destroy_bitmap(SHOP_UP_SPD_MAX);
+    al_destroy_bitmap(SHOP_UP_BU);
+    al_destroy_bitmap(SHOP_UP_BU_NO);
+    al_destroy_bitmap(SHOP_UP_BU_MAX);
+
+    al_destroy_display(display);
+
+    al_destroy_event_queue(event_queue);
+
+    al_destroy_timer(timer);
+    al_destroy_timer(spawn_timer);
+    al_destroy_timer(spawn_timer_boss);
+
+    al_destroy_font(font);
+    al_destroy_font(title_font);
+    al_destroy_font(button_font);
+    al_destroy_font(hud_font);
+
+    al_destroy_sample(BGM);
+    al_destroy_sample(monster_hit);
+    al_destroy_sample(player_attack);
+    al_destroy_sample(boss_summon);
 }
 
 

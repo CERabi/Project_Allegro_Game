@@ -9,29 +9,30 @@ void gamescreen(void) {
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             // 적 생성
-            if (key[ALLEGRO_KEY_Q]) spawn_enermy(1);
-            if (key[ALLEGRO_KEY_W]) spawn_enermy(2);
-            
-            // 적 삭제
-            if (key[ALLEGRO_KEY_E]) clear_summons(1);
+            if (key[ALLEGRO_KEY_1]) spawn_enermy(1);
+            if (key[ALLEGRO_KEY_2]) spawn_enermy(2);
             
             // 필살기
-            if (key[ALLEGRO_KEY_G]) Special_moves(1);
+            if (key[ALLEGRO_KEY_R]) Special_moves(1);
 
             // 아군 생성
-            if (key[ALLEGRO_KEY_1]) spawn_summon(11);
-            if (key[ALLEGRO_KEY_2]) spawn_summon(12);
-            if (key[ALLEGRO_KEY_3]) spawn_summon(13);
+            if (key[ALLEGRO_KEY_Q]) spawn_summon(11);
+            if (key[ALLEGRO_KEY_W]) spawn_summon(12);
+            if (key[ALLEGRO_KEY_E]) spawn_summon(13);
 
-            // 아군 삭제
-            if (key[ALLEGRO_KEY_F]) clear_summons(11);
+            // 적 삭제(디버그용)
+            if (key[ALLEGRO_KEY_5]) clear_summons(1);
+            
+            // 아군 삭제(디버그용)
+            if (key[ALLEGRO_KEY_6]) clear_summons(11);
 
             // 공격
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
             // 본인 강화(상점)
-            if (key[ALLEGRO_KEY_A]) player_enhance_dm();
-            if (key[ALLEGRO_KEY_S]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_A]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_S]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_D]) player_enhance_bu();
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
@@ -88,6 +89,14 @@ void gamescreen(void) {
         int enemy_size = 100;
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 20,
+                    enemies[i].x + ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 20,
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0) + 2 * ((double)enemy_size / 2.0 - 10.0) * ((double)enemies[i].health / KNIGHT_MAX_HEALTH), enemies[i].y - enemy_size / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(knight_sword[current_enemies_frame[i]], 0, 0, al_get_bitmap_width(knight_sword[current_enemies_frame[i]]), al_get_bitmap_height(knight_sword[current_enemies_frame[i]]),
                         enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, ALLEGRO_FLIP_HORIZONTAL);
@@ -111,6 +120,18 @@ void gamescreen(void) {
         int enermy_boss_size = 200;
         for (int i = MAX_KNIGHTS; i < MAX_ENEMIES; i++) {
             if (enemies[i].active) {
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0), 
+                    enemies[i].y - enermy_boss_size / 2 - 20,
+                    enemies[i].x + ((double)enermy_boss_size / 2.0 - 10.0), 
+                    enemies[i].y - enermy_boss_size / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0), 
+                    enemies[i].y - enermy_boss_size / 2 - 20,
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0) + 2 * ((double)enermy_boss_size / 2.0 - 10.0) * ((double)enemies[i].health / BOSS_MAX_HEALTH), 
+                    enemies[i].y - enermy_boss_size / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(enemy_boss_img_r, 0, 0, al_get_bitmap_width(enemy_boss_img_r), al_get_bitmap_height(enemy_boss_img_r),
                         enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
@@ -132,6 +153,20 @@ void gamescreen(void) {
         int summon_size = 90;
         for (int i = 0; i < MAX_ZOMBIES; i++) {
             if (summons[i].active) {
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size / 2.0 - 10.0),
+                    summons[i].y - summon_size / 2 - 20,
+                    summons[i].x + ((double)summon_size / 2.0 - 10.0),
+                    summons[i].y - summon_size / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size / 2.0 - 10.0),
+                    summons[i].y - summon_size / 2 - 20,
+                    summons[i].x - ((double)summon_size / 2.0 - 10.0) + 2 *
+                    ((double)summon_size / 2.0 - 10.0) *
+                    ((double)summons[i].health / ZOMBIE_MAX_HEALTH),
+                    summons[i].y - summon_size / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 int closest_enemy = -1;
                 float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
                 for (int j = 0; j < MAX_ENEMIES; j++) {
@@ -169,6 +204,20 @@ void gamescreen(void) {
         int summon_size1 = 120;
         for (int i = MAX_ZOMBIES; i < MAX_ZOMBIES+MAX_GOBLINS; i++) {
             if (summons[i].active) {
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size1 / 2.0 - 10.0),
+                    summons[i].y - summon_size1 / 2 - 20,
+                    summons[i].x + ((double)summon_size1 / 2.0 - 10.0),
+                    summons[i].y - summon_size1 / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size1 / 2.0 - 10.0),
+                    summons[i].y - summon_size1 / 2 - 20,
+                    summons[i].x - ((double)summon_size1 / 2.0 - 10.0) + 2 *
+                    ((double)summon_size1 / 2.0 - 10.0) *
+                    ((double)summons[i].health / GOBLIN_MAX_HEALTH),
+                    summons[i].y - summon_size1 / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 int closest_enemy = -1;
                 float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
                 for (int j = 0; j < MAX_ENEMIES; j++) {
@@ -208,6 +257,20 @@ void gamescreen(void) {
         int summon_size2 = 70;
         for (int i = MAX_ZOMBIES + MAX_GOBLINS; i < MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS; i++) {
             if (summons[i].active) {
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size2 / 2.0 - 10.0),
+                    summons[i].y - summon_size2 / 2 - 20,
+                    summons[i].x + ((double)summon_size2 / 2.0 - 10.0),
+                    summons[i].y - summon_size2 / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size2 / 2.0 - 10.0),
+                    summons[i].y - summon_size2 / 2 - 20,
+                    summons[i].x - ((double)summon_size2 / 2.0 - 10.0) + 2 *
+                    ((double)summon_size2 / 2.0 - 10.0) *
+                    ((double)summons[i].health / BAT_MAX_HEALTH),
+                    summons[i].y - summon_size2 / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 int closest_enemy = -1;
                 float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
                 for (int j = 0; j < MAX_ENEMIES; j++) {
@@ -244,7 +307,7 @@ void gamescreen(void) {
         }
 
         int bullet_size = 80;
-        for (int i = 0; i < MAX_BULLETS; i++) {
+        for (int i = 0; i < player.bullets; i++) {
             if (bullets[i].active) {
                 al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
                     bullets[i].x - bullet_size / 2, bullets[i].y - bullet_size / 2, bullet_size, bullet_size, 0);
