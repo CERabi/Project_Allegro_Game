@@ -28,6 +28,11 @@
 #define PLAYER_HEALTH 5
 #define BULLET_SPEED 7
 #define ATTACK_DELAY 0.5
+#define KNIGHT_MAX_HEALTH 3.0f
+#define BOSS_MAX_HEALTH 10.0f
+#define BAT_MAX_HEALTH 1.0f
+#define ZOMBIE_MAX_HEALTH 3.0f
+#define GOBLIN_MAX_HEALTH 5.0f
 
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP* summon_img_l;

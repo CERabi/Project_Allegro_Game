@@ -166,7 +166,7 @@ void spawn_summon(int number) {
         // 좀비
         i = 0;
         temp = MAX_ZOMBIES;
-        health = 3;
+        health = ZOMBIE_MAX_HEALTH;
         damage = 1;
         credit = 50;
         speed = 1.7;
@@ -176,7 +176,7 @@ void spawn_summon(int number) {
         // 고블린
         i = MAX_ZOMBIES;
         temp = MAX_GOBLINS;
-        health = 5;
+        health = GOBLIN_MAX_HEALTH;
         damage = 2;
         credit = 100;
         speed = 2.0;
@@ -186,10 +186,10 @@ void spawn_summon(int number) {
         // 박쥐
         i = MAX_ZOMBIES + MAX_GOBLINS;
         temp = MAX_BATS;
-        health = 1;
+        health = BAT_MAX_HEALTH;
         damage = 1;
         credit = 100;
-        speed = 3.0;
+        speed = 5.0;
         size = 30;
         break;
     default:
@@ -219,7 +219,7 @@ void spawn_summon(int number) {
 void spawn_enermy(int number) {
     Summon* target_array = enemies;
     int i;
-    int health;
+    double health;
     int damage;
     int credit;
     int score;
@@ -232,7 +232,7 @@ void spawn_enermy(int number) {
         // knight
         i = 0;
         temp = 0;
-        health = 3;
+        health = KNIGHT_MAX_HEALTH;
         damage = 1;
         credit = 50;
         score = 100;
@@ -244,7 +244,7 @@ void spawn_enermy(int number) {
         // 보스
         i = MAX_KNIGHTS;
         temp = MAX_BOSSES;
-        health = 7;
+        health = BOSS_MAX_HEALTH;
         damage = 1;
         credit = 200;
         score = 500;
@@ -483,7 +483,7 @@ void check_boss_bullet_collision(void) {
                                 for (int l = 0; l < MAX_SUMMONS; l++) {
                                     if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
                                         enemies[l].matched = false;
-                                        summons[l].matched_enemy = -1;
+                                        enemies[l].matched_enemy = -1;
                                         break;
                                     }
                                 }

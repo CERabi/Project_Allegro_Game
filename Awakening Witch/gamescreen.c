@@ -84,6 +84,14 @@ void gamescreen(void) {
         int enemy_size = 100;
         for (int i = 0; i < MAX_KNIGHTS; i++) {
             if (enemies[i].active) {
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 20,
+                    enemies[i].x + ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 20,
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0) + 2 * ((double)enemy_size / 2.0 - 10.0) * ((double)enemies[i].health / KNIGHT_MAX_HEALTH), enemies[i].y - enemy_size / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(enermy_img_r, 0, 0, al_get_bitmap_width(enermy_img_r), al_get_bitmap_height(enermy_img_r),
                         enemies[i].x - enemy_size / 2, enemies[i].y - enemy_size / 2, enemy_size, enemy_size, 0);
@@ -106,6 +114,18 @@ void gamescreen(void) {
         int enermy_boss_size = 200;
         for (int i = MAX_KNIGHTS; i < MAX_ENEMIES; i++) {
             if (enemies[i].active) {
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0), 
+                    enemies[i].y - enermy_boss_size / 2 - 20,
+                    enemies[i].x + ((double)enermy_boss_size / 2.0 - 10.0), 
+                    enemies[i].y - enermy_boss_size / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0), 
+                    enemies[i].y - enermy_boss_size / 2 - 20,
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0) + 2 * ((double)enermy_boss_size / 2.0 - 10.0) * ((double)enemies[i].health / BOSS_MAX_HEALTH), 
+                    enemies[i].y - enermy_boss_size / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(enemy_boss_img_r, 0, 0, al_get_bitmap_width(enemy_boss_img_r), al_get_bitmap_height(enemy_boss_img_r),
                         enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
@@ -127,6 +147,20 @@ void gamescreen(void) {
         int summon_size = 90;
         for (int i = 0; i < MAX_ZOMBIES; i++) {
             if (summons[i].active) {
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size / 2.0 - 10.0),
+                    summons[i].y - summon_size / 2 - 20,
+                    summons[i].x + ((double)summon_size / 2.0 - 10.0),
+                    summons[i].y - summon_size / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size / 2.0 - 10.0),
+                    summons[i].y - summon_size / 2 - 20,
+                    summons[i].x - ((double)summon_size / 2.0 - 10.0) + 2 *
+                    ((double)summon_size / 2.0 - 10.0) *
+                    ((double)summons[i].health / ZOMBIE_MAX_HEALTH),
+                    summons[i].y - summon_size / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 int closest_enemy = -1;
                 float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
                 for (int j = 0; j < MAX_ENEMIES; j++) {
@@ -161,6 +195,20 @@ void gamescreen(void) {
         int summon_size1 = 120;
         for (int i = MAX_ZOMBIES; i < MAX_ZOMBIES+MAX_GOBLINS; i++) {
             if (summons[i].active) {
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size1 / 2.0 - 10.0),
+                    summons[i].y - summon_size1 / 2 - 20,
+                    summons[i].x + ((double)summon_size1 / 2.0 - 10.0),
+                    summons[i].y - summon_size1 / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size1 / 2.0 - 10.0),
+                    summons[i].y - summon_size1 / 2 - 20,
+                    summons[i].x - ((double)summon_size1 / 2.0 - 10.0) + 2 *
+                    ((double)summon_size1 / 2.0 - 10.0) *
+                    ((double)summons[i].health / GOBLIN_MAX_HEALTH),
+                    summons[i].y - summon_size1 / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 int closest_enemy = -1;
                 float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
                 for (int j = 0; j < MAX_ENEMIES; j++) {
@@ -196,6 +244,20 @@ void gamescreen(void) {
         int summon_size2 = 70;
         for (int i = MAX_ZOMBIES + MAX_GOBLINS; i < MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS; i++) {
             if (summons[i].active) {
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size2 / 2.0 - 10.0),
+                    summons[i].y - summon_size2 / 2 - 20,
+                    summons[i].x + ((double)summon_size2 / 2.0 - 10.0),
+                    summons[i].y - summon_size2 / 2 - 10,
+                    al_map_rgb_f(255, 0, 0));
+                al_draw_filled_rectangle(
+                    summons[i].x - ((double)summon_size2 / 2.0 - 10.0),
+                    summons[i].y - summon_size2 / 2 - 20,
+                    summons[i].x - ((double)summon_size2 / 2.0 - 10.0) + 2 *
+                    ((double)summon_size2 / 2.0 - 10.0) *
+                    ((double)summons[i].health / BAT_MAX_HEALTH),
+                    summons[i].y - summon_size2 / 2 - 10,
+                    al_map_rgb_f(0, 255, 0));
                 int closest_enemy = -1;
                 float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
                 for (int j = 0; j < MAX_ENEMIES; j++) {

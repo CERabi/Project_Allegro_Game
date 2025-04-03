@@ -22,7 +22,7 @@ typedef struct Summon {
     bool matched;
     int number;
     int matched_enemy;
-    int health;
+    double health;
     int damage;
     int credit;
     int score;
