@@ -1,5 +1,24 @@
 #include "object.h"
 
+void apply_screen_shake(int intensity, int duration) {
+    shake_amount = intensity;
+    shake_duration = duration;
+}
+
+void render_screen() {
+    int shake_x = 0, shake_y = 0;
+
+    if (shake_duration > 0) {
+        shake_x = (rand() % (shake_amount * 2 + 1)) - shake_amount;
+        shake_y = (rand() % (shake_amount * 2 + 1)) - shake_amount;
+        shake_duration--;
+    }
+
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+        shake_x, shake_y, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+}
+
 void move_player() {
 	if (key[ALLEGRO_KEY_UP]) {
 		player.y -= player.speed;
@@ -354,6 +373,7 @@ void Special_moves(int number) {
 	for (int i = 0; i < max; i++) {
 		target_array[i].health -= 5;
 		invincible_timer = 120;
+        apply_screen_shake(15, 30);
 		if (target_array[i].health <= 0) {
 			target_array[i].active = false;
 			for (int k = 0; k < max2; k++) {
