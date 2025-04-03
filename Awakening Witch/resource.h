@@ -16,6 +16,7 @@
 #define SUMMON_SPEED 1.7f
 #define MAX_KNIGHTS 5
 #define MAX_BOSSES 3
+#define MAX_BATS 5
 #define MAX_ZOMBIES 5
 #define MAX_GOBLINS 5
 #define MAX_BULLETS 10
@@ -33,6 +34,7 @@ ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
 ALLEGRO_BITMAP* summon2_img_l;
 ALLEGRO_BITMAP* summon2_img_r;
+ALLEGRO_BITMAP* summon3_img_r;
 ALLEGRO_BITMAP* enermy_img_l;
 ALLEGRO_BITMAP* enermy_img_r;
 ALLEGRO_BITMAP* enemy_boss_img_l;
@@ -57,6 +59,7 @@ ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
 ALLEGRO_TIMER* timer;
 ALLEGRO_TIMER* spawn_timer;
+ALLEGRO_TIMER* spawn_timer_boss;
 ALLEGRO_FONT* font;
 ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;

@@ -1,7 +1,7 @@
 #include "init.h"
 
 void reset_game_state() {
-    // ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­
+    // í”Œë ˆì´ì–´ ì´ˆê¸°í™”
     player.health = PLAYER_HEALTH;
     //player.health = 1;
     player.damage = BULLET_DAMAGE;
@@ -10,34 +10,35 @@ void reset_game_state() {
     player.x = SCREEN_WIDTH / 2;
     player.y = SCREEN_HEIGHT / 2;
     invincible_timer = 0;
+    player.player_att_delay = ATTACK_DELAY;
     /*for (int i = 0; i < ALLEGRO_KEY_MAX; ++i) {
         key[i] = 0;
     }*/
     memset(key, 0, sizeof(key));
 
-    // Á¡¼ö ¹× ÀçÈ­ ÃÊ±âÈ­
+    // ì ìˆ˜ ë° ì¬í™” ì´ˆê¸°í™”
     score_display = 0;
     money_display = 0;
     boss_attack_delay = 20;
 
-    // ÀüÃ¼ ¸ó½ºÅÍ ¼ö
-    MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS;
+    // ì „ì²´ ëª¬ìŠ¤í„° ìˆ˜
+    MAX_SUMMONS = MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS;
     MAX_ENEMIES = MAX_KNIGHTS + MAX_BOSSES;
 
-    // ¸ó½ºÅÍ ÃÊ±âÈ­
+    // ëª¬ìŠ¤í„° ì´ˆê¸°í™”
     for (int i = 0; i < MAX_ENEMIES; i++) {
-        enemies[i].active = false;  // ¸ğµç Àû ºñÈ°¼ºÈ­
-      // ¸ğµç Àû º¸½º 
+        enemies[i].active = false;  // ëª¨ë“  ì  ë¹„í™œì„±í™”
+      // ëª¨ë“  ì  ë³´ìŠ¤ 
         enemies[i].matched_enemy = -1;
     }
 
-    // ¼ÒÈ¯¼ö ÃÊ±âÈ­
+    // ì†Œí™˜ìˆ˜ ì´ˆê¸°í™”
     for (int i = 0; i < MAX_SUMMONS; i++) {
-        summons[i].active = false;  // ¸ğµç ¼ÒÈ¯¼ö ºñÈ°¼ºÈ­
+        summons[i].active = false;  // ëª¨ë“  ì†Œí™˜ìˆ˜ ë¹„í™œì„±í™”
         summons[i].matched_enemy = -1;
     }
 
-    // Åõ»çÃ¼ °ü·Ã ÃÊ±âÈ­
+    // íˆ¬ì‚¬ì²´ ê´€ë ¨ ì´ˆê¸°í™”
     for (int i = 0; i < MAX_BULLETS; i++) {
         bullets[i].active = false;
     }
@@ -47,8 +48,8 @@ void reset_game_state() {
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î °ø°İ °ü·Ã ÃÊ±âÈ­
-    last_att = 0;  // °ø°İ Å¸ÀÌ¹Ö ÃÊ±âÈ­
+    // í”Œë ˆì´ì–´ ê³µê²© ê´€ë ¨ ì´ˆê¸°í™”
+    last_att = 0;  // ê³µê²© íƒ€ì´ë° ì´ˆê¸°í™”
 }
 
 void init(void) {
@@ -56,46 +57,46 @@ void init(void) {
     srand(time(NULL));
 
     if (!al_init()) {
-        fprintf(stderr, "Allegro ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     last_att = -1.0f;
 
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display) {
-        fprintf(stderr, "µğ½ºÇÃ·¹ÀÌ »ı¼º ½ÇÆĞ!\n");
+        fprintf(stderr, "ë””ìŠ¤í”Œë ˆì´ ìƒì„± ì‹¤íŒ¨!\n");
         return;
     }
     if (!al_init_primitives_addon()) {
-        fprintf(stderr, "Allegro primitives ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro primitives ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if(!al_init_image_addon()) {
-        fprintf(stderr, "Allegro image ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro image ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if (!al_install_mouse()) {
-        fprintf(stderr, "Allegro mouse ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro mouse ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if(!al_install_keyboard()) {
-        fprintf(stderr, "Allegro keyboard ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro keyboard ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if(!al_init_font_addon()) {
-        fprintf(stderr, "Allegro font ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro font ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if(!al_init_ttf_addon()) {
-        fprintf(stderr, "Allegro ttf ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro ttf ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if (!al_install_audio()) {
-        fprintf(stderr, "Allegro audio ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro audio ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
     if (!al_init_acodec_addon()) {
-        fprintf(stderr, "Allegro audio ÃÊ±âÈ­ ½ÇÆĞ!\n");
+        fprintf(stderr, "Allegro audio ì´ˆê¸°í™” ì‹¤íŒ¨!\n");
         return;
     }
 
@@ -108,16 +109,19 @@ void init(void) {
 
     timer = al_create_timer(1.0 / 60.0);
     spawn_timer = al_create_timer(3.0);
+    spawn_timer_boss = al_create_timer(12.0);
     event_queue = al_create_event_queue();
 
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_timer_event_source(spawn_timer));
+    al_register_event_source(event_queue, al_get_timer_event_source(spawn_timer_boss));
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_keyboard_event_source());    
     al_register_event_source(event_queue, al_get_mouse_event_source());
 
     al_start_timer(timer);
     al_start_timer(spawn_timer);
+    al_start_timer(spawn_timer_boss);
 
     al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
         0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
