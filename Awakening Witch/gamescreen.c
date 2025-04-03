@@ -190,6 +190,7 @@ void gamescreen(void) {
             }
         }
 
+        int summon_size2 = 70;
         for (int i = MAX_ZOMBIES + MAX_GOBLINS; i < MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS; i++) {
             if (summons[i].active) {
                 int closest_enemy = -1;
@@ -207,19 +208,19 @@ void gamescreen(void) {
                 }
                 if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, 0);
                 }
                 else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
                     al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, ALLEGRO_FLIP_HORIZONTAL);
+                        summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, ALLEGRO_FLIP_HORIZONTAL);
                 }
                 else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
                     al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                        summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, 0);
                 }
                 else {
                     al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
-                        summons[i].x - 50, summons[i].y - 50, 100, 100, ALLEGRO_FLIP_HORIZONTAL);
+                        summons[i].x - summon_size2 / 2, summons[i].y - summon_size2 / 2, summon_size2, summon_size2, ALLEGRO_FLIP_HORIZONTAL);
                 }
             }
         }

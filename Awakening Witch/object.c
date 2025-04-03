@@ -30,7 +30,7 @@ void move_player() {
 }
 
 void player_enhance_sp() {
-    if (money_display < 50) return;
+    if (money_display < 50 || player.player_att_delay <= 0.01) return;
     player.player_att_delay -= 0.01;
     money_display -= 50;
 }
@@ -159,6 +159,7 @@ void spawn_summon(int number) {
     int health;
     int damage;
     int credit;
+    int size;
     double speed;
     switch (number) {
     case 11:
@@ -169,6 +170,7 @@ void spawn_summon(int number) {
         damage = 1;
         credit = 50;
         speed = 1.7;
+        size = 50;
         break;
     case 12:
         // 고블린
@@ -178,15 +180,17 @@ void spawn_summon(int number) {
         damage = 2;
         credit = 100;
         speed = 2.0;
+        size = 50;
         break;
     case 13:
         // 박쥐
         i = MAX_ZOMBIES + MAX_GOBLINS;
         temp = MAX_BATS;
-        health = 5;
-        damage = 2;
+        health = 1;
+        damage = 1;
         credit = 100;
         speed = 3.0;
+        size = 30;
         break;
     default:
         printf("잘못된 입력값: %d\n", number);
@@ -206,6 +210,7 @@ void spawn_summon(int number) {
             target_array[i].speed = speed;
             target_array[i].invincible = 0;
             target_array[i].matched_enemy = -1;
+            target_array[i].size = size;
             break;
         }
     }
@@ -418,7 +423,7 @@ void check_boss_bullet_collision(void) {
                         float dx = boss_bullets[j][i].x - summons[k].x;
                         float dy = boss_bullets[j][i].y - summons[k].y;
                         float distance = sqrt(dx * dx + dy * dy);
-                        if (distance < BULLET_COLLISION_DISTANCE) {
+                        if (distance < summons[k].size) {
                             summons[k].health -= enemies[MAX_KNIGHTS+j].damage;
                             al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
                             if (summons[k].health <= 0) {
