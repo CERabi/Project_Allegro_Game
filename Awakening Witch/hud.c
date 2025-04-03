@@ -10,6 +10,11 @@ void hud_draw() {
 		50, 55, 40, 40, 0);
 	al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
 		50, 105, 40, 40, 0);
+	al_draw_scaled_bitmap(HUD_speed, 0, 0, al_get_bitmap_width(HUD_speed), al_get_bitmap_height(HUD_speed),
+		50, 210, 40, 40, 0);
+	al_draw_scaled_bitmap(HUD_damage, 0, 0, al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
+		220, 210, 40, 40, 0);
+
 
 	al_draw_textf(
 		hud_font,
@@ -32,21 +37,20 @@ void hud_draw() {
 		al_map_rgb_f(1, 1, 1),
 		100, 200,
 		0,
-		"%d",
-		player.speed / 5
+		"%.2f",
+		player.player_att_delay
 	); 
 	al_draw_textf(
 		hud_font,
 		al_map_rgb_f(1, 1, 1),
-		200, 200,
+		270, 200,
 		0,
-		"%d",
+		"%.1f",
 		player.damage
 	);
 	for (int i = 0; i < player.health; ++i) {
 		al_draw_scaled_bitmap(HUD_life, 0, 0, al_get_bitmap_width(HUD_life), 
 			al_get_bitmap_height(HUD_life), 50 + i * 50, 160, 40, 40, 0);
-		
 	}
 
 	if (money_display >= 50) {

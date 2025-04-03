@@ -31,20 +31,20 @@ void move_player() {
 
 void player_enhance_sp() {
     if (money_display < 50) return;
-    player.speed += 5;
+    player.player_att_delay -= 0.01;
     money_display -= 50;
 }
 
 void player_enhance_dm() {
     if (money_display < 50) return;
-    player.damage += 1;
+    player.damage += 0.1;
     money_display -= 50;
 }
 
 void fire_bullet() {
     double now = al_get_time();
     for (int i = 0; i < MAX_BULLETS; i++) {
-        if (!bullets[i].active && now - last_att > ATTACK_DELAY) {
+        if (!bullets[i].active && now - last_att > player.player_att_delay) {
             al_play_sample(player_attack, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
             last_att = now;
             bullets[i].x = player.x;
@@ -221,6 +221,7 @@ void spawn_enermy(int number) {
     int speed;
     int max_summons;
     int temp;
+    int size;
     switch (number) {
     case 1:
         // knight
@@ -232,10 +233,10 @@ void spawn_enermy(int number) {
         score = 100;
         speed = 2.0;
         max_summons = 5;
+        size = 35;
         break;
     case 2:
         // 보스
-        al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
         i = MAX_KNIGHTS;
         temp = MAX_BOSSES;
         health = 7;
@@ -244,6 +245,7 @@ void spawn_enermy(int number) {
         score = 500;
         speed = 0;
         max_summons = 3;
+        size = 80;
         break;
     default:
         return;  // 잘못된 값이면 함수 종료
@@ -253,6 +255,7 @@ void spawn_enermy(int number) {
 
     for (; i < MAX_KNIGHTS + temp; i++) {
         if (!target_array[i].active) {
+            if(i >= MAX_KNIGHTS)al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
             int x, y;
             bool safe_position = false;
 
@@ -276,6 +279,7 @@ void spawn_enermy(int number) {
             target_array[i].speed = speed;
             target_array[i].invincible = 0;
             target_array[i].matched_enemy = -1;
+            target_array[i].size = size;
             break;
         }
     }
@@ -380,7 +384,7 @@ void check_bullet_collision() {
                     float dx = bullets[i].x - enemies[j].x;
                     float dy = bullets[i].y - enemies[j].y;
                     float distance = sqrt(dx * dx + dy * dy);
-                    if (distance < BULLET_COLLISION_DISTANCE) {
+                    if (distance < enemies[j].size) {
                         enemies[j].health -= player.damage;
                         al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
                         if (enemies[j].health <= 0) {
@@ -409,7 +413,6 @@ void boss_shoot(int j) {
     int k = j + MAX_KNIGHTS;
     for (int i = 0; i < MAX_BULLETS; i++) {
         if (!boss_bullets[j][i].active && enemies[k].active) {
-            printf("보스 %d : %d\n", j, i);
             boss_bullets[j][i].x = enemies[k].x;
             boss_bullets[j][i].y = enemies[k].y;
             boss_bullets[j][i].active = true;

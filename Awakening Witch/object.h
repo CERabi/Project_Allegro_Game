@@ -8,25 +8,27 @@
 #include "menu.h"
 
 typedef struct Player {
-	float x, y;
-	int speed;
-	int damage;
-	int health;
-	bool sees_left;
+    float x, y;
+    int speed;
+    double player_att_delay;
+    double damage;
+    int health;
+    bool sees_left;
 } Player;
 
 typedef struct Summon {
-	float x, y;
-	bool active;
-	bool matched;
-	int number;
-	int matched_enemy;
-	int health;
-	int damage;
-	int credit;
-	int score;
-	double speed;
-	int invincible; // 몬스터 소환수 무적 시간
+    float x, y;
+    bool active;
+    bool matched;
+    int number;
+    int matched_enemy;
+    int health;
+    int damage;
+    int credit;
+    int score;
+    int size;
+    double speed;
+    int invincible;
 } Summon;
 
 typedef struct Bullet {
