@@ -57,6 +57,7 @@ ALLEGRO_EVENT_QUEUE* event_queue;
 ALLEGRO_DISPLAY* display;
 ALLEGRO_TIMER* timer;
 ALLEGRO_TIMER* spawn_timer;
+ALLEGRO_TIMER* spawn_timer_boss;
 ALLEGRO_FONT* font;
 ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;

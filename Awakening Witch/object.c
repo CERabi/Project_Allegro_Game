@@ -226,7 +226,6 @@ void spawn_enermy(int number) {
         break;
     case 2:
         // 보스
-        al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
         i = MAX_KNIGHTS;
         temp = MAX_BOSSES;
         health = 7;
@@ -244,6 +243,7 @@ void spawn_enermy(int number) {
 
     for (; i < MAX_KNIGHTS + temp; i++) {
         if (!target_array[i].active) {
+            if(i >= MAX_KNIGHTS)al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
             int x, y;
             bool safe_position = false;
 

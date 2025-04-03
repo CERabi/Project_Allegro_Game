@@ -33,6 +33,10 @@ void gamescreen(void) {
             spawn_enermy(1);
         }
 
+        if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer_boss) {
+            spawn_enermy(2);
+        }
+
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == timer) {
             move_player();
             move_bullets();
