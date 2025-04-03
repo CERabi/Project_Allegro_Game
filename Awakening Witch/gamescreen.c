@@ -10,14 +10,17 @@ void gamescreen(void) {
             // 적 생성
             if (key[ALLEGRO_KEY_Q]) spawn_enermy(1);
             if (key[ALLEGRO_KEY_W]) spawn_enermy(2);
+            
             // 적 삭제
             if (key[ALLEGRO_KEY_E]) clear_summons(1);
             
             // 아군 생성
             if (key[ALLEGRO_KEY_A]) spawn_summon(11);
             if (key[ALLEGRO_KEY_S]) spawn_summon(12);
+            if (key[ALLEGRO_KEY_D]) spawn_summon(13);
+
             // 아군 삭제
-            if (key[ALLEGRO_KEY_D]) clear_summons(11);
+            if (key[ALLEGRO_KEY_F]) clear_summons(11);
 
             // 공격
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
@@ -182,6 +185,40 @@ void gamescreen(void) {
                 else {
                     al_draw_scaled_bitmap(summon2_img_l, 0, 0, al_get_bitmap_width(summon2_img_l), al_get_bitmap_height(summon2_img_l),
                         summons[i].x - summon_size1/2, summons[i].y - summon_size1/2, summon_size1, summon_size1, 0);
+                }
+            }
+        }
+
+        for (int i = MAX_ZOMBIES + MAX_GOBLINS; i < MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS; i++) {
+            if (summons[i].active) {
+                int closest_enemy = -1;
+                float min_distance = SCREEN_WIDTH * SCREEN_HEIGHT;
+                for (int j = 0; j < MAX_ENEMIES; j++) {
+                    if (enemies[j].active && !enemies[j].matched) {
+                        float dx = summons[i].x - enemies[j].x;
+                        float dy = summons[i].y - enemies[j].y;
+                        float distance = sqrt(dx * dx + dy * dy);
+                        if (distance < min_distance) {
+                            min_distance = distance;
+                            closest_enemy = j;
+                        }
+                    }
+                }
+                if (summons[i].matched_enemy != -1 && summons[i].x < enemies[summons[i].matched_enemy].x) {
+                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                }
+                else if (summons[i].matched_enemy != -1 && summons[i].x >= enemies[summons[i].matched_enemy].x) {
+                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, ALLEGRO_FLIP_HORIZONTAL);
+                }
+                else if (closest_enemy != -1 && summons[i].x < enemies[closest_enemy].x) {
+                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, 0);
+                }
+                else {
+                    al_draw_scaled_bitmap(summon3_img_r, 0, 0, al_get_bitmap_width(summon3_img_r), al_get_bitmap_height(summon3_img_r),
+                        summons[i].x - 50, summons[i].y - 50, 100, 100, ALLEGRO_FLIP_HORIZONTAL);
                 }
             }
         }
