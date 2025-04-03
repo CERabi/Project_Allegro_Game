@@ -110,6 +110,8 @@ int boss_shoot_timer[MAX_BOSSES];
 int boss_attack_delay;
 int MAX_SUMMONS;
 int MAX_ENEMIES;
+int shake_amount;
+int shake_duration;
 
 int current_frame[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
 double last_update_time[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];

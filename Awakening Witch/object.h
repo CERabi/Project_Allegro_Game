@@ -44,7 +44,8 @@ Summon summons[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
 Bullet bullets[MAX_PLAYER_BULLETS];
 Bullet boss_bullets[MAX_BOSSES][MAX_BULLETS];
 
-
+void apply_screen_shake(int, int);
+void render_screen();
 void move_player();
 void player_enhance_sp(void);
 void player_enhance_dm(void);
