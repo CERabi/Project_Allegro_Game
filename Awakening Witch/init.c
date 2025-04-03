@@ -9,6 +9,7 @@ void reset_game_state() {
     player.sees_left = true;
     player.x = SCREEN_WIDTH / 2;
     player.y = SCREEN_HEIGHT / 2;
+    player.bullets = 3;
     invincible_timer = 0;
     player.player_att_delay = ATTACK_DELAY;
     /*for (int i = 0; i < ALLEGRO_KEY_MAX; ++i) {
@@ -39,7 +40,7 @@ void reset_game_state() {
     }
 
     // 투사체 관련 초기화
-    for (int i = 0; i < MAX_BULLETS; i++) {
+    for (int i = 0; i < player.bullets; i++) {
         bullets[i].active = false;
     }
     for (int i = 0; i < MAX_BOSSES; i++) {

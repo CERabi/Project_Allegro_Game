@@ -31,6 +31,7 @@ void gamescreen(void) {
             // 본인 강화(상점)
             if (key[ALLEGRO_KEY_A]) player_enhance_sp();
             if (key[ALLEGRO_KEY_S]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_D]) player_enhance_bu();
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
@@ -291,7 +292,7 @@ void gamescreen(void) {
         }
 
         int bullet_size = 80;
-        for (int i = 0; i < MAX_BULLETS; i++) {
+        for (int i = 0; i < player.bullets; i++) {
             if (bullets[i].active) {
                 al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
                     bullets[i].x - bullet_size / 2, bullets[i].y - bullet_size / 2, bullet_size, bullet_size, 0);

@@ -13,6 +13,7 @@ typedef struct Player {
     double player_att_delay;
     double damage;
     int health;
+    int bullets;
     bool sees_left;
 } Player;
 
@@ -40,7 +41,7 @@ typedef struct Bullet {
 Player player;
 Summon enemies[MAX_KNIGHTS + MAX_BOSSES];
 Summon summons[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
-Bullet bullets[MAX_BULLETS];
+Bullet bullets[MAX_PLAYER_BULLETS];
 Bullet boss_bullets[MAX_BOSSES][MAX_BULLETS];
 
 void move_player();

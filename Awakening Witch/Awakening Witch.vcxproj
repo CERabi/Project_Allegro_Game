@@ -169,6 +169,7 @@
     <Image Include="Resource\pic\battleback1.png" />
     <Image Include="Resource\pic\boss_l.png" />
     <Image Include="Resource\pic\boss_r.png" />
+    <Image Include="Resource\pic\bullets.png" />
     <Image Include="Resource\pic\damage.png" />
     <Image Include="Resource\pic\fireball.png" />
     <Image Include="Resource\pic\fireball_boss.png" />

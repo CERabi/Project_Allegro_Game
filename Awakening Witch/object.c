@@ -29,21 +29,27 @@ void move_player() {
         player.y = SCREEN_HEIGHT - 100;
 }
 
+void player_enhance_bu() {
+    if (money_display < 50 || player.bullets >= MAX_PLAYER_BULLETS) return;
+    player.bullets += 1;
+    money_display -= 500;
+}
+
 void player_enhance_sp() {
     if (money_display < 50 || player.player_att_delay <= 0.01) return;
     player.player_att_delay -= 0.01;
-    money_display -= 50;
+    money_display -= 200;
 }
 
 void player_enhance_dm() {
     if (money_display < 50) return;
     player.damage += 0.1;
-    money_display -= 50;
+    money_display -= 500;
 }
 
 void fire_bullet() {
     double now = al_get_time();
-    for (int i = 0; i < MAX_BULLETS; i++) {
+    for (int i = 0; i < player.bullets; i++) {
         if (!bullets[i].active && now - last_att > player.player_att_delay) {
             al_play_sample(player_attack, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
             last_att = now;
@@ -141,7 +147,7 @@ void move_summons() {
 }
 
 void move_bullets() {
-    for (int i = 0; i < MAX_BULLETS; i++) {
+    for (int i = 0; i < player.bullets; i++) {
         if (bullets[i].active) {
             bullets[i].x += bullets[i].direction_x * BULLET_SPEED;
             bullets[i].y += bullets[i].direction_y * BULLET_SPEED;
@@ -432,7 +438,7 @@ void check_player_collision() {
 }
 
 void check_bullet_collision() {
-    for (int i = 0; i < MAX_BULLETS; i++) {
+    for (int i = 0; i < player.bullets; i++) {
         if (bullets[i].active) {
             for (int j = 0; j < MAX_ENEMIES; j++) {
                 if (enemies[j].active) {

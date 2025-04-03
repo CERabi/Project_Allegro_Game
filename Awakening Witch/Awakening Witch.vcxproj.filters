@@ -135,9 +135,12 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\pic\zombie_l.png">
-      <Filter>리소스 파일\pic</Filter>
+      <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Resource\pic\zombie_r.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\bullets.png">
       <Filter>리소스 파일\pic</Filter>
     </Image>
   </ItemGroup>

@@ -111,14 +111,26 @@ void load_resource(void) {
         printf("이미지를 불러오지 못했습니다!\n");
         return;
     }
+    HUD_bullets = al_load_bitmap("Resource/pic/bullets.png");
+    if (!HUD_bullets) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
 
     // 상점 이미지 로드
     SHOP_ORIGIN = al_load_bitmap("Resource/pic/shop_icon.png");
+    if (!SHOP_ORIGIN) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
     SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
     SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
+    SHOP_UP_BU = al_create_sub_bitmap(SHOP_ORIGIN, 48, 72, 24, 24);
     SHOP_UP_SPD_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 48, 24, 24));
+    SHOP_UP_BU_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 72, 24, 24));
     SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
     SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
+    SHOP_UP_BU_NO = convert_to_grayscale(SHOP_UP_BU);
 
     // 폰트 로드
     font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
@@ -183,6 +195,7 @@ void destroy_resource(void) {
     al_destroy_bitmap(HUD_life);
     al_destroy_bitmap(HUD_speed);
     al_destroy_bitmap(HUD_damage);
+    al_destroy_bitmap(HUD_bullets);
     al_destroy_display(display);
     al_destroy_event_queue(event_queue);
     al_destroy_timer(timer);
