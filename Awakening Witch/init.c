@@ -4,6 +4,7 @@ void reset_game_state() {
     // 배경 초기화
     al_stop_sample(sample1);
     al_play_sample(BGM, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample2);
+    for(int i = 0; i < 3; ++i) now_alley[i] = 0;
     // 플레이어 초기화
     player.health = PLAYER_HEALTH;
     //player.health = 1;
@@ -23,11 +24,11 @@ void reset_game_state() {
 
     // 점수 및 재화 초기화
     score_display = 0;
+    money_display = 0;
     prev_score = 0;
     score_multiplier = 1.0f;
-    money_display = 9900;
     //score_display = 1000;
-    money_display = 100000;
+    //money_display = 100000;
 
     // 난이도 초기화
     enemy_health_plus = 0;

@@ -133,6 +133,7 @@ int boss_laser_timer[MAX_BOSSES];
 int boss_attack_delay;
 int MAX_SUMMONS;
 int MAX_ENEMIES;
+int now_alley[3];
 int knights_amount;
 int debuff_damage_knight;
 int debuff_amount_bossbullet;

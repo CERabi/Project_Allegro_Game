@@ -14,13 +14,16 @@ void hud_draw() {
 		50, 210, 40, 40, 0);
 	al_draw_scaled_bitmap(HUD_damage, 0, 0, al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
 		220, 210, 40, 40, 0);
-	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 150, 0, "Q");
-	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 150, 0, "W");
-	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1420, 150, 0, "E");
-	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 0, 0, "A");
-	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 0, 0, "S");
-	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1420, 0, 0, "D");
+	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 0, 0, "Q");
+	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 0, 0, "W");
+	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1420, 0, 0, "E");
 	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 325, 100, 0, "R");
+	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 150, 0, "A");
+	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 150, 0, "S");
+	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1420, 150, 0, "D");
+	al_draw_textf(hud_font, al_map_rgb_f(1, 1, 1), 1310, 200, 0, "%1d", now_alley[2]);
+	al_draw_textf(hud_font, al_map_rgb_f(1, 1, 1), 1365, 200, 0, "%1d", now_alley[0]);
+	al_draw_textf(hud_font, al_map_rgb_f(1, 1, 1), 1420, 200, 0, "%1d", now_alley[1]);
 	al_draw_textf(
 		hud_font,
 		al_map_rgb_f(1, 1, 1),

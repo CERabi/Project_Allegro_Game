@@ -235,13 +235,15 @@ void spawn_summon(int number) {
 			target_array[i].invincible = 0;
 			target_array[i].matched_enemy = -1;
 			target_array[i].size = size;
+			if (i < MAX_ZOMBIES) ++now_alley[0];
+			else if (i < MAX_ZOMBIES + MAX_GOBLINS) ++now_alley[1];
+			else ++now_alley[2];
 			break;
 		}
 	}
 }
 
 void spawn_enermy(int number) {
-
     Summon* target_array = enemies;
     int i;
     double health;
@@ -333,6 +335,7 @@ void clear_summons(int number) {
 		target_array2 = enemies;
 		max = MAX_SUMMONS;
 		max2 = MAX_ENEMIES;
+		for (int i = 0; i < 3; ++i) now_alley[i] = 0;
 		break;
 	default:
 		return;
@@ -427,6 +430,9 @@ void check_collision() {
 					if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 				}
 				if (summons[j].health <= 0) {
+					if (j < MAX_ZOMBIES) --now_alley[0];
+					else if (j < MAX_ZOMBIES + MAX_GOBLINS) --now_alley[1];
+					else --now_alley[2];
 					summons[j].active = false;
 					enemies[i].matched = false;
 					enemies[i].matched_enemy = -1;
@@ -534,6 +540,9 @@ void check_boss_bullet_collision(void) {
 							summons[k].health -= enemies[MAX_KNIGHTS + j].damage;
 							al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 							if (summons[k].health <= 0) {
+								if (k < MAX_ZOMBIES) --now_alley[0];
+								else if (k < MAX_ZOMBIES + MAX_GOBLINS) --now_alley[1];
+								else --now_alley[2];
 								summons[k].active = false;
 								summons[k].matched_enemy = -1;
 
@@ -584,6 +593,9 @@ void check_boss_laser_collision(void) {
 							summons[k].health -= 0.5;
 							al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 							if (summons[k].health <= 0) {
+								if (k < MAX_ZOMBIES) --now_alley[0];
+								else if (k < MAX_ZOMBIES + MAX_GOBLINS) --now_alley[1];
+								else --now_alley[2];
 								summons[k].active = false;
 								summons[k].matched_enemy = -1;
 
