@@ -21,7 +21,7 @@ void reset_game_state() {
     score_display = 0;
     prev_score = 0;
     score_multiplier = 1.0f;
-    money_display = 0;
+    money_display = 9900;
     //score_display = 1000;
     //money_display = 100000;
 

@@ -215,12 +215,14 @@ void load_resource(void) {
     SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
     SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
     SHOP_UP_BU = al_create_sub_bitmap(SHOP_ORIGIN, 48, 72, 24, 24);
-    
+    ULT = al_create_sub_bitmap(SHOP_ORIGIN, 24, 48, 24, 24);
+
     SHOP_UP_SPD_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 48, 24, 24));
     SHOP_UP_BU_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 72, 24, 24));
     SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
     SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
     SHOP_UP_BU_NO = convert_to_grayscale(SHOP_UP_BU);
+    ULT_NO = convert_to_grayscale(ULT);
 
     // 디버프 이미지 로드
     debuff_background = al_load_bitmap("Resource/pic/debuff_background.png");
