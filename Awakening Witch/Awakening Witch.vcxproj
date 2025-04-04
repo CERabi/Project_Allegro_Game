@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\pic\battleback1.png" />
+    <Image Include="Resource\pic\bat_up.png" />
     <Image Include="Resource\pic\boss_l.png" />
     <Image Include="Resource\pic\boss_r.png" />
     <Image Include="Resource\pic\bullets.png" />
@@ -178,6 +179,7 @@
     <Image Include="Resource\pic\fireball_boss.png" />
     <Image Include="Resource\pic\goblin_l.png" />
     <Image Include="Resource\pic\goblin_r.png" />
+    <Image Include="Resource\pic\goblin_up.png" />
     <Image Include="Resource\pic\knight_l.png" />
     <Image Include="Resource\pic\knight_r.png" />
     <Image Include="Resource\pic\laser.png" />
@@ -195,9 +197,11 @@
     <Image Include="Resource\pic\player_r.png" />
     <Image Include="Resource\pic\score.png" />
     <Image Include="Resource\pic\speed.png" />
+    <Image Include="Resource\pic\X.png" />
     <Image Include="Resource\pic\zombie_l.png" />
     <Image Include="Resource\pic\zombie_r.png" />
     <Image Include="Resource\pic\shop_icon.png" />
+    <Image Include="Resource\pic\zombie_up.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\rank_db\rank.txt" />
