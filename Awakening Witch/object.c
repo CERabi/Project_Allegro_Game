@@ -14,7 +14,7 @@ void render_screen() {
 		shake_duration--;
 	}
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
+    al_draw_scaled_bitmap(background[backstage], 0, 0, al_get_bitmap_width(background[backstage]), al_get_bitmap_height(background[backstage]),
         shake_x, shake_y, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 }
 
@@ -372,9 +372,9 @@ void Special_moves(int number) {
 		return;
 	}
 	for (int i = 0; i < max; i++) {
-		if (money_display < COST_ULT) break;
+		if (!COST_ULT) break;
 		target_array[i].health -= 5;
-		money_display -= COST_ULT;
+		COST_ULT = 0;
 		invincible_timer = 120;
 		apply_screen_shake(15, 30);
 		if (target_array[i].health <= 0) {

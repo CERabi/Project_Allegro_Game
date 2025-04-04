@@ -2,7 +2,7 @@
 
 void draw_menu() {
     // 배경 이미지 크기 맞추기
-    al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
+    al_draw_scaled_bitmap(background[backstage], 0, 0, al_get_bitmap_width(background[backstage]), al_get_bitmap_height(background[backstage]),
         0, 0, 1500, 900, 0);  // 화면 크기 1500x900으로 변경
 
     // 제목 텍스트는 여전히 가운데 정렬

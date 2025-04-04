@@ -10,6 +10,7 @@ void load_resource(void) {
     char back[50];
     for (int i = 0; i < 10; i++) {
         sprintf_s(back, sizeof(back), "Resource/pic/battleback%d.png", i + 1);
+        //printf("%s", back);
         background[i] = al_load_bitmap(back);
         if (!background[i]) {
             printf("Failed to load image: %s\n", back);
@@ -319,7 +320,7 @@ void load_resource(void) {
 }
 
 void destroy_resource(void) {
-    al_destroy_bitmap(background[0]);
+    for (int i = 0; i < 10; i++) al_destroy_bitmap(background[i]);
     al_destroy_bitmap(summon_img_l);
     al_destroy_bitmap(summon_img_r);
     al_destroy_bitmap(goblin_sword[0]);

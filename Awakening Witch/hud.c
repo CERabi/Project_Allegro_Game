@@ -125,7 +125,7 @@ void hud_draw() {
 			al_get_bitmap_height(SHOP_UP_BU_NO), 1405, 50, 55, 55, 0);
 	}
 	
-	if (money_display >= COST_ULT) {
+	if (COST_ULT) {
 		al_draw_scaled_bitmap(ULT, 0, 0, al_get_bitmap_width(ULT),
 			al_get_bitmap_height(ULT), 270, 105, 40, 40, 0);
 	}

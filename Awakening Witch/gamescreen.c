@@ -40,8 +40,8 @@ void gamescreen(void) {
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
             // 본인 강화(상점)
-            if (key[ALLEGRO_KEY_A]) player_enhance_dm();
-            if (key[ALLEGRO_KEY_S]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_A]) player_enhance_sp();
+            if (key[ALLEGRO_KEY_S]) player_enhance_dm();
             if (key[ALLEGRO_KEY_D]) player_enhance_bu();
         }
 
@@ -73,7 +73,7 @@ void gamescreen(void) {
         update_animation2();
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
-        al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
+        al_draw_scaled_bitmap(background[backstage], 0, 0, al_get_bitmap_width(background[backstage]), al_get_bitmap_height(background[backstage]),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
         /*al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 150, 0, "Q");
         al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 150, 0, "W");

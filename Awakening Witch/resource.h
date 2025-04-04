@@ -45,7 +45,6 @@
 #define COST_BAT 200
 #define COST_ZOMBIE 300
 #define COST_GOBLIN 400
-#define COST_ULT 10000
 #define AMOUNT_DEBUFF 6
 
 
@@ -121,6 +120,7 @@ float player_x;
 float player_y;
 float player_size; 
 int player_health;
+int COST_ULT;
 float boss_bullet_speed;
 int enemy_health_plus;
 int invincible_timer;
@@ -139,6 +139,7 @@ int debuff_amount_bossbullet;
 int shake_amount;
 int shake_duration;
 int prev_score;
+int backstage;
 double score_multiplier;
 
 int current_frame[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];

@@ -26,6 +26,7 @@ int main(void) {
             gamescreen();
             al_play_sample(mainMenu, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample1);
             strcpy(state, "rank");
+            backstage = 0;
         }
         else if (!strcmp(state, "rank")) {
             rank();

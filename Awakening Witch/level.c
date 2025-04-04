@@ -45,6 +45,10 @@ void level_up(void) {
 
 		al_flip_display();
 	}
+	backstage = (backstage + 1) % 10;
+	COST_ULT = 1;
+	// for debug
+	//printf("update backstage : %d", backstage);
 }
 
 void debuff_action(int flg) {
