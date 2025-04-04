@@ -1,6 +1,8 @@
 #include "init.h"
 
 void reset_game_state() {
+    al_stop_sample(sample1);
+    al_play_sample(BGM, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample2);
     // 플레이어 초기화
     player.health = PLAYER_HEALTH;
     //player.health = 1;

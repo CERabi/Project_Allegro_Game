@@ -1,0 +1,3 @@
+WWEQ 600
+SAD 100
+QWE 0
