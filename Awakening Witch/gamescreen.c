@@ -73,7 +73,7 @@ void gamescreen(void) {
         update_animation2();
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
-        al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+        al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
         render_screen();
         int player_size = 80;

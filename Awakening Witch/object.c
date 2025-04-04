@@ -15,7 +15,7 @@ void render_screen() {
     }
 
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+    al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
         shake_x, shake_y, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 }
 

@@ -7,10 +7,13 @@ void load_resource(void) {
     player_size = 30;
     invincible_timer = 120;
     // 배경 이미지 로드
-    background = al_load_bitmap("Resource/pic/battleback1.png");
-    if (!background) {
-        printf("이미지를 불러오지 못했습니다!\n");
-        return;
+    char back[50];
+    for (int i = 0; i < 10; i++) {
+        sprintf_s(back, sizeof(back), "Resource/pic/battleback%d.png", i + 1);
+        background[i] = al_load_bitmap(back);
+        if (!background[i]) {
+            printf("Failed to load image: %s\n", back);
+        }
     }
 
     // 소환수 이미지 로드
@@ -129,6 +132,7 @@ void load_resource(void) {
             printf("Failed to load image: %s\n", laser);
         }
     }
+
     int scale_factor_width = 1;
     int scale_factor_height = 3;
     int new_width = al_get_bitmap_width(laser_img[0]) * scale_factor_width;
@@ -306,7 +310,7 @@ void load_resource(void) {
 }
 
 void destroy_resource(void) {
-    al_destroy_bitmap(background);
+    al_destroy_bitmap(background[0]);
     al_destroy_bitmap(summon_img_l);
     al_destroy_bitmap(summon_img_r);
     al_destroy_bitmap(goblin_sword[0]);
