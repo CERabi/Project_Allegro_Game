@@ -28,7 +28,7 @@ void reset_game_state() {
     // 난이도 초기화
     enemy_health_plus = 0;
     boss_attack_delay = 20;
-    boss_bullet_speed = 0.1f; 
+    boss_bullet_speed = 0.5f; 
     knights_amount = 3;
     debuff_damage_knight = 0;
     debuff_amount_bossbullet = 5;

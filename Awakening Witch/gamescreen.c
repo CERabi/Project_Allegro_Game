@@ -46,7 +46,7 @@ void gamescreen(void) {
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer) {
-            //spawn_enermy(1);
+            spawn_enermy(1);
         }
 
         if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == spawn_timer_boss) {
@@ -64,7 +64,7 @@ void gamescreen(void) {
             check_boss_bullet_collision();
             check_boss_laser_collision();
             check_player_collision();
-            //attack_boss();
+            attack_boss();
             attack_laser_boss();
             
         }
@@ -392,21 +392,10 @@ void gamescreen(void) {
         }
 
         for (int j = 0; j < MAX_BOSSES; ++j) {
-            if (boss_laser_timer[j] >= 350) {
+            if (boss_laser_timer[j] >= 200) {
                 draw_rotated_laser(j + MAX_KNIGHTS);
             }
         }
-
-        for (int j = 0; j < MAX_BOSSES; ++j) {
-            for (int i = 0; i < MAX_BOSSES_LASER; i++) {
-                if (boss_lasers[j][i].active) {
-                    al_draw_scaled_bitmap(fireball_boss_img, 0, 0, al_get_bitmap_width(fireball_boss_img), al_get_bitmap_height(fireball_boss_img),
-                        boss_lasers[j][i].x - 35, boss_lasers[j][i].y - 35, 70, 70, 0);
-                }
-            }
-        }
-       
-
 
         hud_draw();
         al_flip_display();

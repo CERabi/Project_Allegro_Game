@@ -624,8 +624,8 @@ void boss_shoot(int j) {
 			boss_bullets[j][i].x = enemies[k].x;
 			boss_bullets[j][i].y = enemies[k].y;
 			boss_bullets[j][i].active = true;
-			float dx = boss_laser_target[j].x - enemies[k].x;
-			float dy = boss_laser_target[j].y - enemies[k].y;
+			float dx = player.x - enemies[k].x;
+			float dy = player.y - enemies[k].y;
 			float length = sqrt(dx * dx + dy * dy);
 			if (length != 0) {
 				boss_bullets[j][i].direction_x = (dx / length) * 5;
@@ -724,6 +724,16 @@ void attack_laser_boss() {
 
 // 레이저 돌리는 함수
 void draw_rotated_laser(int k) {
+    float angle2;
+    float dx2=0.0;
+    float dy2=0.0;
+    if (boss_laser_timer[k - MAX_KNIGHTS] >= 200 && boss_laser_timer[k - MAX_KNIGHTS] < 350) {
+        dx2 = player.x - enemies[k].x;
+        dy2 = player.y - enemies[k].y;
+
+        
+    }
+    angle2 = atan2(-dx2, dy2);
    
     if (boss_laser_timer[k-MAX_KNIGHTS] == 350) {
         boss_laser_target[k - MAX_KNIGHTS].x = player.x;
@@ -736,7 +746,17 @@ void draw_rotated_laser(int k) {
 
     float angle = atan2(-dx, dy); // 보스 → 플레이어 방향 각도 계산
 
-    if (boss_laser_timer[k - MAX_KNIGHTS] >= 350 && boss_laser_timer[k - MAX_KNIGHTS] <= 380) {
+    if (boss_laser_timer[k - MAX_KNIGHTS] >= 200 && boss_laser_timer[k - MAX_KNIGHTS] <= 350) {
+        al_draw_rotated_bitmap(
+            laser_img[6],
+            al_get_bitmap_width(laser_img[6]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle2,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 350 && boss_laser_timer[k - MAX_KNIGHTS] <= 380) {
         al_draw_rotated_bitmap(
             laser_img[0],
             al_get_bitmap_width(laser_img[0]) / 2,

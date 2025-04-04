@@ -129,6 +129,27 @@ void load_resource(void) {
             printf("Failed to load image: %s\n", laser);
         }
     }
+    int scale_factor_width = 1;
+    int scale_factor_height = 3;
+    int new_width = al_get_bitmap_width(laser_img[0]) * scale_factor_width;
+    int new_height = al_get_bitmap_height(laser_img[0]) * scale_factor_height;
+
+    // 레이저 확대
+    ALLEGRO_BITMAP* scaled_laser1;
+    scaled_laser1 = al_create_bitmap(new_width, new_height);
+    al_set_target_bitmap(scaled_laser1);
+    al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+    al_draw_scaled_bitmap(
+        laser_img[0],
+        0, 0,
+        al_get_bitmap_width(laser_img[0]), al_get_bitmap_height(laser_img[0]),
+        0, 0,
+        new_width, new_height,
+        0
+    );
+    al_set_target_backbuffer(display);
+    laser_img[6] = scaled_laser1;
+
 
     for (int i = 0; i < 6; ++i) {
         int scale_factor_width = 2;
