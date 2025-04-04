@@ -750,9 +750,9 @@ void draw_rotated_laser(int k) {
     }
     angle2 = atan2(-dx2, dy2);
    
-    if (boss_laser_timer[k-MAX_KNIGHTS] == 350) {
-        boss_laser_target[k - MAX_KNIGHTS].x = player.x;
-        boss_laser_target[k - MAX_KNIGHTS].y = player.y;
+    if (boss_laser_timer[p] == 350) {
+        boss_laser_target[p].x = player.x;
+        boss_laser_target[p].y = player.y;
        
     }
 
