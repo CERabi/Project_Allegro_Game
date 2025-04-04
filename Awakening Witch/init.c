@@ -141,7 +141,7 @@ void init(void) {
 
     timer = al_create_timer(1.0 / 60.0);
     spawn_timer = al_create_timer(3.0);
-    spawn_timer_boss = al_create_timer(15.0);
+    spawn_timer_boss = al_create_timer(20.0);
     event_queue = al_create_event_queue();
 
     al_register_event_source(event_queue, al_get_timer_event_source(timer));

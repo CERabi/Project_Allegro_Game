@@ -374,23 +374,6 @@ void gamescreen(void) {
         
         }
 
-        int bullet_size = 80;
-        for (int i = 0; i < player.bullets; i++) {
-            if (bullets[i].active) {
-                al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
-                    bullets[i].x - bullet_size / 2, bullets[i].y - bullet_size / 2, bullet_size, bullet_size, 0);
-            }
-        }
-
-        for (int j = 0; j < MAX_BOSSES; ++j) {
-            for (int i = 0; i < MAX_BULLETS; i++) {
-                if (boss_bullets[j][i].active) {
-                    al_draw_scaled_bitmap(fireball_boss_img, 0, 0, al_get_bitmap_width(fireball_boss_img), al_get_bitmap_height(fireball_boss_img),
-                        boss_bullets[j][i].x - 35, boss_bullets[j][i].y - 35, 70, 70, 0);
-                }
-            }
-        }
-
         for (int j = 0; j < MAX_BOSSES; ++j) {
             if (boss_laser_timer[j] >= 200) {
                 draw_rotated_laser(j + MAX_KNIGHTS);
@@ -419,7 +402,7 @@ void gamescreen(void) {
                 al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
                     player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
             }
-
+        }
 
         hud_draw();
         al_flip_display();
