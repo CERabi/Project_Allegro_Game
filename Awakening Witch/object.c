@@ -193,7 +193,7 @@ void spawn_summon(int number) {
         temp = MAX_ZOMBIES;
         health = ZOMBIE_MAX_HEALTH;
         damage = 1;
-        credit = 50;
+        credit = COST_ZOMBIE;
         speed = 1.7;
         size = 50;
         break;
@@ -203,7 +203,7 @@ void spawn_summon(int number) {
         temp = MAX_GOBLINS;
         health = GOBLIN_MAX_HEALTH;
         damage = 2;
-        credit = 100;
+        credit = COST_GOBLIN;
         speed = 2.0;
         size = 50;
         break;
@@ -213,7 +213,7 @@ void spawn_summon(int number) {
         temp = MAX_BATS;
         health = BAT_MAX_HEALTH;
         damage = 1;
-        credit = 100;
+        credit = COST_BAT;
         speed = 5.0;
         size = 30;
         break;

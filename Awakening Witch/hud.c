@@ -80,6 +80,12 @@ void hud_draw() {
 			cnt++;
 		}
 	}
+	al_draw_scaled_bitmap(SHOP_UP_BAT, 0, 0, al_get_bitmap_width(SHOP_UP_BAT),
+		al_get_bitmap_height(SHOP_UP_BAT), 1295, 105, 55, 55, 0);
+	al_draw_scaled_bitmap(SHOP_UP_ZOMBIE, 0, 0, al_get_bitmap_width(SHOP_UP_ZOMBIE),
+		al_get_bitmap_height(SHOP_UP_ZOMBIE), 1350, 105, 55, 55, 0);
+	al_draw_scaled_bitmap(SHOP_UP_GOBLIN, 0, 0, al_get_bitmap_width(SHOP_UP_GOBLIN),
+		al_get_bitmap_height(SHOP_UP_GOBLIN), 1405, 105, 55, 55, 0);
 
 	if (money_display >= COST_ATT) {
 		al_draw_scaled_bitmap(SHOP_UP_ATT, 0, 0, al_get_bitmap_width(SHOP_UP_ATT),
