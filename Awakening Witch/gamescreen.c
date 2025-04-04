@@ -407,4 +407,5 @@ void gamescreen(void) {
         hud_draw();
         al_flip_display();
     }
+    al_stop_sample(sample2);
 }

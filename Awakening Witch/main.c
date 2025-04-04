@@ -12,7 +12,7 @@ int main(void) {
     bool running = true;
     bool redraw = true;  // 화면 갱신 여부
     bool char_exists = false;
-    al_play_sample(BGM, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, NULL);
+    al_play_sample(mainMenu, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample1);
 
     while (true) {
         ALLEGRO_EVENT ev;
@@ -24,6 +24,7 @@ int main(void) {
         if (!strcmp(state, "game")) {
             reset_game_state();
             gamescreen();
+            al_play_sample(mainMenu, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample1);
             strcpy(state, "rank");
         }
         else if (!strcmp(state, "rank")) {

@@ -283,11 +283,18 @@ void load_resource(void) {
     }
 
     // 오디오 로드
-    BGM = al_load_sample("Resource/audio/bgm.ogg");
-    if (!BGM) {
-        fprintf(stderr, "BGM 로드 실패!\n");
+    mainMenu = al_load_sample("Resource/audio/mainmenu.ogg");
+    if (!mainMenu) {
+        fprintf(stderr, "BGM load failed : mainmenu.ogg!\n");
         return;
     }
+    sample1 = al_create_sample_instance(mainMenu);
+    BGM = al_load_sample("Resource/audio/bgm.ogg");
+    if (!BGM) {
+        fprintf(stderr, "BGM load failed : bgm.ogg!\n");
+        return;
+    }
+    sample2 = al_create_sample_instance(BGM);
     monster_hit = al_load_sample("Resource/audio/monster_hit.ogg");
     if (!monster_hit) {
         fprintf(stderr, "monster_hit 로드 실패!\n");

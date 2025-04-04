@@ -106,11 +106,14 @@ ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;
 ALLEGRO_FONT* hud_font;
 
+ALLEGRO_SAMPLE* mainMenu;
 ALLEGRO_SAMPLE* BGM;
 ALLEGRO_SAMPLE* monster_hit;
 ALLEGRO_SAMPLE* player_attack;
 ALLEGRO_SAMPLE* boss_summon;
 
+ALLEGRO_SAMPLE_INSTANCE** sample1;
+ALLEGRO_SAMPLE_INSTANCE** sample2;
 
 float player_x;
 float player_y;
