@@ -339,7 +339,8 @@ void clear_summons(int number) {
 	}
 	for (int i = 0; i < max; i++) {
 		target_array[i].active = false;
-		for (int k = 0; k < max2; k++) {
+        for (int k = 0; k < max2; k++) {
+            if (target_array == enemies && i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 			if (target_array2[k].active && target_array2[k].matched && target_array2[k].matched_enemy == i) {
 				target_array2[k].matched = false;
 				target_array2[k].matched_enemy = -1;
@@ -600,7 +601,7 @@ void check_boss_laser_collision(void) {
                 float dx = boss_lasers[j][i].x - player.x;
                 float dy = boss_lasers[j][i].y - player.y;
                 float distance = sqrt(dx * dx + dy * dy);
-                if (distance < 75) {
+                if (distance < 90) {
                     if (invincible_timer <= 0) {
                         player.health--;
                         invincible_timer = 180;
@@ -623,8 +624,8 @@ void boss_shoot(int j) {
 			boss_bullets[j][i].x = enemies[k].x;
 			boss_bullets[j][i].y = enemies[k].y;
 			boss_bullets[j][i].active = true;
-			float dx = player.x - enemies[k].x;
-			float dy = player.y - enemies[k].y;
+			float dx = boss_laser_target[j].x - enemies[k].x;
+			float dy = boss_laser_target[j].y - enemies[k].y;
 			float length = sqrt(dx * dx + dy * dy);
 			if (length != 0) {
 				boss_bullets[j][i].direction_x = (dx / length) * 5;
@@ -662,8 +663,8 @@ void boss_laser(int j) {
             boss_lasers[j][i].x = enemies[k].x;
             boss_lasers[j][i].y = enemies[k].y;
             boss_lasers[j][i].active = true;
-            float dx = player.x - enemies[k].x;
-            float dy = player.y - enemies[k].y;
+            float dx = boss_laser_target[j].x - enemies[k].x;
+            float dy = boss_laser_target[j].y - enemies[k].y;
             float length = sqrt(dx * dx + dy * dy);
             if (length != 0) {
                 boss_lasers[j][i].direction_x = (dx / length) * 80;
@@ -685,6 +686,7 @@ void move_boss_lasers() {
             if (boss_lasers[j][i].active) {
                 boss_lasers[j][i].x += boss_lasers[j][i].direction_x;
                 boss_lasers[j][i].y += boss_lasers[j][i].direction_y;
+                
                 if (boss_lasers[j][i].x < 0 || boss_lasers[j][i].x > SCREEN_WIDTH ||
                     boss_lasers[j][i].y < 0 || boss_lasers[j][i].y > SCREEN_HEIGHT) {
                     boss_lasers[j][i].active = false;
@@ -713,8 +715,9 @@ void attack_laser_boss() {
             boss_laser_timer[i]++;
             if (boss_laser_timer[i] >= 500) {
                 boss_laser(i);
-                if(boss_laser_timer[i] >600) boss_laser_timer[i] = 0;
+                
             }
+            if (boss_laser_timer[i] > 600) boss_laser_timer[i] = 0;
         }
     }
 }
