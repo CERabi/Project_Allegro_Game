@@ -19,8 +19,21 @@ void reset_game_state() {
 
     // 점수 및 재화 초기화
     score_display = 0;
-    money_display = 1000000;
+    prev_score = 0;
+    score_multiplier = 1.0f;
+    money_display = 0;
+    //score_display = 1000;
+    //money_display = 100000;
+
+    // 난이도 초기화
+    enemy_health_plus = 0;
     boss_attack_delay = 20;
+    boss_bullet_speed = 0.1f; 
+    knights_amount = 3;
+    debuff_damage_knight = 0;
+    debuff_amount_bossbullet = 5;
+
+    // 모션 초기화
     for (int i = 0; i < MAX_GOBLINS; ++i) {
         current_frame[i] = 0;
         current_enemies_frame[i] = 0;
@@ -55,12 +68,24 @@ void reset_game_state() {
         }
     }
 
+    // 보스 타이머 초기화
+    for (int i = 0; i < MAX_BOSSES; i++) {
+        boss_laser_timer[i] = 0;
+    }
+
     // 플레이어 공격 관련 초기화
     last_att = 0;  // 공격 타이밍 초기화
 }
 
+void reset_keyboard_event() {
+    for (int i = 0; i < ALLEGRO_KEY_MAX; i++) {
+        key[i] = false;
+    }
+}
+
 void init(void) {
     strcpy(state, "menu");
+    //strcpy(state, "game");
     srand(time(NULL));
 
     if (!al_init()) {

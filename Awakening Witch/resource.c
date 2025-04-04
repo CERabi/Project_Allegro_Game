@@ -121,6 +121,39 @@ void load_resource(void) {
         return;
     }
 
+    char laser[50];
+    for (int i = 0; i < 6; i++) {
+        sprintf_s(laser, sizeof(laser), "Resource/pic/laser_wait%d.png", i + 1);
+        laser_img[i] = al_load_bitmap(laser);
+        if (!laser_img[i]) {
+            printf("Failed to load image: %s\n", laser);
+        }
+    }
+
+    for (int i = 0; i < 6; ++i) {
+        int scale_factor_width = 2;
+        int scale_factor_height = 3;
+        int new_width = al_get_bitmap_width(laser_img[i]) * scale_factor_width;
+        int new_height = al_get_bitmap_height(laser_img[i]) * scale_factor_height;
+
+        // 레이저 확대
+        ALLEGRO_BITMAP* scaled_laser[6];
+        scaled_laser[i]=al_create_bitmap(new_width, new_height);
+        al_set_target_bitmap(scaled_laser[i]);
+        al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+        al_draw_scaled_bitmap(
+            laser_img[i],
+            0, 0,
+            al_get_bitmap_width(laser_img[i]), al_get_bitmap_height(laser_img[i]),
+            0, 0,
+            new_width, new_height,
+            0
+        );
+        al_set_target_backbuffer(display);
+        laser_img[i] = scaled_laser[i];
+
+    }
+
     // HUD 이미지 로드
     HUD_score = al_load_bitmap("Resource/pic/score.png");
     if (!HUD_score) {
@@ -189,8 +222,22 @@ void load_resource(void) {
     SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
     SHOP_UP_BU_NO = convert_to_grayscale(SHOP_UP_BU);
 
-
-
+    // 디버프 이미지 로드
+    debuff_background = al_load_bitmap("Resource/pic/debuff_background.png");
+    if (!debuff_background) {
+        printf("Cannot load debuff_background\n");
+        return;
+    }
+    debuff_selection = al_load_bitmap("Resource/pic/debuff_select.png");
+    if (!debuff_selection) {
+        printf("Cannot load debuff_selection\n");
+        return;
+    }
+    for (int i = 0; i < 6; i++) {
+        // x 50, 366, 682 -> 316씩
+        // y 156, 570 -> 414씩
+        debuff[i] = al_create_sub_bitmap(debuff_selection, 50 + 316 * (i % 3), 156 + 414 * (i / 3), DEBUFF_WIDTH, DEBUFF_HEIGHT);
+    }
 
     // 폰트 로드
     font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
@@ -275,6 +322,9 @@ void destroy_resource(void) {
     al_destroy_bitmap(SHOP_UP_ZOMBIE);
     al_destroy_bitmap(SHOP_UP_GOBLIN);
     al_destroy_bitmap(SHOP_UP_X);
+    al_destroy_bitmap(debuff_background);
+    al_destroy_bitmap(debuff_selection);
+    for (int i = 0; i < AMOUNT_DEBUFF; i++) al_destroy_bitmap(debuff[i]);
 
     al_destroy_display(display);
 

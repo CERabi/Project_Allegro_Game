@@ -144,6 +144,7 @@
     <ClCompile Include="hud.c" />
     <ClCompile Include="init.c" />
     <ClCompile Include="keyboard.c" />
+    <ClCompile Include="level.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="object.c" />
@@ -154,6 +155,7 @@
     <ClInclude Include="hud.h" />
     <ClInclude Include="init.h" />
     <ClInclude Include="keyboard.h" />
+    <ClInclude Include="level.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="resource.h" />
@@ -171,12 +173,21 @@
     <Image Include="Resource\pic\boss_r.png" />
     <Image Include="Resource\pic\bullets.png" />
     <Image Include="Resource\pic\damage.png" />
+    <Image Include="Resource\pic\debuff_select.png" />
     <Image Include="Resource\pic\fireball.png" />
     <Image Include="Resource\pic\fireball_boss.png" />
     <Image Include="Resource\pic\goblin_l.png" />
     <Image Include="Resource\pic\goblin_r.png" />
     <Image Include="Resource\pic\knight_l.png" />
     <Image Include="Resource\pic\knight_r.png" />
+    <Image Include="Resource\pic\laser.png" />
+    <Image Include="Resource\pic\laser1.png" />
+    <Image Include="Resource\pic\laser_wait1.png" />
+    <Image Include="Resource\pic\laser_wait2.png" />
+    <Image Include="Resource\pic\laser_wait3.png" />
+    <Image Include="Resource\pic\laser_wait4.png" />
+    <Image Include="Resource\pic\laser_wait5.png" />
+    <Image Include="Resource\pic\laser_wait6.png" />
     <Image Include="Resource\pic\life.png" />
     <Image Include="Resource\pic\money.png" />
     <Image Include="Resource\pic\player_dead.png" />
