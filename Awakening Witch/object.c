@@ -1,19 +1,18 @@
 #include "object.h"
 
 void apply_screen_shake(int intensity, int duration) {
-    shake_amount = intensity;
-    shake_duration = duration;
+	shake_amount = intensity;
+	shake_duration = duration;
 }
 
 void render_screen() {
-    int shake_x = 0, shake_y = 0;
+	int shake_x = 0, shake_y = 0;
 
-    if (shake_duration > 0) {
-        shake_x = (rand() % (shake_amount * 2 + 1)) - shake_amount;
-        shake_y = (rand() % (shake_amount * 2 + 1)) - shake_amount;
-        shake_duration--;
-    }
-
+	if (shake_duration > 0) {
+		shake_x = (rand() % (shake_amount * 2 + 1)) - shake_amount;
+		shake_y = (rand() % (shake_amount * 2 + 1)) - shake_amount;
+		shake_duration--;
+	}
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
         shake_x, shake_y, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
@@ -49,76 +48,76 @@ void move_player() {
 }
 
 void player_enhance_bu() {
-    if (money_display < COST_ATT || player.bullets >= MAX_PLAYER_BULLETS) return;
-    player.bullets += 1;
-    money_display -= COST_ATT;
+	if (money_display < COST_ATT || player.bullets >= MAX_PLAYER_BULLETS) return;
+	player.bullets += 1;
+	money_display -= COST_ATT;
 }
 
 void player_enhance_sp() {
-    if (money_display < COST_SPD || player.player_att_delay <= 0.01) return;
-    player.player_att_delay -= 0.01;
-    money_display -= COST_SPD;
+	if (money_display < COST_SPD || player.player_att_delay <= 0.01) return;
+	player.player_att_delay -= 0.01;
+	money_display -= COST_SPD;
 }
 
 void player_enhance_dm() {
-    if (money_display < COST_BU) return;
-    player.damage += 0.1;
-    money_display -= COST_BU;
+	if (money_display < COST_BU) return;
+	player.damage += 0.1;
+	money_display -= COST_BU;
 }
 
 void fire_bullet() {
-    double now = al_get_time();
-    for (int i = 0; i < player.bullets; i++) {
-        if (!bullets[i].active && now - last_att > player.player_att_delay) {
-            al_play_sample(player_attack, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-            last_att = now;
-            bullets[i].x = player.x;
-            bullets[i].y = player.y;
-            bullets[i].active = true;
+	double now = al_get_time();
+	for (int i = 0; i < player.bullets; i++) {
+		if (!bullets[i].active && now - last_att > player.player_att_delay) {
+			al_play_sample(player_attack, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+			last_att = now;
+			bullets[i].x = player.x;
+			bullets[i].y = player.y;
+			bullets[i].active = true;
 
-            if (key[ALLEGRO_KEY_LEFT]) {
-                player_direction = LEFT;
-                bullets[i].direction_x = -1;
-                bullets[i].direction_y = 0;
-            }
-            else if (key[ALLEGRO_KEY_RIGHT]) {
-                player_direction = RIGHT;
-                bullets[i].direction_x = 1;
-                bullets[i].direction_y = 0;
-            }
-            else if (key[ALLEGRO_KEY_DOWN]) {
-                player_direction = DOWN;
-                bullets[i].direction_x = 0;
-                bullets[i].direction_y = 1;
-            }
-            else if (key[ALLEGRO_KEY_UP]) {
-                player_direction = UP;
-                bullets[i].direction_x = 0;
-                bullets[i].direction_y = -1;
-            }
-            else {
-                switch (player_direction) {
-                case LEFT:
-                    bullets[i].direction_x = -1;
-                    bullets[i].direction_y = 0;
-                    break;
-                case RIGHT:
-                    bullets[i].direction_x = 1;
-                    bullets[i].direction_y = 0;
-                    break;
-                case UP:
-                    bullets[i].direction_x = 0;
-                    bullets[i].direction_y = -1;
-                    break;
-                case DOWN:
-                    bullets[i].direction_x = 0;
-                    bullets[i].direction_y = 1;
-                    break;
-                }
-            }
-            break;
-        }
-    }
+			if (key[ALLEGRO_KEY_LEFT]) {
+				player_direction = LEFT;
+				bullets[i].direction_x = -1;
+				bullets[i].direction_y = 0;
+			}
+			else if (key[ALLEGRO_KEY_RIGHT]) {
+				player_direction = RIGHT;
+				bullets[i].direction_x = 1;
+				bullets[i].direction_y = 0;
+			}
+			else if (key[ALLEGRO_KEY_DOWN]) {
+				player_direction = DOWN;
+				bullets[i].direction_x = 0;
+				bullets[i].direction_y = 1;
+			}
+			else if (key[ALLEGRO_KEY_UP]) {
+				player_direction = UP;
+				bullets[i].direction_x = 0;
+				bullets[i].direction_y = -1;
+			}
+			else {
+				switch (player_direction) {
+				case LEFT:
+					bullets[i].direction_x = -1;
+					bullets[i].direction_y = 0;
+					break;
+				case RIGHT:
+					bullets[i].direction_x = 1;
+					bullets[i].direction_y = 0;
+					break;
+				case UP:
+					bullets[i].direction_x = 0;
+					bullets[i].direction_y = -1;
+					break;
+				case DOWN:
+					bullets[i].direction_x = 0;
+					bullets[i].direction_y = 1;
+					break;
+				}
+			}
+			break;
+		}
+	}
 }
 
 void move_summons() {
@@ -166,82 +165,83 @@ void move_summons() {
 }
 
 void move_bullets() {
-    for (int i = 0; i < player.bullets; i++) {
-        if (bullets[i].active) {
-            bullets[i].x += bullets[i].direction_x * BULLET_SPEED;
-            bullets[i].y += bullets[i].direction_y * BULLET_SPEED;
-            if (bullets[i].x < 0 || bullets[i].x > SCREEN_WIDTH || bullets[i].y < 0 || bullets[i].y > SCREEN_HEIGHT) {
-                bullets[i].active = false;
-            }
-        }
-    }
+	for (int i = 0; i < player.bullets; i++) {
+		if (bullets[i].active) {
+			bullets[i].x += bullets[i].direction_x * BULLET_SPEED;
+			bullets[i].y += bullets[i].direction_y * BULLET_SPEED;
+			if (bullets[i].x < 0 || bullets[i].x > SCREEN_WIDTH || bullets[i].y < 0 || bullets[i].y > SCREEN_HEIGHT) {
+				bullets[i].active = false;
+			}
+		}
+	}
 }
 
 void spawn_summon(int number) {
-    Summon* target_array = summons;
-    int i;
-    int temp;
-    int health;
-    int damage;
-    int credit;
-    int size;
-    double speed;
-    switch (number) {
-    case 11:
-        // 좀비
-        i = 0;
-        temp = MAX_ZOMBIES;
-        health = ZOMBIE_MAX_HEALTH;
-        damage = 1;
-        credit = COST_ZOMBIE;
-        speed = 1.7;
-        size = 50;
-        break;
-    case 12:
-        // 고블린
-        i = MAX_ZOMBIES;
-        temp = MAX_GOBLINS;
-        health = GOBLIN_MAX_HEALTH;
-        damage = 2;
-        credit = COST_GOBLIN;
-        speed = 2.0;
-        size = 50;
-        break;
-    case 13:
-        // 박쥐
-        i = MAX_ZOMBIES + MAX_GOBLINS;
-        temp = MAX_BATS;
-        health = BAT_MAX_HEALTH;
-        damage = 1;
-        credit = COST_BAT;
-        speed = 5.0;
-        size = 30;
-        break;
-    default:
-        printf("잘못된 입력값: %d\n", number);
-        return;  // 잘못된 값이면 함수 종료
-    }
-    int max_summons = i;
+	Summon* target_array = summons;
+	int i;
+	int temp;
+	int health;
+	int damage;
+	int credit;
+	int size;
+	double speed;
+	switch (number) {
+	case 11:
+		// 좀비
+		i = 0;
+		temp = MAX_ZOMBIES;
+		health = ZOMBIE_MAX_HEALTH;
+		damage = 1;
+		credit = COST_ZOMBIE;
+		speed = 1.7;
+		size = 50;
+		break;
+	case 12:
+		// 고블린
+		i = MAX_ZOMBIES;
+		temp = MAX_GOBLINS;
+		health = GOBLIN_MAX_HEALTH;
+		damage = 2;
+		credit = COST_GOBLIN;
+		speed = 2.0;
+		size = 50;
+		break;
+	case 13:
+		// 박쥐
+		i = MAX_ZOMBIES + MAX_GOBLINS;
+		temp = MAX_BATS;
+		health = BAT_MAX_HEALTH;
+		damage = 1;
+		credit = COST_BAT;
+		speed = 5.0;
+		size = 30;
+		break;
+	default:
+		printf("잘못된 입력값: %d\n", number);
+		return;  // 잘못된 값이면 함수 종료
+	}
+	int max_summons = i;
 
-    for (; i < max_summons + temp; i++) {
-        if (!target_array[i].active && money_display >= credit) {
-            money_display -= credit;
-            target_array[i].x = player.x + (rand() % 121 - 60);
-            target_array[i].y = player.y + (rand() % 121 - 60);
-            target_array[i].active = true;
-            target_array[i].matched = false;
-            target_array[i].health = health;
-            target_array[i].damage = damage;
-            target_array[i].speed = speed;
-            target_array[i].invincible = 0;
-            target_array[i].matched_enemy = -1;
-            target_array[i].size = size;
-            break;
-        }
-    }
+	for (; i < max_summons + temp; i++) {
+		if (!target_array[i].active && money_display >= credit) {
+			money_display -= credit;
+			target_array[i].x = player.x + (rand() % 121 - 60);
+			target_array[i].y = player.y + (rand() % 121 - 60);
+			target_array[i].active = true;
+			target_array[i].matched = false;
+			target_array[i].health = health;
+			target_array[i].damage = damage;
+			target_array[i].speed = speed;
+			target_array[i].invincible = 0;
+			target_array[i].matched_enemy = -1;
+			target_array[i].size = size;
+			break;
+		}
+	}
 }
 
 void spawn_enermy(int number) {
+
     Summon* target_array = enemies;
     int i;
     double health;
@@ -339,8 +339,8 @@ void clear_summons(int number) {
 	}
 	for (int i = 0; i < max; i++) {
 		target_array[i].active = false;
-        for (int k = 0; k < max2; k++) {
-            if (target_array == enemies && i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
+		for (int k = 0; k < max2; k++) {
+			if (target_array == enemies && i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 			if (target_array2[k].active && target_array2[k].matched && target_array2[k].matched_enemy == i) {
 				target_array2[k].matched = false;
 				target_array2[k].matched_enemy = -1;
@@ -372,12 +372,14 @@ void Special_moves(int number) {
 		return;
 	}
 	for (int i = 0; i < max; i++) {
+		if (money_display < COST_ULT) break;
 		target_array[i].health -= 5;
+		money_display -= COST_ULT;
 		invincible_timer = 120;
-        apply_screen_shake(15, 30);
+		apply_screen_shake(15, 30);
 		if (target_array[i].health <= 0) {
 			target_array[i].active = false;
-            if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
+			if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 			for (int k = 0; k < max2; k++) {
 				if (target_array2[k].active && target_array2[k].matched && target_array2[k].matched_enemy == i) {
 					target_array2[k].matched = false;
@@ -422,7 +424,7 @@ void check_collision() {
 					enemies[i].matched_enemy = -1;
 					summons[j].matched = false;
 					summons[j].matched_enemy = -1;
-                    if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
+					if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 				}
 				if (summons[j].health <= 0) {
 					summons[j].active = false;
@@ -486,135 +488,135 @@ void check_player_collision() {
 }
 
 void check_bullet_collision() {
-    for (int i = 0; i < player.bullets; i++) {
-        if (bullets[i].active) {
-            for (int j = 0; j < MAX_ENEMIES; j++) {
-                if (enemies[j].active) {
-                    float dx = bullets[i].x - enemies[j].x;
-                    float dy = bullets[i].y - enemies[j].y;
-                    float distance = sqrt(dx * dx + dy * dy);
-                    if (distance < enemies[j].size) {
-                        enemies[j].health -= player.damage;
-                        al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-                        if (enemies[j].health <= 0) {
-                            score_display += enemies[j].score;
-                            money_display += enemies[j].credit;
-                            enemies[j].active = false;
-                            enemies[j].matched_enemy = -1;
-                            if (j >= MAX_KNIGHTS) boss_laser_timer[j - MAX_KNIGHTS] = 0;
+	for (int i = 0; i < player.bullets; i++) {
+		if (bullets[i].active) {
+			for (int j = 0; j < MAX_ENEMIES; j++) {
+				if (enemies[j].active) {
+					float dx = bullets[i].x - enemies[j].x;
+					float dy = bullets[i].y - enemies[j].y;
+					float distance = sqrt(dx * dx + dy * dy);
+					if (distance < enemies[j].size) {
+						enemies[j].health -= player.damage;
+						al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+						if (enemies[j].health <= 0) {
+							score_display += enemies[j].score;
+							money_display += enemies[j].credit;
+							enemies[j].active = false;
+							enemies[j].matched_enemy = -1;
+							if (j >= MAX_KNIGHTS) boss_laser_timer[j - MAX_KNIGHTS] = 0;
 
-                            for (int k = 0; k < MAX_SUMMONS; k++) {
-                                if (summons[k].active && summons[k].matched && summons[k].matched_enemy == j) {
-                                    summons[k].matched = false;
-                                    summons[k].matched_enemy = -1;
-                                    break;
-                                }
-                            }
-                        }
-                        bullets[i].active = false;
-                    }
-                }
-            }
-        }
-    }
+							for (int k = 0; k < MAX_SUMMONS; k++) {
+								if (summons[k].active && summons[k].matched && summons[k].matched_enemy == j) {
+									summons[k].matched = false;
+									summons[k].matched_enemy = -1;
+									break;
+								}
+							}
+						}
+						bullets[i].active = false;
+					}
+				}
+			}
+		}
+	}
 }
 
 void check_boss_bullet_collision(void) {
-    for (int j = 0; j < MAX_BOSSES; ++j) {
-        for (int i = 0; i < MAX_BULLETS; i++) {
-            if (boss_bullets[j][i].active) {
-                for (int k = 0; k < MAX_SUMMONS; k++) {
-                    if (summons[k].active) {
-                        float dx = boss_bullets[j][i].x - summons[k].x;
-                        float dy = boss_bullets[j][i].y - summons[k].y;
-                        float distance = sqrt(dx * dx + dy * dy);
-                        if (distance < summons[k].size) {
-                            summons[k].health -= enemies[MAX_KNIGHTS+j].damage;
-                            al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-                            if (summons[k].health <= 0) {
-                                summons[k].active = false;
-                                summons[k].matched_enemy = -1;
+	for (int j = 0; j < MAX_BOSSES; ++j) {
+		for (int i = 0; i < MAX_BULLETS; i++) {
+			if (boss_bullets[j][i].active) {
+				for (int k = 0; k < MAX_SUMMONS; k++) {
+					if (summons[k].active) {
+						float dx = boss_bullets[j][i].x - summons[k].x;
+						float dy = boss_bullets[j][i].y - summons[k].y;
+						float distance = sqrt(dx * dx + dy * dy);
+						if (distance < summons[k].size) {
+							summons[k].health -= enemies[MAX_KNIGHTS + j].damage;
+							al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+							if (summons[k].health <= 0) {
+								summons[k].active = false;
+								summons[k].matched_enemy = -1;
 
-                                for (int l = 0; l < MAX_SUMMONS; l++) {
-                                    if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
-                                        enemies[l].matched = false;
-                                        enemies[l].matched_enemy = -1;
-                                        break;
-                                    }
-                                }
-                            }
-                            boss_bullets[j][i].active = false;
-                        }
-                    }
-                }
-            }
-            if (boss_bullets[j][i].active) {
-                float dx = boss_bullets[j][i].x - player.x;
-                float dy = boss_bullets[j][i].y - player.y;
-                float distance = sqrt(dx * dx + dy * dy);
-                if (distance < BULLET_COLLISION_DISTANCE) {
-                    if (invincible_timer <= 0) {
-                        player.health--;
-                        invincible_timer = 180;
-                        al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-                    }
-                    if (player.health <= 0) {
-                        name(font);  // 이름 입력 받기
-                        break;
-                    }
-                    boss_bullets[j][i].active = false;
-                }
-            }
-        }
-    }
+								for (int l = 0; l < MAX_SUMMONS; l++) {
+									if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
+										enemies[l].matched = false;
+										enemies[l].matched_enemy = -1;
+										break;
+									}
+								}
+							}
+							boss_bullets[j][i].active = false;
+						}
+					}
+				}
+			}
+			if (boss_bullets[j][i].active) {
+				float dx = boss_bullets[j][i].x - player.x;
+				float dy = boss_bullets[j][i].y - player.y;
+				float distance = sqrt(dx * dx + dy * dy);
+				if (distance < BULLET_COLLISION_DISTANCE) {
+					if (invincible_timer <= 0) {
+						player.health--;
+						invincible_timer = 180;
+						al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+					}
+					if (player.health <= 0) {
+						name(font);  // 이름 입력 받기
+						break;
+					}
+					boss_bullets[j][i].active = false;
+				}
+			}
+		}
+	}
 }
 
 void check_boss_laser_collision(void) {
-    for (int j = 0; j < MAX_BOSSES; ++j) {
-        for (int i = 0; i < MAX_BOSSES_LASER; i++) {
-            if (boss_lasers[j][i].active) {
-                for (int k = 0; k < MAX_SUMMONS; k++) {
-                    if (summons[k].active) {
-                        float dx = boss_lasers[j][i].x - summons[k].x;
-                        float dy = boss_lasers[j][i].y - summons[k].y;
-                        float distance = sqrt(dx * dx + dy * dy);
-                        if (distance < 75) {
-                            summons[k].health -= 0.5;
-                            al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-                            if (summons[k].health <= 0) {
-                                summons[k].active = false;
-                                summons[k].matched_enemy = -1;
+	for (int j = 0; j < MAX_BOSSES; ++j) {
+		for (int i = 0; i < MAX_BOSSES_LASER; i++) {
+			if (boss_lasers[j][i].active) {
+				for (int k = 0; k < MAX_SUMMONS; k++) {
+					if (summons[k].active) {
+						float dx = boss_lasers[j][i].x - summons[k].x;
+						float dy = boss_lasers[j][i].y - summons[k].y;
+						float distance = sqrt(dx * dx + dy * dy);
+						if (distance < 75) {
+							summons[k].health -= 0.5;
+							al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+							if (summons[k].health <= 0) {
+								summons[k].active = false;
+								summons[k].matched_enemy = -1;
 
-                                for (int l = 0; l < MAX_SUMMONS; l++) {
-                                    if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
-                                        enemies[l].matched = false;
-                                        enemies[l].matched_enemy = -1;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (boss_lasers[j][i].active) {
-                float dx = boss_lasers[j][i].x - player.x;
-                float dy = boss_lasers[j][i].y - player.y;
-                float distance = sqrt(dx * dx + dy * dy);
-                if (distance < 90) {
-                    if (invincible_timer <= 0) {
-                        player.health--;
-                        invincible_timer = 180;
-                        al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-                    }
-                    if (player.health <= 0) {
-                        name(font);  // 이름 입력 받기
-                        break;
-                    }
-                }
-            }
-        }
-    }
+								for (int l = 0; l < MAX_SUMMONS; l++) {
+									if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
+										enemies[l].matched = false;
+										enemies[l].matched_enemy = -1;
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			if (boss_lasers[j][i].active) {
+				float dx = boss_lasers[j][i].x - player.x;
+				float dy = boss_lasers[j][i].y - player.y;
+				float distance = sqrt(dx * dx + dy * dy);
+				if (distance < 90) {
+					if (invincible_timer <= 0) {
+						player.health--;
+						invincible_timer = 180;
+						al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+					}
+					if (player.health <= 0) {
+						name(font);  // 이름 입력 받기
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
 void boss_shoot(int j) {
@@ -657,43 +659,43 @@ void move_boss_bullets() {
 }
 
 void boss_laser(int j) {
-    int k = j + MAX_KNIGHTS;
-    for (int i = 0; i < MAX_BOSSES_LASER; i++) {
-        if (!boss_lasers[j][i].active && enemies[k].active) {
-            boss_lasers[j][i].x = enemies[k].x;
-            boss_lasers[j][i].y = enemies[k].y;
-            boss_lasers[j][i].active = true;
-            float dx = boss_laser_target[j].x - enemies[k].x;
-            float dy = boss_laser_target[j].y - enemies[k].y;
-            float length = sqrt(dx * dx + dy * dy);
-            if (length != 0) {
-                boss_lasers[j][i].direction_x = (dx / length) * 80;
-                boss_lasers[j][i].direction_y = (dy / length) * 80;
-            }
-            else {
-                boss_lasers[j][i].direction_x = 0;
-                boss_lasers[j][i].direction_y = 0;
-            }
+	int k = j + MAX_KNIGHTS;
+	for (int i = 0; i < MAX_BOSSES_LASER; i++) {
+		if (!boss_lasers[j][i].active && enemies[k].active) {
+			boss_lasers[j][i].x = enemies[k].x;
+			boss_lasers[j][i].y = enemies[k].y;
+			boss_lasers[j][i].active = true;
+			float dx = boss_laser_target[j].x - enemies[k].x;
+			float dy = boss_laser_target[j].y - enemies[k].y;
+			float length = sqrt(dx * dx + dy * dy);
+			if (length != 0) {
+				boss_lasers[j][i].direction_x = (dx / length) * 80;
+				boss_lasers[j][i].direction_y = (dy / length) * 80;
+			}
+			else {
+				boss_lasers[j][i].direction_x = 0;
+				boss_lasers[j][i].direction_y = 0;
+			}
 
-            break;
-        }
-    }
+			break;
+		}
+	}
 }
 
 void move_boss_lasers() {
-    for (int j = 0; j < MAX_BOSSES; ++j) {
-        for (int i = 0; i < MAX_BOSSES_LASER; i++) {
-            if (boss_lasers[j][i].active) {
-                boss_lasers[j][i].x += boss_lasers[j][i].direction_x;
-                boss_lasers[j][i].y += boss_lasers[j][i].direction_y;
-                
-                if (boss_lasers[j][i].x < 0 || boss_lasers[j][i].x > SCREEN_WIDTH ||
-                    boss_lasers[j][i].y < 0 || boss_lasers[j][i].y > SCREEN_HEIGHT) {
-                    boss_lasers[j][i].active = false;
-                }
-            }
-        }
-    }
+	for (int j = 0; j < MAX_BOSSES; ++j) {
+		for (int i = 0; i < MAX_BOSSES_LASER; i++) {
+			if (boss_lasers[j][i].active) {
+				boss_lasers[j][i].x += boss_lasers[j][i].direction_x;
+				boss_lasers[j][i].y += boss_lasers[j][i].direction_y;
+
+				if (boss_lasers[j][i].x < 0 || boss_lasers[j][i].x > SCREEN_WIDTH ||
+					boss_lasers[j][i].y < 0 || boss_lasers[j][i].y > SCREEN_HEIGHT) {
+					boss_lasers[j][i].active = false;
+				}
+			}
+		}
+	}
 }
 
 
@@ -710,16 +712,16 @@ void attack_boss() {
 }
 
 void attack_laser_boss() {
-    for (int i = 0; i < MAX_BOSSES; ++i) {
-        if (enemies[i + MAX_KNIGHTS].active) {
-            boss_laser_timer[i]++;
-            if (boss_laser_timer[i] >= 500) {
-                boss_laser(i);
-                
-            }
-            if (boss_laser_timer[i] > 600) boss_laser_timer[i] = 0;
-        }
-    }
+	for (int i = 0; i < MAX_BOSSES; ++i) {
+		if (enemies[i + MAX_KNIGHTS].active) {
+			boss_laser_timer[i]++;
+			if (boss_laser_timer[i] >= 500) {
+				boss_laser(i);
+
+			}
+			if (boss_laser_timer[i] > 600) boss_laser_timer[i] = 0;
+		}
+	}
 }
 
 // 레이저 돌리는 함수

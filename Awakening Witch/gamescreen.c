@@ -26,9 +26,9 @@ void gamescreen(void) {
             if (key[ALLEGRO_KEY_R]) Special_moves(1);
 
             // 아군 생성
-            if (key[ALLEGRO_KEY_Q]) spawn_summon(11);
-            if (key[ALLEGRO_KEY_W]) spawn_summon(12);
-            if (key[ALLEGRO_KEY_E]) spawn_summon(13);
+            if (key[ALLEGRO_KEY_W]) spawn_summon(11);
+            if (key[ALLEGRO_KEY_E]) spawn_summon(12);
+            if (key[ALLEGRO_KEY_Q]) spawn_summon(13);
 
             // 적 삭제(디버그용)
             if (key[ALLEGRO_KEY_5]) clear_summons(1);
@@ -75,6 +75,9 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+        /*al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 150, 0, "Q");
+        al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 150, 0, "W");
+        al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1420, 150, 0, "E");*/
         render_screen();
 
         int bullet_size = 80;
