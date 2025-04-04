@@ -192,9 +192,30 @@ void load_resource(void) {
         printf("이미지를 불러오지 못했습니다!\n");
         return;
     }
+    SHOP_UP_BAT = al_load_bitmap("Resource/pic/bat_up.png");
+    if (!SHOP_ORIGIN) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    SHOP_UP_ZOMBIE = al_load_bitmap("Resource/pic/zombie_up.png");
+    if (!SHOP_ORIGIN) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    SHOP_UP_GOBLIN = al_load_bitmap("Resource/pic/goblin_up.png");
+    if (!SHOP_ORIGIN) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
+    SHOP_UP_X = al_load_bitmap("Resource/pic/x.png");
+    if (!SHOP_UP_X) {
+        printf("이미지를 불러오지 못했습니다!\n");
+        return;
+    }
     SHOP_UP_ATT = al_create_sub_bitmap(SHOP_ORIGIN, 48, 0, 24, 24);
     SHOP_UP_SPD = al_create_sub_bitmap(SHOP_ORIGIN, 48, 48, 24, 24);
     SHOP_UP_BU = al_create_sub_bitmap(SHOP_ORIGIN, 48, 72, 24, 24);
+    
     SHOP_UP_SPD_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 48, 24, 24));
     SHOP_UP_BU_MAX = convert_to_grayscale(al_create_sub_bitmap(SHOP_ORIGIN, 144, 72, 24, 24));
     SHOP_UP_ATT_NO = convert_to_grayscale(SHOP_UP_ATT);
@@ -297,6 +318,10 @@ void destroy_resource(void) {
     al_destroy_bitmap(SHOP_UP_BU);
     al_destroy_bitmap(SHOP_UP_BU_NO);
     al_destroy_bitmap(SHOP_UP_BU_MAX);
+    al_destroy_bitmap(SHOP_UP_BAT);
+    al_destroy_bitmap(SHOP_UP_ZOMBIE);
+    al_destroy_bitmap(SHOP_UP_GOBLIN);
+    al_destroy_bitmap(SHOP_UP_X);
     al_destroy_bitmap(debuff_background);
     al_destroy_bitmap(debuff_selection);
     for (int i = 0; i < AMOUNT_DEBUFF; i++) al_destroy_bitmap(debuff[i]);
@@ -330,9 +355,8 @@ ALLEGRO_BITMAP* convert_to_grayscale(ALLEGRO_BITMAP* original) {
 		printf("그레이스케일 비트맵 생성 실패!\n");
 		return NULL;
 	}
-
+    
 	al_set_target_bitmap(gray_bitmap);
-
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
 			ALLEGRO_COLOR color = al_get_pixel(original, x, y);

@@ -75,9 +75,13 @@ void gamescreen(void) {
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-
+        al_draw_scaled_bitmap(SHOP_UP_BAT, 0, 0, al_get_bitmap_width(SHOP_UP_BAT),
+            al_get_bitmap_height(SHOP_UP_BAT), 1295, 105, 55, 55, 0);
+        al_draw_scaled_bitmap(SHOP_UP_ZOMBIE, 0, 0, al_get_bitmap_width(SHOP_UP_ZOMBIE),
+            al_get_bitmap_height(SHOP_UP_ZOMBIE), 1350, 105, 55, 55, 0);
+        al_draw_scaled_bitmap(SHOP_UP_GOBLIN, 0, 0, al_get_bitmap_width(SHOP_UP_GOBLIN),
+            al_get_bitmap_height(SHOP_UP_GOBLIN), 1405, 105, 55, 55, 0);
         render_screen();
-        
         int player_size = 80;
         if (invincible_timer > 0) {
             if ((invincible_timer / 15) % 2 == 0) {

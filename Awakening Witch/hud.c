@@ -68,7 +68,7 @@ void hud_draw() {
 		);
 	}
 	for (int i = 0; i < player.health; ++i) {
-		al_draw_scaled_bitmap(HUD_life, 0, 0, al_get_bitmap_width(HUD_life), 
+		al_draw_scaled_bitmap(HUD_life, 0, 0, al_get_bitmap_width(HUD_life),
 			al_get_bitmap_height(HUD_life), 50 + i * 50, 160, 40, 40, 0);
 	}
 
@@ -113,4 +113,42 @@ void hud_draw() {
 		al_draw_scaled_bitmap(SHOP_UP_BU_NO, 0, 0, al_get_bitmap_width(SHOP_UP_BU_NO),
 			al_get_bitmap_height(SHOP_UP_BU_NO), 1405, 50, 55, 55, 0);
 	}
+
+	if (summons[0 + MAX_GOBLINS + MAX_ZOMBIES].active && summons[1 + MAX_GOBLINS + MAX_ZOMBIES].active && summons[2 + MAX_GOBLINS + MAX_ZOMBIES].active && summons[3 + MAX_GOBLINS + MAX_ZOMBIES].active && summons[4 + MAX_GOBLINS + MAX_ZOMBIES].active) {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1295, 105, 55, 55, 0);
+	}
+	else if (money_display < COST_BAT) {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1295, 105, 55, 55, 0);
+	}
+	/*else {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1295, 105, 55, 55, 0);
+	}*/
+	if (summons[0].active && summons[1].active && summons[2].active && summons[3].active && summons[4].active) {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1350, 105, 55, 55, 0);
+	}
+	else if (money_display < COST_ZOMBIE) {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1350, 105, 55, 55, 0);
+	}
+	/*else {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1350, 105, 0, 0, 0);
+	}*/
+	if (summons[0 + MAX_ZOMBIES].active && summons[1 + MAX_ZOMBIES].active && summons[2 + MAX_ZOMBIES].active && summons[3 + MAX_ZOMBIES].active && summons[4 + MAX_ZOMBIES].active) {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1405, 105, 55, 55, 0);
+	}
+	else if (money_display < COST_GOBLIN) {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1405, 105, 55, 55, 0);
+	}
+	/*else {
+		al_draw_scaled_bitmap(SHOP_UP_X, 0, 0, al_get_bitmap_width(SHOP_UP_X),
+			al_get_bitmap_height(SHOP_UP_X), 1405, 105, 0, 0, 0);
+	}*/
+
 }
