@@ -51,6 +51,9 @@
     <ClCompile Include="hud.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="level.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="init.h">
@@ -72,6 +75,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="hud.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="level.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,19 +145,22 @@
     <Image Include="Resource\pic\shop_icon.png">
       <Filter>리소스 파일\pic</Filter>
     </Image>
+    <Image Include="Resource\pic\bullets.png">
+      <Filter>리소스 파일\pic</Filter>
+    </Image>
     <Image Include="Resource\pic\damage.png">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\pic</Filter>
     </Image>
     <Image Include="Resource\pic\speed.png">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\pic</Filter>
     </Image>
     <Image Include="Resource\pic\zombie_l.png">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\pic</Filter>
     </Image>
     <Image Include="Resource\pic\zombie_r.png">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\pic</Filter>
     </Image>
-    <Image Include="Resource\pic\bullets.png">
+    <Image Include="Resource\pic\debuff_select.png">
       <Filter>리소스 파일\pic</Filter>
     </Image>
     <Image Include="Resource\pic\laser.png">

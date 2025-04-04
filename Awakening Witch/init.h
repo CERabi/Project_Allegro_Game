@@ -9,6 +9,7 @@
 #include "object.h"
 #include "hud.h"
 
-void reset_game_state();
+void reset_game_state(void);
 void init(void);
+void reset_keyboard_event(void);
 #endif

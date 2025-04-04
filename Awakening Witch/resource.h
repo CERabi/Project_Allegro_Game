@@ -11,15 +11,17 @@
 
 #define SCREEN_WIDTH 1500
 #define SCREEN_HEIGHT 900
+#define DEBUFF_WIDTH 297
+#define DEBUFF_HEIGHT 392
 #define PLAYER_SPEED 5
 #define ENEMY_SPEED 1.5f
 #define SUMMON_SPEED 1.7f
-#define MAX_KNIGHTS 5
+#define MAX_KNIGHTS 30
 #define MAX_BOSSES 3
 #define MAX_BATS 5
 #define MAX_ZOMBIES 5
 #define MAX_GOBLINS 5
-#define MAX_BULLETS 10
+#define MAX_BULLETS 20
 #define MAX_PLAYER_BULLETS 10
 #define MAX_BOSSES_LASER 1
 #define COLLISION_DISTANCE 50
@@ -40,6 +42,7 @@
 #define COST_ATT 300
 #define COST_SPD 100
 #define COST_BU 500
+#define AMOUNT_DEBUFF 6
 
 
 ALLEGRO_BITMAP* background;
@@ -73,11 +76,13 @@ ALLEGRO_BITMAP* SHOP_UP_BU;
 ALLEGRO_BITMAP* SHOP_UP_BU_NO;
 ALLEGRO_BITMAP* SHOP_UP_BU_MAX;
 //ALLEGRO_BITMAP* SHOP_FRIENDLY;
-
 ALLEGRO_BITMAP* goblin_sword[FRAME_COUNT];
 ALLEGRO_BITMAP* bat_sword[FRAME_COUNT];
 ALLEGRO_BITMAP* zombie_sword[FRAME_COUNT];
 ALLEGRO_BITMAP* knight_sword[FRAME_COUNT];
+ALLEGRO_BITMAP* debuff_background;
+ALLEGRO_BITMAP* debuff_selection;
+ALLEGRO_BITMAP* debuff[AMOUNT_DEBUFF];
 
 
 ALLEGRO_EVENT_QUEUE* event_queue;
@@ -103,6 +108,8 @@ float player_x;
 float player_y;
 float player_size; 
 int player_health;
+float boss_bullet_speed;
+int enemy_health_plus;
 int invincible_timer;
 double last_att;
 char state[20];
@@ -113,8 +120,13 @@ int boss_laser_timer[MAX_BOSSES];
 int boss_attack_delay;
 int MAX_SUMMONS;
 int MAX_ENEMIES;
+int knights_amount;
+int debuff_damage_knight;
+int debuff_amount_bossbullet;
 int shake_amount;
 int shake_duration;
+int prev_score;
+double score_multiplier;
 
 int current_frame[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];
 double last_update_time[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];

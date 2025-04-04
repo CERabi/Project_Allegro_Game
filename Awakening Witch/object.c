@@ -256,11 +256,11 @@ void spawn_enermy(int number) {
     case 1:
         // knight
         i = 0;
-        temp = 0;
-        health = KNIGHT_MAX_HEALTH;
-        damage = 1;
+        temp = knights_amount;
+        health = KNIGHT_MAX_HEALTH + enemy_health_plus;
+        damage = 1 + debuff_damage_knight;
         credit = 50;
-        score = 100;
+        score = (int)(100.0 * score_multiplier);
         speed = 2.0;
         max_summons = 5;
         size = 35;
@@ -268,11 +268,11 @@ void spawn_enermy(int number) {
     case 2:
         // 보스
         i = MAX_KNIGHTS;
-        temp = MAX_BOSSES;
-        health = BOSS_MAX_HEALTH;
+        temp = MAX_KNIGHTS + MAX_BOSSES;
+        health = BOSS_MAX_HEALTH + enemy_health_plus;
         damage = 1;
         credit = 200;
-        score = 500;
+        score = (int)(500.0 * score_multiplier);
         speed = 0;
         max_summons = 3;
         size = 80;
@@ -283,7 +283,7 @@ void spawn_enermy(int number) {
     const int SAFE_ZONE = 250;
     int max_enemies = MAX_KNIGHTS;
 
-    for (; i < MAX_KNIGHTS + temp; i++) {
+    for (; i < temp; i++) {
         if (!target_array[i].active) {
             if(i >= MAX_KNIGHTS)al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
             int x, y;
@@ -618,7 +618,7 @@ void check_boss_laser_collision(void) {
 
 void boss_shoot(int j) {
 	int k = j + MAX_KNIGHTS;
-	for (int i = 0; i < MAX_BULLETS; i++) {
+	for (int i = 0; i < debuff_amount_bossbullet; i++) {
 		if (!boss_bullets[j][i].active && enemies[k].active) {
 			boss_bullets[j][i].x = enemies[k].x;
 			boss_bullets[j][i].y = enemies[k].y;
@@ -644,8 +644,8 @@ void move_boss_bullets() {
 	for (int j = 0; j < MAX_BOSSES; ++j) {
 		for (int i = 0; i < MAX_BULLETS; i++) {
 			if (boss_bullets[j][i].active) {
-				boss_bullets[j][i].x += boss_bullets[j][i].direction_x;
-				boss_bullets[j][i].y += boss_bullets[j][i].direction_y;
+				boss_bullets[j][i].x += boss_bullets[j][i].direction_x * boss_bullet_speed;
+				boss_bullets[j][i].y += boss_bullets[j][i].direction_y * boss_bullet_speed;
 				if (boss_bullets[j][i].x < 0 || boss_bullets[j][i].x > SCREEN_WIDTH ||
 					boss_bullets[j][i].y < 0 || boss_bullets[j][i].y > SCREEN_HEIGHT) {
 					boss_bullets[j][i].active = false;
