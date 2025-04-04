@@ -354,6 +354,8 @@ void clear_summons(int number) {
 }
 
 void Special_moves(int number) {
+	if (!COST_ULT) return;
+	COST_ULT = 0;
 	Summon* target_array;
 	Summon* target_array2;
 	int max;
@@ -375,9 +377,7 @@ void Special_moves(int number) {
 		return;
 	}
 	for (int i = 0; i < max; i++) {
-		if (!COST_ULT) break;
-		target_array[i].health -= 5;
-		COST_ULT = 0;
+		target_array[i].health -= (5 + enemy_health_plus);
 		invincible_timer = 120;
 		apply_screen_shake(15, 30);
 		if (target_array[i].health <= 0) {

@@ -7,7 +7,7 @@ void gamescreen(void) {
         al_wait_for_event(event_queue, &event);
         keyboard_update(&event);
 
-        if (score_display - prev_score >= 100) {
+        if (score_display - prev_score >= (int)(150.0 * score_multiplier)) {
             level_up();
             prev_score = score_display;
             reset_keyboard_event();

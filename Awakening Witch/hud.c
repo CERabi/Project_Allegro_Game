@@ -6,13 +6,17 @@ void hud_init() {
 }
 
 void hud_draw() {
-	al_draw_scaled_bitmap(HUD_score, 0, 0, al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
+	al_draw_scaled_bitmap(HUD_score, 0, 0, 
+		al_get_bitmap_width(HUD_score), al_get_bitmap_height(HUD_score),
 		50, 55, 40, 40, 0);
-	al_draw_scaled_bitmap(HUD_money, 0, 0, al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
+	al_draw_scaled_bitmap(HUD_money, 0, 0, 
+		al_get_bitmap_width(HUD_money), al_get_bitmap_height(HUD_money),
 		50, 105, 40, 40, 0);
-	al_draw_scaled_bitmap(HUD_speed, 0, 0, al_get_bitmap_width(HUD_speed), al_get_bitmap_height(HUD_speed),
+	al_draw_scaled_bitmap(HUD_speed, 0, 0, 
+		al_get_bitmap_width(HUD_speed), al_get_bitmap_height(HUD_speed),
 		50, 210, 40, 40, 0);
-	al_draw_scaled_bitmap(HUD_damage, 0, 0, al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
+	al_draw_scaled_bitmap(HUD_damage, 0, 0, 
+		al_get_bitmap_width(HUD_damage), al_get_bitmap_height(HUD_damage),
 		220, 210, 40, 40, 0);
 	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 0, 0, "Q");
 	al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 0, 0, "W");

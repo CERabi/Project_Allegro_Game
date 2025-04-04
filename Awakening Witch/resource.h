@@ -42,9 +42,9 @@
 #define COST_ATT 300
 #define COST_SPD 100
 #define COST_BU 500
-#define COST_BAT 200
-#define COST_ZOMBIE 300
-#define COST_GOBLIN 400
+#define COST_BAT 50
+#define COST_ZOMBIE 150
+#define COST_GOBLIN 300
 #define AMOUNT_DEBUFF 6
 
 

@@ -55,7 +55,7 @@ void debuff_action(int flg) {
 	if (flg == 0) {
 		// 보스 탄막 속도 증가
 		boss_bullet_speed += 0.3f;
-		score_multiplier += 0.1f;
+		score_multiplier += 0.2f;
 	}
 	else if (flg == 1) {
 		// 몬스터 수 증가
@@ -65,12 +65,12 @@ void debuff_action(int flg) {
 	else if (flg == 2) {
 		// 기사 몸박뎀 증가
 		++debuff_damage_knight;
-		score_multiplier += 0.1f;
+		score_multiplier += 0.5f;
 	}
 	else if (flg == 3) {
 		// 몬스터 체력 증가
 		++enemy_health_plus;
-		score_multiplier += 0.1f;
+		score_multiplier += 0.3f;
 	}
 	else if (flg == 4) {
 		// 보스 탄막 갯수 증가
@@ -84,7 +84,7 @@ void debuff_action(int flg) {
 		++debuff_damage_knight;
 		++enemy_health_plus;
 		++debuff_amount_bossbullet;
-		score_multiplier += 0.2f;
+		score_multiplier += 1.0f;
 	}
 }
 int debuff_button(int mouse_x, int mouse_y, int button_x, int button_y) {
