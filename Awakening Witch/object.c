@@ -471,7 +471,7 @@ void check_player_collision() {
 			float distance = sqrt(dx * dx + dy * dy);
 			if (distance < COLLISION_DISTANCE) {
 				if (invincible_timer <= 0) {
-					player.health -= ENERMY_DAMAGE;
+					player.health -= (enemies[j].damage);
 					invincible_timer = 180;
 
 					if (player.health <= 0) {
@@ -624,8 +624,8 @@ void boss_shoot(int j) {
 			boss_bullets[j][i].x = enemies[k].x;
 			boss_bullets[j][i].y = enemies[k].y;
 			boss_bullets[j][i].active = true;
-			float dx = boss_laser_target[j].x - enemies[k].x;
-			float dy = boss_laser_target[j].y - enemies[k].y;
+			float dx = player.x - enemies[k].x;
+			float dy = player.y - enemies[k].y;
 			float length = sqrt(dx * dx + dy * dy);
 			if (length != 0) {
 				boss_bullets[j][i].direction_x = (dx / length) * 5;
