@@ -32,7 +32,7 @@
 #define PLAYER_HEALTH 5
 #define BULLET_SPEED 7
 #define ATTACK_DELAY 0.5
-#define FRAME_COUNT 3
+#define FRAME_COUNT 4
 #define FRAME_DELAY 0.2
 #define KNIGHT_MAX_HEALTH 3.0f
 #define BOSS_MAX_HEALTH 10.0f
@@ -48,7 +48,7 @@
 #define AMOUNT_DEBUFF 6
 
 
-ALLEGRO_BITMAP* background;
+ALLEGRO_BITMAP* background[10];
 ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
 ALLEGRO_BITMAP* summon2_img_l;
@@ -62,7 +62,7 @@ ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
 ALLEGRO_BITMAP* fireball_boss_img;
-ALLEGRO_BITMAP* laser_img[6];
+ALLEGRO_BITMAP* laser_img[7];
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
@@ -82,7 +82,8 @@ ALLEGRO_BITMAP* SHOP_UP_BAT;
 ALLEGRO_BITMAP* SHOP_UP_ZOMBIE;
 ALLEGRO_BITMAP* SHOP_UP_GOBLIN;
 ALLEGRO_BITMAP* SHOP_UP_X;
-
+ALLEGRO_BITMAP* ULT;
+ALLEGRO_BITMAP* ULT_NO;
 //ALLEGRO_BITMAP* SHOP_FRIENDLY;
 ALLEGRO_BITMAP* goblin_sword[FRAME_COUNT];
 ALLEGRO_BITMAP* bat_sword[FRAME_COUNT];
@@ -106,16 +107,20 @@ ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;
 ALLEGRO_FONT* hud_font;
 
+ALLEGRO_SAMPLE* mainMenu;
 ALLEGRO_SAMPLE* BGM;
 ALLEGRO_SAMPLE* monster_hit;
 ALLEGRO_SAMPLE* player_attack;
 ALLEGRO_SAMPLE* boss_summon;
 
+ALLEGRO_SAMPLE_INSTANCE** sample1;
+ALLEGRO_SAMPLE_INSTANCE** sample2;
 
 float player_x;
 float player_y;
 float player_size; 
 int player_health;
+int COST_ULT;
 float boss_bullet_speed;
 int enemy_health_plus;
 int invincible_timer;
@@ -128,12 +133,14 @@ int boss_laser_timer[MAX_BOSSES];
 int boss_attack_delay;
 int MAX_SUMMONS;
 int MAX_ENEMIES;
+int now_alley[3];
 int knights_amount;
 int debuff_damage_knight;
 int debuff_amount_bossbullet;
 int shake_amount;
 int shake_duration;
 int prev_score;
+int backstage;
 double score_multiplier;
 
 int current_frame[MAX_ZOMBIES + MAX_GOBLINS + MAX_BATS];

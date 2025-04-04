@@ -1,6 +1,10 @@
 #include "init.h"
 
 void reset_game_state() {
+    // 배경 초기화
+    al_stop_sample(sample1);
+    al_play_sample(BGM, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample2);
+    for(int i = 0; i < 3; ++i) now_alley[i] = 0;
     // 플레이어 초기화
     player.health = PLAYER_HEALTH;
     //player.health = 1;
@@ -12,6 +16,7 @@ void reset_game_state() {
     player.bullets = 3;
     invincible_timer = 0;
     player.player_att_delay = ATTACK_DELAY;
+    COST_ULT = 1;
     /*for (int i = 0; i < ALLEGRO_KEY_MAX; ++i) {
         key[i] = 0;
     }*/
@@ -19,9 +24,9 @@ void reset_game_state() {
 
     // 점수 및 재화 초기화
     score_display = 0;
+    money_display = 0;
     prev_score = 0;
     score_multiplier = 1.0f;
-    money_display = 0;
     //score_display = 1000;
     //money_display = 100000;
 
@@ -84,6 +89,7 @@ void reset_keyboard_event() {
 }
 
 void init(void) {
+    backstage = 0;
     strcpy(state, "menu");
     //strcpy(state, "game");
     srand(time(NULL));
@@ -141,7 +147,7 @@ void init(void) {
 
     timer = al_create_timer(1.0 / 60.0);
     spawn_timer = al_create_timer(3.0);
-    spawn_timer_boss = al_create_timer(15.0);
+    spawn_timer_boss = al_create_timer(20.0);
     event_queue = al_create_event_queue();
 
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
@@ -155,7 +161,7 @@ void init(void) {
     al_start_timer(spawn_timer);
     al_start_timer(spawn_timer_boss);
 
-    al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+    al_draw_scaled_bitmap(background[backstage], 0, 0, al_get_bitmap_width(background[backstage]), al_get_bitmap_height(background[backstage]),
         0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     al_flip_display();
 }

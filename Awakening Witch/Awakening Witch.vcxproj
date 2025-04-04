@@ -164,11 +164,21 @@
     <None Include="packages.config" />
     <None Include="Resource\audio\bgm.ogg" />
     <None Include="Resource\audio\boss_summon.ogg" />
+    <None Include="Resource\audio\mainmenu.ogg" />
     <None Include="Resource\audio\monster_hit.ogg" />
     <None Include="Resource\audio\player_attack.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\pic\battleback1.png" />
+    <Image Include="Resource\pic\battleback10.png" />
+    <Image Include="Resource\pic\battleback2.png" />
+    <Image Include="Resource\pic\battleback3.png" />
+    <Image Include="Resource\pic\battleback4.png" />
+    <Image Include="Resource\pic\battleback5.png" />
+    <Image Include="Resource\pic\battleback6.png" />
+    <Image Include="Resource\pic\battleback7.png" />
+    <Image Include="Resource\pic\battleback8.png" />
+    <Image Include="Resource\pic\battleback9.png" />
     <Image Include="Resource\pic\bat_up.png" />
     <Image Include="Resource\pic\boss_l.png" />
     <Image Include="Resource\pic\boss_r.png" />
