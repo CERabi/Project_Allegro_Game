@@ -371,6 +371,7 @@ void destroy_resource(void) {
     al_destroy_font(button_font);
     al_destroy_font(hud_font);
 
+    al_destroy_sample(mainMenu);
     al_destroy_sample(BGM);
     al_destroy_sample(monster_hit);
     al_destroy_sample(player_attack);
