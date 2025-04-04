@@ -7,7 +7,7 @@ void gamescreen(void) {
         al_wait_for_event(event_queue, &event);
         keyboard_update(&event);
 
-        if (score_display - prev_score >= 1000) {
+        if (score_display - prev_score >= 100) {
             level_up();
             prev_score = score_display;
             reset_keyboard_event();
@@ -40,8 +40,8 @@ void gamescreen(void) {
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
 
             // 본인 강화(상점)
-            if (key[ALLEGRO_KEY_A]) player_enhance_sp();
-            if (key[ALLEGRO_KEY_S]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_A]) player_enhance_dm();
+            if (key[ALLEGRO_KEY_S]) player_enhance_sp();
             if (key[ALLEGRO_KEY_D]) player_enhance_bu();
         }
 
@@ -73,33 +73,33 @@ void gamescreen(void) {
         update_animation2();
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
-        al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+        al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
             0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
         /*al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1310, 150, 0, "Q");
         al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1365, 150, 0, "W");
         al_draw_text(hud_font, al_map_rgb_f(1, 1, 1), 1420, 150, 0, "E");*/
         render_screen();
-        int player_size = 80;
-        if (invincible_timer > 0) {
-            if ((invincible_timer / 15) % 2 == 0) {
-                if (player.sees_left) {
-                    al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
-                        player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
-                }
-                else {
-                    al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
-                        player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
+
+        int bullet_size = 80;
+        for (int i = 0; i < player.bullets; i++) {
+            if (bullets[i].active) {
+                al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
+                    bullets[i].x - bullet_size / 2, bullets[i].y - bullet_size / 2, bullet_size, bullet_size, 0);
+            }
+        }
+
+        for (int j = 0; j < MAX_BOSSES; ++j) {
+            for (int i = 0; i < MAX_BULLETS; i++) {
+                if (boss_bullets[j][i].active) {
+                    al_draw_scaled_bitmap(fireball_boss_img, 0, 0, al_get_bitmap_width(fireball_boss_img), al_get_bitmap_height(fireball_boss_img),
+                        boss_bullets[j][i].x - 35, boss_bullets[j][i].y - 35, 70, 70, 0);
                 }
             }
         }
-        else {
-            if (player.sees_left) {
-                al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
-                    player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
-            }
-            else {
-                al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
-                    player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
+
+        for (int j = 0; j < MAX_BOSSES; ++j) {
+            if (boss_laser_timer[j] >= 350) {
+                draw_rotated_laser(j + MAX_KNIGHTS);
             }
         }
 
@@ -377,31 +377,38 @@ void gamescreen(void) {
         
         }
 
-        int bullet_size = 80;
-        for (int i = 0; i < player.bullets; i++) {
-            if (bullets[i].active) {
-                al_draw_scaled_bitmap(fireball_img, 0, 0, al_get_bitmap_width(fireball_img), al_get_bitmap_height(fireball_img),
-                    bullets[i].x - bullet_size / 2, bullets[i].y - bullet_size / 2, bullet_size, bullet_size, 0);
+        for (int j = 0; j < MAX_BOSSES; ++j) {
+            if (boss_laser_timer[j] >= 200) {
+                draw_rotated_laser(j + MAX_KNIGHTS);
             }
         }
 
-        for (int j = 0; j < MAX_BOSSES; ++j) {
-            for (int i = 0; i < MAX_BULLETS; i++) {
-                if (boss_bullets[j][i].active) {
-                    al_draw_scaled_bitmap(fireball_boss_img, 0, 0, al_get_bitmap_width(fireball_boss_img), al_get_bitmap_height(fireball_boss_img),
-                        boss_bullets[j][i].x - 35, boss_bullets[j][i].y - 35, 70, 70, 0);
+        int player_size = 80;
+        if (invincible_timer > 0) {
+            if ((invincible_timer / 15) % 2 == 0) {
+                if (player.sees_left) {
+                    al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
+                        player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
+                }
+                else {
+                    al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
+                        player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
                 }
             }
         }
-
-        for (int j = 0; j < MAX_BOSSES; ++j) {
-            if (boss_laser_timer[j] >= 350) {
-                draw_rotated_laser(j + MAX_KNIGHTS);
+        else {
+            if (player.sees_left) {
+                al_draw_scaled_bitmap(player_img_l, 0, 0, al_get_bitmap_width(player_img_l), al_get_bitmap_height(player_img_l),
+                    player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
             }
-        }     
-
+            else {
+                al_draw_scaled_bitmap(player_img_r, 0, 0, al_get_bitmap_width(player_img_r), al_get_bitmap_height(player_img_r),
+                    player.x - player_size / 2, player.y - player_size / 2, player_size, player_size, 0);
+            }
+        }
 
         hud_draw();
         al_flip_display();
     }
+    al_stop_sample(sample2);
 }

@@ -13,10 +13,9 @@ void render_screen() {
 		shake_y = (rand() % (shake_amount * 2 + 1)) - shake_amount;
 		shake_duration--;
 	}
-
-	al_clear_to_color(al_map_rgb(0, 0, 0));
-	al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
-		shake_x, shake_y, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
+        shake_x, shake_y, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 }
 
 void move_player() {
@@ -242,77 +241,78 @@ void spawn_summon(int number) {
 }
 
 void spawn_enermy(int number) {
-	Summon* target_array = enemies;
-	int i;
-	double health;
-	int damage;
-	int credit;
-	int score;
-	int speed;
-	int max_summons;
-	int temp;
-	int size;
-	switch (number) {
-	case 1:
-		// knight
-		i = 0;
-		temp = knights_amount;
-		health = KNIGHT_MAX_HEALTH + enemy_health_plus;
-		damage = 1 + debuff_damage_knight;
-		credit = 50;
-		score = (int)(100.0 * score_multiplier);
-		speed = 2.0;
-		max_summons = 5;
-		size = 35;
-		break;
-	case 2:
-		// 보스
-		i = MAX_KNIGHTS;
-		temp = MAX_KNIGHTS + MAX_BOSSES;
-		health = BOSS_MAX_HEALTH + enemy_health_plus;
-		damage = 1;
-		credit = 200;
-		score = (int)(500.0 * score_multiplier);
-		speed = 0;
-		max_summons = 3;
-		size = 80;
-		break;
-	default:
-		return;  // 잘못된 값이면 함수 종료
-	}
-	const int SAFE_ZONE = 250;
-	int max_enemies = MAX_KNIGHTS;
 
-	for (; i < temp; i++) {
-		if (!target_array[i].active) {
-			if (i >= MAX_KNIGHTS)al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
-			int x, y;
-			bool safe_position = false;
+    Summon* target_array = enemies;
+    int i;
+    double health;
+    int damage;
+    int credit;
+    int score;
+    int speed;
+    int max_summons;
+    int temp;
+    int size;
+    switch (number) {
+    case 1:
+        // knight
+        i = 0;
+        temp = knights_amount;
+        health = KNIGHT_MAX_HEALTH + enemy_health_plus;
+        damage = 1 + debuff_damage_knight;
+        credit = 50;
+        score = (int)(10.0 * score_multiplier);
+        speed = 2.0;
+        max_summons = 5;
+        size = 35;
+        break;
+    case 2:
+        // 보스
+        i = MAX_KNIGHTS;
+        temp = MAX_KNIGHTS + MAX_BOSSES;
+        health = BOSS_MAX_HEALTH + enemy_health_plus;
+        damage = 1;
+        credit = 200;
+        score = (int)(50.0 * score_multiplier);
+        speed = 0;
+        max_summons = 3;
+        size = 80;
+        break;
+    default:
+        return;  // 잘못된 값이면 함수 종료
+    }
+    const int SAFE_ZONE = 250;
+    int max_enemies = MAX_KNIGHTS;
 
-			while (!safe_position) {
-				x = rand() % (SCREEN_WIDTH - 80) + 40;
-				y = rand() % (SCREEN_HEIGHT - 350) + 240;
+    for (; i < temp; i++) {
+        if (!target_array[i].active) {
+            if(i >= MAX_KNIGHTS)al_play_sample(boss_summon, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+            int x, y;
+            bool safe_position = false;
 
-				if (abs(x - player.x) > SAFE_ZONE || abs(y - player.y) > SAFE_ZONE) {
-					safe_position = true;
-				}
-			}
+            while (!safe_position) {
+                x = rand() % (SCREEN_WIDTH-80) + 40;
+                y = rand() % (SCREEN_HEIGHT - 350) + 240;
 
-			target_array[i].x = x;
-			target_array[i].y = y;
-			target_array[i].active = true;
-			target_array[i].matched = false;
-			target_array[i].health = health;
-			target_array[i].damage = damage;
-			target_array[i].credit = credit;
-			target_array[i].score = score;
-			target_array[i].speed = speed;
-			target_array[i].invincible = 0;
-			target_array[i].matched_enemy = -1;
-			target_array[i].size = size;
-			break;
-		}
-	}
+                if (abs(x - player.x) > SAFE_ZONE || abs(y - player.y) > SAFE_ZONE) {
+                    safe_position = true;
+                }
+            }
+
+            target_array[i].x = x;
+            target_array[i].y = y;
+            target_array[i].active = true;
+            target_array[i].matched = false;
+            target_array[i].health = health;
+            target_array[i].damage = damage;
+            target_array[i].credit = credit;
+            target_array[i].score = score;
+            target_array[i].speed = speed;
+            target_array[i].invincible = 0;
+            target_array[i].matched_enemy = -1;
+            target_array[i].size = size;
+            break;
+        }
+    }
 }
 
 
@@ -726,76 +726,96 @@ void attack_laser_boss() {
 
 // 레이저 돌리는 함수
 void draw_rotated_laser(int k) {
+    float angle2;
+    float dx2=0.0;
+    float dy2=0.0;
+    if (boss_laser_timer[k - MAX_KNIGHTS] >= 200 && boss_laser_timer[k - MAX_KNIGHTS] < 350) {
+        dx2 = player.x - enemies[k].x;
+        dy2 = player.y - enemies[k].y;
 
-	if (boss_laser_timer[k - MAX_KNIGHTS] == 350) {
-		boss_laser_target[k - MAX_KNIGHTS].x = player.x;
-		boss_laser_target[k - MAX_KNIGHTS].y = player.y;
+        
+    }
+    angle2 = atan2(-dx2, dy2);
+   
+    if (boss_laser_timer[k-MAX_KNIGHTS] == 350) {
+        boss_laser_target[k - MAX_KNIGHTS].x = player.x;
+        boss_laser_target[k - MAX_KNIGHTS].y = player.y;
+       
+    }
 
-	}
+    float dx = boss_laser_target[k - MAX_KNIGHTS].x - enemies[k].x;
+    float dy = boss_laser_target[k - MAX_KNIGHTS].y - enemies[k].y;
 
-	float dx = boss_laser_target[k - MAX_KNIGHTS].x - enemies[k].x;
-	float dy = boss_laser_target[k - MAX_KNIGHTS].y - enemies[k].y;
+    float angle = atan2(-dx, dy); // 보스 → 플레이어 방향 각도 계산
 
-	float angle = atan2(-dx, dy); // 보스 → 플레이어 방향 각도 계산
-
-	if (boss_laser_timer[k - MAX_KNIGHTS] >= 350 && boss_laser_timer[k - MAX_KNIGHTS] <= 380) {
-		al_draw_rotated_bitmap(
-			laser_img[0],
-			al_get_bitmap_width(laser_img[0]) / 2,
-			0,
-			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-			angle,  // 회전 각도 (라디안)
-			0
-		);
-	}
-	if (boss_laser_timer[k - MAX_KNIGHTS] > 380 && boss_laser_timer[k - MAX_KNIGHTS] <= 410) {
-		al_draw_rotated_bitmap(
-			laser_img[1],
-			al_get_bitmap_width(laser_img[1]) / 2,
-			0,
-			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-			angle,  // 회전 각도 (라디안)
-			0
-		);
-	}
-	if (boss_laser_timer[k - MAX_KNIGHTS] > 410 && boss_laser_timer[k - MAX_KNIGHTS] <= 440) {
-		al_draw_rotated_bitmap(
-			laser_img[2],
-			al_get_bitmap_width(laser_img[2]) / 2,
-			0,
-			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-			angle,  // 회전 각도 (라디안)
-			0
-		);
-	}
-	if (boss_laser_timer[k - MAX_KNIGHTS] > 440 && boss_laser_timer[k - MAX_KNIGHTS] <= 470) {
-		al_draw_rotated_bitmap(
-			laser_img[3],
-			al_get_bitmap_width(laser_img[3]) / 2,
-			0,
-			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-			angle,  // 회전 각도 (라디안)
-			0
-		);
-	}
-	if (boss_laser_timer[k - MAX_KNIGHTS] > 470 && boss_laser_timer[k - MAX_KNIGHTS] <= 500) {
-		al_draw_rotated_bitmap(
-			laser_img[4],
-			al_get_bitmap_width(laser_img[4]) / 2,
-			0,
-			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-			angle,  // 회전 각도 (라디안)
-			0
-		);
-	}
-	if (boss_laser_timer[k - MAX_KNIGHTS] > 500) {
-		al_draw_rotated_bitmap(
-			laser_img[5],
-			al_get_bitmap_width(laser_img[5]) / 2,
-			0,
-			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-			angle,  // 회전 각도 (라디안)
-			0
-		);
-	}
+    if (boss_laser_timer[k - MAX_KNIGHTS] >= 200 && boss_laser_timer[k - MAX_KNIGHTS] <= 350) {
+        al_draw_rotated_bitmap(
+            laser_img[6],
+            al_get_bitmap_width(laser_img[6]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle2,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 350 && boss_laser_timer[k - MAX_KNIGHTS] <= 380) {
+        al_draw_rotated_bitmap(
+            laser_img[0],
+            al_get_bitmap_width(laser_img[0]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 380 && boss_laser_timer[k - MAX_KNIGHTS] <= 410) {
+        al_draw_rotated_bitmap(
+            laser_img[1],
+            al_get_bitmap_width(laser_img[1]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 410 && boss_laser_timer[k - MAX_KNIGHTS] <= 440) {
+        al_draw_rotated_bitmap(
+            laser_img[2],
+            al_get_bitmap_width(laser_img[2]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 440 && boss_laser_timer[k - MAX_KNIGHTS] <= 470) {
+        al_draw_rotated_bitmap(
+            laser_img[3],
+            al_get_bitmap_width(laser_img[3]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 470 && boss_laser_timer[k - MAX_KNIGHTS] <= 500) {
+        al_draw_rotated_bitmap(
+            laser_img[4],
+            al_get_bitmap_width(laser_img[4]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 500) {
+        al_draw_rotated_bitmap(
+            laser_img[5],
+            al_get_bitmap_width(laser_img[5]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
 }

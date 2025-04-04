@@ -7,10 +7,13 @@ void load_resource(void) {
     player_size = 30;
     invincible_timer = 120;
     // 배경 이미지 로드
-    background = al_load_bitmap("Resource/pic/battleback1.png");
-    if (!background) {
-        printf("이미지를 불러오지 못했습니다!\n");
-        return;
+    char back[50];
+    for (int i = 0; i < 10; i++) {
+        sprintf_s(back, sizeof(back), "Resource/pic/battleback%d.png", i + 1);
+        background[i] = al_load_bitmap(back);
+        if (!background[i]) {
+            printf("Failed to load image: %s\n", back);
+        }
     }
 
     // 소환수 이미지 로드
@@ -62,7 +65,7 @@ void load_resource(void) {
 
 	char goblin_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(goblin_motion, sizeof(goblin_motion), "Resource/pic/goblin_sword_%d.png", i + 1);
+		sprintf_s(goblin_motion, sizeof(goblin_motion), "Resource/pic/goblin_sword_%d.png", i);
 		goblin_sword[i] = al_load_bitmap(goblin_motion);
 		if (!goblin_sword[i]) {
 			printf("Failed to load image: %s\n", goblin_motion);
@@ -71,7 +74,7 @@ void load_resource(void) {
 
 	char bat_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(bat_motion, sizeof(bat_motion), "Resource/pic/bat_%d.png", i + 1);
+		sprintf_s(bat_motion, sizeof(bat_motion), "Resource/pic/bat_%d.png", i);
 		bat_sword[i] = al_load_bitmap(bat_motion);
 		if (!bat_sword[i]) {
 			printf("Failed to load image: %s\n", bat_motion);
@@ -80,7 +83,7 @@ void load_resource(void) {
 
 	char zombie_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(zombie_motion, sizeof(zombie_motion), "Resource/pic/zombie_sword_%d.png", i + 1);
+		sprintf_s(zombie_motion, sizeof(zombie_motion), "Resource/pic/zombie_sword_%d.png", i);
 		zombie_sword[i] = al_load_bitmap(zombie_motion);
 		if (!zombie_sword[i]) {
 			printf("Failed to load image: %s\n", zombie_motion);
@@ -89,7 +92,7 @@ void load_resource(void) {
 
 	char knight_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(knight_motion, sizeof(knight_motion), "Resource/pic/knight_sword_%d.png", i + 1);
+		sprintf_s(knight_motion, sizeof(knight_motion), "Resource/pic/knight_sword_%d.png", i);
 		knight_sword[i] = al_load_bitmap(knight_motion);
 		if (!knight_sword[i]) {
 			printf("Failed to load image: %s\n", knight_motion);
@@ -129,6 +132,28 @@ void load_resource(void) {
             printf("Failed to load image: %s\n", laser);
         }
     }
+
+    int scale_factor_width = 1;
+    int scale_factor_height = 3;
+    int new_width = al_get_bitmap_width(laser_img[0]) * scale_factor_width;
+    int new_height = al_get_bitmap_height(laser_img[0]) * scale_factor_height;
+
+    // 레이저 확대
+    ALLEGRO_BITMAP* scaled_laser1;
+    scaled_laser1 = al_create_bitmap(new_width, new_height);
+    al_set_target_bitmap(scaled_laser1);
+    al_clear_to_color(al_map_rgba(0, 0, 0, 0));
+    al_draw_scaled_bitmap(
+        laser_img[0],
+        0, 0,
+        al_get_bitmap_width(laser_img[0]), al_get_bitmap_height(laser_img[0]),
+        0, 0,
+        new_width, new_height,
+        0
+    );
+    al_set_target_backbuffer(display);
+    laser_img[6] = scaled_laser1;
+
 
     for (int i = 0; i < 6; ++i) {
         int scale_factor_width = 2;
@@ -264,11 +289,18 @@ void load_resource(void) {
     }
 
     // 오디오 로드
-    BGM = al_load_sample("Resource/audio/bgm.ogg");
-    if (!BGM) {
-        fprintf(stderr, "BGM 로드 실패!\n");
+    mainMenu = al_load_sample("Resource/audio/mainmenu.ogg");
+    if (!mainMenu) {
+        fprintf(stderr, "BGM load failed : mainmenu.ogg!\n");
         return;
     }
+    sample1 = al_create_sample_instance(mainMenu);
+    BGM = al_load_sample("Resource/audio/bgm.ogg");
+    if (!BGM) {
+        fprintf(stderr, "BGM load failed : bgm.ogg!\n");
+        return;
+    }
+    sample2 = al_create_sample_instance(BGM);
     monster_hit = al_load_sample("Resource/audio/monster_hit.ogg");
     if (!monster_hit) {
         fprintf(stderr, "monster_hit 로드 실패!\n");
@@ -287,7 +319,7 @@ void load_resource(void) {
 }
 
 void destroy_resource(void) {
-    al_destroy_bitmap(background);
+    al_destroy_bitmap(background[0]);
     al_destroy_bitmap(summon_img_l);
     al_destroy_bitmap(summon_img_r);
     al_destroy_bitmap(goblin_sword[0]);
@@ -341,6 +373,7 @@ void destroy_resource(void) {
     al_destroy_font(button_font);
     al_destroy_font(hud_font);
 
+    al_destroy_sample(mainMenu);
     al_destroy_sample(BGM);
     al_destroy_sample(monster_hit);
     al_destroy_sample(player_attack);

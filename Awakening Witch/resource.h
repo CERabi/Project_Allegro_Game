@@ -32,7 +32,7 @@
 #define PLAYER_HEALTH 5
 #define BULLET_SPEED 7
 #define ATTACK_DELAY 0.5
-#define FRAME_COUNT 3
+#define FRAME_COUNT 4
 #define FRAME_DELAY 0.2
 #define KNIGHT_MAX_HEALTH 3.0f
 #define BOSS_MAX_HEALTH 10.0f
@@ -49,7 +49,7 @@
 #define AMOUNT_DEBUFF 6
 
 
-ALLEGRO_BITMAP* background;
+ALLEGRO_BITMAP* background[10];
 ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
 ALLEGRO_BITMAP* summon2_img_l;
@@ -63,7 +63,7 @@ ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
 ALLEGRO_BITMAP* fireball_boss_img;
-ALLEGRO_BITMAP* laser_img[6];
+ALLEGRO_BITMAP* laser_img[7];
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
@@ -108,11 +108,14 @@ ALLEGRO_FONT* title_font;
 ALLEGRO_FONT* button_font;
 ALLEGRO_FONT* hud_font;
 
+ALLEGRO_SAMPLE* mainMenu;
 ALLEGRO_SAMPLE* BGM;
 ALLEGRO_SAMPLE* monster_hit;
 ALLEGRO_SAMPLE* player_attack;
 ALLEGRO_SAMPLE* boss_summon;
 
+ALLEGRO_SAMPLE_INSTANCE** sample1;
+ALLEGRO_SAMPLE_INSTANCE** sample2;
 
 float player_x;
 float player_y;

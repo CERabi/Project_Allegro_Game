@@ -1,6 +1,8 @@
 #include "init.h"
 
 void reset_game_state() {
+    al_stop_sample(sample1);
+    al_play_sample(BGM, 0.3, 0, 1, ALLEGRO_PLAYMODE_LOOP, sample2);
     // 플레이어 초기화
     player.health = PLAYER_HEALTH;
     //player.health = 1;
@@ -23,7 +25,7 @@ void reset_game_state() {
     score_multiplier = 1.0f;
     money_display = 9900;
     //score_display = 1000;
-    //money_display = 100000;
+    money_display = 100000;
 
     // 난이도 초기화
     enemy_health_plus = 0;
@@ -141,7 +143,7 @@ void init(void) {
 
     timer = al_create_timer(1.0 / 60.0);
     spawn_timer = al_create_timer(3.0);
-    spawn_timer_boss = al_create_timer(15.0);
+    spawn_timer_boss = al_create_timer(20.0);
     event_queue = al_create_event_queue();
 
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
@@ -155,7 +157,7 @@ void init(void) {
     al_start_timer(spawn_timer);
     al_start_timer(spawn_timer_boss);
 
-    al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+    al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
         0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     al_flip_display();
 }
