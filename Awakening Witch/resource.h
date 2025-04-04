@@ -32,7 +32,7 @@
 #define PLAYER_HEALTH 5
 #define BULLET_SPEED 7
 #define ATTACK_DELAY 0.5
-#define FRAME_COUNT 3
+#define FRAME_COUNT 4
 #define FRAME_DELAY 0.2
 #define KNIGHT_MAX_HEALTH 3.0f
 #define BOSS_MAX_HEALTH 10.0f

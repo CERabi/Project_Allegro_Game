@@ -65,7 +65,7 @@ void load_resource(void) {
 
 	char goblin_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(goblin_motion, sizeof(goblin_motion), "Resource/pic/goblin_sword_%d.png", i + 1);
+		sprintf_s(goblin_motion, sizeof(goblin_motion), "Resource/pic/goblin_sword_%d.png", i);
 		goblin_sword[i] = al_load_bitmap(goblin_motion);
 		if (!goblin_sword[i]) {
 			printf("Failed to load image: %s\n", goblin_motion);
@@ -74,7 +74,7 @@ void load_resource(void) {
 
 	char bat_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(bat_motion, sizeof(bat_motion), "Resource/pic/bat_%d.png", i + 1);
+		sprintf_s(bat_motion, sizeof(bat_motion), "Resource/pic/bat_%d.png", i);
 		bat_sword[i] = al_load_bitmap(bat_motion);
 		if (!bat_sword[i]) {
 			printf("Failed to load image: %s\n", bat_motion);
@@ -83,7 +83,7 @@ void load_resource(void) {
 
 	char zombie_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(zombie_motion, sizeof(zombie_motion), "Resource/pic/zombie_sword_%d.png", i + 1);
+		sprintf_s(zombie_motion, sizeof(zombie_motion), "Resource/pic/zombie_sword_%d.png", i);
 		zombie_sword[i] = al_load_bitmap(zombie_motion);
 		if (!zombie_sword[i]) {
 			printf("Failed to load image: %s\n", zombie_motion);
@@ -92,7 +92,7 @@ void load_resource(void) {
 
 	char knight_motion[50];
 	for (int i = 0; i < FRAME_COUNT; i++) {
-		sprintf_s(knight_motion, sizeof(knight_motion), "Resource/pic/knight_sword_%d.png", i + 1);
+		sprintf_s(knight_motion, sizeof(knight_motion), "Resource/pic/knight_sword_%d.png", i);
 		knight_sword[i] = al_load_bitmap(knight_motion);
 		if (!knight_sword[i]) {
 			printf("Failed to load image: %s\n", knight_motion);
