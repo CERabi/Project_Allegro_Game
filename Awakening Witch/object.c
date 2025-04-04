@@ -724,76 +724,76 @@ void attack_laser_boss() {
 
 // 레이저 돌리는 함수
 void draw_rotated_laser(int k) {
-   
-    if (boss_laser_timer[k-MAX_KNIGHTS] == 350) {
-        boss_laser_target[k - MAX_KNIGHTS].x = player.x;
-        boss_laser_target[k - MAX_KNIGHTS].y = player.y;
-       
-    }
+	int p = k - MAX_KNIGHTS;
+	if (boss_laser_timer[p] == 350) {
+		boss_laser_target[p].x = player.x;
+		boss_laser_target[p].y = player.y;
 
-    float dx = boss_laser_target[k - MAX_KNIGHTS].x - enemies[k].x;
-    float dy = boss_laser_target[k - MAX_KNIGHTS].y - enemies[k].y;
+	}
+
+	float dx = boss_laser_target[p].x - enemies[k].x;
+	float dy = boss_laser_target[p].y - enemies[k].y;
 
     float angle = atan2(-dx, dy); // 보스 → 플레이어 방향 각도 계산
 
-    if (boss_laser_timer[k - MAX_KNIGHTS] >= 350 && boss_laser_timer[k - MAX_KNIGHTS] <= 380) {
-        al_draw_rotated_bitmap(
-            laser_img[0],
-            al_get_bitmap_width(laser_img[0]) / 2,
-            0,
-            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-            angle,  // 회전 각도 (라디안)
-            0
-        );
-    }
-    if (boss_laser_timer[k - MAX_KNIGHTS] > 380 && boss_laser_timer[k - MAX_KNIGHTS] <= 410) {
-        al_draw_rotated_bitmap(
-            laser_img[1],
-            al_get_bitmap_width(laser_img[1]) / 2,
-            0,
-            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-            angle,  // 회전 각도 (라디안)
-            0
-        );
-    }
-    if (boss_laser_timer[k - MAX_KNIGHTS] > 410 && boss_laser_timer[k - MAX_KNIGHTS] <= 440) {
-        al_draw_rotated_bitmap(
-            laser_img[2],
-            al_get_bitmap_width(laser_img[2]) / 2,
-            0,
-            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-            angle,  // 회전 각도 (라디안)
-            0
-        );
-    }
-    if (boss_laser_timer[k - MAX_KNIGHTS] > 440 && boss_laser_timer[k - MAX_KNIGHTS] <= 470) {
-        al_draw_rotated_bitmap(
-            laser_img[3],
-            al_get_bitmap_width(laser_img[3]) / 2,
-            0,
-            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-            angle,  // 회전 각도 (라디안)
-            0
-        );
-    }
-    if (boss_laser_timer[k - MAX_KNIGHTS] > 470 && boss_laser_timer[k - MAX_KNIGHTS] <= 500) {
-        al_draw_rotated_bitmap(
-            laser_img[4],
-            al_get_bitmap_width(laser_img[4]) / 2,
-            0,
-            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-            angle,  // 회전 각도 (라디안)
-            0
-        );
-    }
-    if (boss_laser_timer[k - MAX_KNIGHTS] > 500) {
-        al_draw_rotated_bitmap(
-            laser_img[5],
-            al_get_bitmap_width(laser_img[5]) / 2,
-            0,
-            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
-            angle,  // 회전 각도 (라디안)
-            0
-        );
-    }
+	if (boss_laser_timer[p] >= 350 && boss_laser_timer[p] <= 380) {
+		al_draw_rotated_bitmap(
+			laser_img[0],
+			al_get_bitmap_width(laser_img[0]) / 2,
+			0,
+			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+			angle,  // 회전 각도 (라디안)
+			0
+		);
+	}
+	if (boss_laser_timer[p] > 380 && boss_laser_timer[p] <= 410) {
+		al_draw_rotated_bitmap(
+			laser_img[1],
+			al_get_bitmap_width(laser_img[1]) / 2,
+			0,
+			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+			angle,  // 회전 각도 (라디안)
+			0
+		);
+	}
+	if (boss_laser_timer[p] > 410 && boss_laser_timer[p] <= 440) {
+		al_draw_rotated_bitmap(
+			laser_img[2],
+			al_get_bitmap_width(laser_img[2]) / 2,
+			0,
+			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+			angle,  // 회전 각도 (라디안)
+			0
+		);
+	}
+	if (boss_laser_timer[p] > 440 && boss_laser_timer[p] <= 470) {
+		al_draw_rotated_bitmap(
+			laser_img[3],
+			al_get_bitmap_width(laser_img[3]) / 2,
+			0,
+			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+			angle,  // 회전 각도 (라디안)
+			0
+		);
+	}
+	if (boss_laser_timer[p] > 470 && boss_laser_timer[p] <= 500) {
+		al_draw_rotated_bitmap(
+			laser_img[4],
+			al_get_bitmap_width(laser_img[4]) / 2,
+			0,
+			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+			angle,  // 회전 각도 (라디안)
+			0
+		);
+	}
+	if (boss_laser_timer[p] > 500) {
+		al_draw_rotated_bitmap(
+			laser_img[5],
+			al_get_bitmap_width(laser_img[5]) / 2,
+			0,
+			enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+			angle,  // 회전 각도 (라디안)
+			0
+		);
+	}
 }
