@@ -19,7 +19,7 @@ void reset_game_state() {
 
     // 점수 및 재화 초기화
     score_display = 0;
-    money_display = 100000;
+    money_display = 1000000;
     boss_attack_delay = 20;
     for (int i = 0; i < MAX_GOBLINS; ++i) {
         current_frame[i] = 0;
