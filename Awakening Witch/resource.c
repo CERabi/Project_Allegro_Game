@@ -168,6 +168,23 @@ void load_resource(void) {
     SHOP_UP_SPD_NO = convert_to_grayscale(SHOP_UP_SPD);
     SHOP_UP_BU_NO = convert_to_grayscale(SHOP_UP_BU);
 
+    // 디버프 이미지 로드
+    debuff_background = al_load_bitmap("Resource/pic/debuff_background.png");
+    if (!debuff_background) {
+        printf("Cannot load debuff_background\n");
+        return;
+    }
+    debuff_selection = al_load_bitmap("Resource/pic/debuff_select.png");
+    if (!debuff_selection) {
+        printf("Cannot load debuff_selection\n");
+        return;
+    }
+    for (int i = 0; i < 6; i++) {
+        // x 50, 366, 682 -> 316씩
+        // y 156, 570 -> 414씩
+        debuff[i] = al_create_sub_bitmap(debuff_selection, 50 + 316 * (i % 3), 156 + 414 * (i / 3), DEBUFF_WIDTH, DEBUFF_HEIGHT);
+    }
+
     // 폰트 로드
     font = al_load_ttf_font("Resource/font/DungGeunMo.otf", 70, 0);
     if (!font) {
@@ -247,6 +264,9 @@ void destroy_resource(void) {
     al_destroy_bitmap(SHOP_UP_BU);
     al_destroy_bitmap(SHOP_UP_BU_NO);
     al_destroy_bitmap(SHOP_UP_BU_MAX);
+    al_destroy_bitmap(debuff_background);
+    al_destroy_bitmap(debuff_selection);
+    for (int i = 0; i < AMOUNT_DEBUFF; i++) al_destroy_bitmap(debuff[i]);
 
     al_destroy_display(display);
 

@@ -173,6 +173,7 @@
     <Image Include="Resource\pic\boss_r.png" />
     <Image Include="Resource\pic\bullets.png" />
     <Image Include="Resource\pic\damage.png" />
+    <Image Include="Resource\pic\debuff_select.png" />
     <Image Include="Resource\pic\fireball.png" />
     <Image Include="Resource\pic\fireball_boss.png" />
     <Image Include="Resource\pic\goblin_l.png" />

@@ -7,6 +7,16 @@ void gamescreen(void) {
         al_wait_for_event(event_queue, &event);
         keyboard_update(&event);
 
+        if (score_display - prev_score >= 1000) {
+            level_up();
+            prev_score = score_display;
+            reset_keyboard_event();
+        }
+
+        if (event.type == ALLEGRO_EVENT_DISPLAY_SWITCH_OUT) {
+            reset_keyboard_event();
+        }
+
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             // 적 생성
             if (key[ALLEGRO_KEY_1]) spawn_enermy(1);
@@ -53,10 +63,6 @@ void gamescreen(void) {
             check_boss_bullet_collision();
             check_player_collision();
             attack_boss();
-        }
-        
-        if (score_display - prev_score >= 1000) {
-            level_up();
         }
 
         update_animation();
@@ -107,7 +113,7 @@ void gamescreen(void) {
                     al_map_rgb_f(255, 0, 0));
                 al_draw_filled_rectangle(
                     enemies[i].x - ((double)enemy_size / 2.0 - 10.0), enemies[i].y - enemy_size / 2 - 20,
-                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0) + 2 * ((double)enemy_size / 2.0 - 10.0) * ((double)enemies[i].health / KNIGHT_MAX_HEALTH), enemies[i].y - enemy_size / 2 - 10,
+                    enemies[i].x - ((double)enemy_size / 2.0 - 10.0) + 2 * ((double)enemy_size / 2.0 - 10.0) * ((double)enemies[i].health / (KNIGHT_MAX_HEALTH + enemy_health_plus)), enemies[i].y - enemy_size / 2 - 10,
                     al_map_rgb_f(0, 255, 0));
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(knight_sword[current_enemies_frame[i]], 0, 0, al_get_bitmap_width(knight_sword[current_enemies_frame[i]]), al_get_bitmap_height(knight_sword[current_enemies_frame[i]]),
@@ -147,7 +153,7 @@ void gamescreen(void) {
                 al_draw_filled_rectangle(
                     enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0), 
                     enemies[i].y - enermy_boss_size / 2 - 20,
-                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0) + 2 * ((double)enermy_boss_size / 2.0 - 10.0) * ((double)enemies[i].health / BOSS_MAX_HEALTH), 
+                    enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0) + 2 * ((double)enermy_boss_size / 2.0 - 10.0) * ((double)enemies[i].health / (BOSS_MAX_HEALTH + enemy_health_plus)),
                     enemies[i].y - enermy_boss_size / 2 - 10,
                     al_map_rgb_f(0, 255, 0));
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {

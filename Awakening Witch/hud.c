@@ -23,6 +23,14 @@ void hud_draw() {
 		0,
 		"%06ld",
 		score_display
+	); 
+	al_draw_textf(
+		hud_font,
+		al_map_rgb_f(1, 1, 1),
+		270, 50,
+		0,
+		"x%.1f",
+		score_multiplier
 	);
 	al_draw_textf(
 		hud_font,
