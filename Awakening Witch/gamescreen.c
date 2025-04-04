@@ -396,7 +396,6 @@ void gamescreen(void) {
                 draw_rotated_laser(j + MAX_KNIGHTS);
             }
         }
-
         hud_draw();
         al_flip_display();
     }

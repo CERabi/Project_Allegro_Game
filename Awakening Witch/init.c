@@ -23,7 +23,7 @@ void reset_game_state() {
     score_multiplier = 1.0f;
     money_display = 0;
     //score_display = 1000;
-    money_display = 100000;
+    //money_display = 100000;
 
     // 난이도 초기화
     enemy_health_plus = 0;

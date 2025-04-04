@@ -471,7 +471,7 @@ void check_player_collision() {
 			float distance = sqrt(dx * dx + dy * dy);
 			if (distance < COLLISION_DISTANCE) {
 				if (invincible_timer <= 0) {
-					player.health -= ENERMY_DAMAGE;
+					player.health -= (enemies[j].damage);
 					invincible_timer = 180;
 
 					if (player.health <= 0) {
