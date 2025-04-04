@@ -49,11 +49,14 @@ void gamescreen(void) {
             move_bullets();
             move_summons();
             move_boss_bullets();
+            move_boss_lasers();
             check_collision();
             check_bullet_collision();
             check_boss_bullet_collision();
+            check_boss_laser_collision();
             check_player_collision();
             attack_boss();
+            attack_laser_boss();
             
         }
         
@@ -149,6 +152,30 @@ void gamescreen(void) {
                     enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0) + 2 * ((double)enermy_boss_size / 2.0 - 10.0) * ((double)enemies[i].health / BOSS_MAX_HEALTH), 
                     enemies[i].y - enermy_boss_size / 2 - 10,
                     al_map_rgb_f(0, 255, 0));
+                // 보스 레이저 충전 시간
+                if (boss_laser_timer[i-MAX_KNIGHTS] > 350 && boss_laser_timer[i-MAX_KNIGHTS]<=500) {
+                    // 테두리
+                    al_draw_filled_rectangle(
+                        enemies[i].x - ((double)enermy_boss_size / 3.0 - 10.0 + 2.0),
+                        enemies[i].y + enermy_boss_size / 2 - 5 - 2.0,
+                        enemies[i].x + ((double)enermy_boss_size / 3.0 - 10.0 + 2.0),
+                        enemies[i].y + enermy_boss_size / 2 + 5 + 2.0,
+                        al_map_rgb_f(0, 0, 0));
+                    // 배경
+                    /*al_draw_filled_rectangle(
+                        enemies[i].x - ((double)enermy_boss_size / 2.0 - 10.0),
+                        enemies[i].y + enermy_boss_size / 2 - 5,
+                        enemies[i].x + ((double)enermy_boss_size / 2.0 - 10.0),
+                        enemies[i].y + enermy_boss_size / 2 + 5,
+                        al_map_rgb_f(255, 0, 0));*/
+                    // 충전 시간
+                    al_draw_filled_rectangle(
+                        enemies[i].x - ((double)enermy_boss_size / 3.0 - 10.0),
+                        enemies[i].y + enermy_boss_size / 2 - 5,
+                        enemies[i].x - ((double)enermy_boss_size / 3.0 - 10.0) + 2 * ((double)enermy_boss_size / 3.0 - 10.0) * (((double)(boss_laser_timer[i - MAX_KNIGHTS] - 350) / 150)),
+                        enemies[i].y + enermy_boss_size / 2 + 5,
+                        al_map_rgb_f(204, 204, 0));
+                }
                 if (enemies[i].matched_enemy == -1 && enemies[i].x < player.x) {
                     al_draw_scaled_bitmap(enemy_boss_img_r, 0, 0, al_get_bitmap_width(enemy_boss_img_r), al_get_bitmap_height(enemy_boss_img_r),
                         enemies[i].x - enermy_boss_size / 2, enemies[i].y - enermy_boss_size / 2, enermy_boss_size, enermy_boss_size, 0);
@@ -357,6 +384,14 @@ void gamescreen(void) {
                 }
             }
         }
+
+        for (int j = 0; j < MAX_BOSSES; ++j) {
+            if (boss_laser_timer[j] >= 350) {
+                draw_rotated_laser(j + MAX_KNIGHTS);
+            }
+        }
+
+
         hud_draw();
         al_flip_display();
     }

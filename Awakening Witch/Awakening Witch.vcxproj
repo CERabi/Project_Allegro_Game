@@ -177,6 +177,14 @@
     <Image Include="Resource\pic\goblin_r.png" />
     <Image Include="Resource\pic\knight_l.png" />
     <Image Include="Resource\pic\knight_r.png" />
+    <Image Include="Resource\pic\laser.png" />
+    <Image Include="Resource\pic\laser1.png" />
+    <Image Include="Resource\pic\laser_wait1.png" />
+    <Image Include="Resource\pic\laser_wait2.png" />
+    <Image Include="Resource\pic\laser_wait3.png" />
+    <Image Include="Resource\pic\laser_wait4.png" />
+    <Image Include="Resource\pic\laser_wait5.png" />
+    <Image Include="Resource\pic\laser_wait6.png" />
     <Image Include="Resource\pic\life.png" />
     <Image Include="Resource\pic\money.png" />
     <Image Include="Resource\pic\player_dead.png" />

@@ -55,6 +55,11 @@ void reset_game_state() {
         }
     }
 
+    // 보스 타이머 초기화
+    for (int i = 0; i < MAX_BOSSES; i++) {
+        boss_laser_timer[i] = 0;
+    }
+
     // 플레이어 공격 관련 초기화
     last_att = 0;  // 공격 타이밍 초기화
 }

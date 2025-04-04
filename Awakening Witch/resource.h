@@ -21,6 +21,7 @@
 #define MAX_GOBLINS 5
 #define MAX_BULLETS 10
 #define MAX_PLAYER_BULLETS 10
+#define MAX_BOSSES_LASER 1
 #define COLLISION_DISTANCE 50
 #define BULLET_COLLISION_DISTANCE 30
 #define BULLET_DAMAGE 1
@@ -55,6 +56,7 @@ ALLEGRO_BITMAP* player_img_l;
 ALLEGRO_BITMAP* player_img_r;
 ALLEGRO_BITMAP* fireball_img;
 ALLEGRO_BITMAP* fireball_boss_img;
+ALLEGRO_BITMAP* laser_img[6];
 ALLEGRO_BITMAP* HUD_score;
 ALLEGRO_BITMAP* HUD_money;
 ALLEGRO_BITMAP* HUD_life;
@@ -107,6 +109,7 @@ char state[20];
 long score_display;
 int money_display;
 int boss_shoot_timer[MAX_BOSSES];
+int boss_laser_timer[MAX_BOSSES];
 int boss_attack_delay;
 int MAX_SUMMONS;
 int MAX_ENEMIES;

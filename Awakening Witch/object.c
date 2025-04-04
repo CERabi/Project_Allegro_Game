@@ -280,7 +280,7 @@ void spawn_enermy(int number) {
     default:
         return;  // 잘못된 값이면 함수 종료
     }
-    const int SAFE_ZONE = 300;
+    const int SAFE_ZONE = 250;
     int max_enemies = MAX_KNIGHTS;
 
     for (; i < MAX_KNIGHTS + temp; i++) {
@@ -290,8 +290,8 @@ void spawn_enermy(int number) {
             bool safe_position = false;
 
             while (!safe_position) {
-                x = rand() % SCREEN_WIDTH;
-                y = rand() % (SCREEN_HEIGHT - 250) + 230;
+                x = rand() % (SCREEN_WIDTH-80) + 40;
+                y = rand() % (SCREEN_HEIGHT - 350) + 240;
 
                 if (abs(x - player.x) > SAFE_ZONE || abs(y - player.y) > SAFE_ZONE) {
                     safe_position = true;
@@ -376,6 +376,7 @@ void Special_moves(int number) {
         apply_screen_shake(15, 30);
 		if (target_array[i].health <= 0) {
 			target_array[i].active = false;
+            if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 			for (int k = 0; k < max2; k++) {
 				if (target_array2[k].active && target_array2[k].matched && target_array2[k].matched_enemy == i) {
 					target_array2[k].matched = false;
@@ -420,6 +421,7 @@ void check_collision() {
 					enemies[i].matched_enemy = -1;
 					summons[j].matched = false;
 					summons[j].matched_enemy = -1;
+                    if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 				}
 				if (summons[j].health <= 0) {
 					summons[j].active = false;
@@ -498,6 +500,7 @@ void check_bullet_collision() {
                             money_display += enemies[j].credit;
                             enemies[j].active = false;
                             enemies[j].matched_enemy = -1;
+                            if (j >= MAX_KNIGHTS) boss_laser_timer[j - MAX_KNIGHTS] = 0;
 
                             for (int k = 0; k < MAX_SUMMONS; k++) {
                                 if (summons[k].active && summons[k].matched && summons[k].matched_enemy == j) {
@@ -565,6 +568,54 @@ void check_boss_bullet_collision(void) {
     }
 }
 
+void check_boss_laser_collision(void) {
+    for (int j = 0; j < MAX_BOSSES; ++j) {
+        for (int i = 0; i < MAX_BOSSES_LASER; i++) {
+            if (boss_lasers[j][i].active) {
+                for (int k = 0; k < MAX_SUMMONS; k++) {
+                    if (summons[k].active) {
+                        float dx = boss_lasers[j][i].x - summons[k].x;
+                        float dy = boss_lasers[j][i].y - summons[k].y;
+                        float distance = sqrt(dx * dx + dy * dy);
+                        if (distance < 75) {
+                            summons[k].health -= 0.5;
+                            al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+                            if (summons[k].health <= 0) {
+                                summons[k].active = false;
+                                summons[k].matched_enemy = -1;
+
+                                for (int l = 0; l < MAX_SUMMONS; l++) {
+                                    if (enemies[l].active && enemies[l].matched && enemies[l].matched_enemy == k) {
+                                        enemies[l].matched = false;
+                                        enemies[l].matched_enemy = -1;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (boss_lasers[j][i].active) {
+                float dx = boss_lasers[j][i].x - player.x;
+                float dy = boss_lasers[j][i].y - player.y;
+                float distance = sqrt(dx * dx + dy * dy);
+                if (distance < 75) {
+                    if (invincible_timer <= 0) {
+                        player.health--;
+                        invincible_timer = 180;
+                        al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+                    }
+                    if (player.health <= 0) {
+                        name(font);  // 이름 입력 받기
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
 void boss_shoot(int j) {
 	int k = j + MAX_KNIGHTS;
 	for (int i = 0; i < MAX_BULLETS; i++) {
@@ -604,6 +655,44 @@ void move_boss_bullets() {
 	}
 }
 
+void boss_laser(int j) {
+    int k = j + MAX_KNIGHTS;
+    for (int i = 0; i < MAX_BOSSES_LASER; i++) {
+        if (!boss_lasers[j][i].active && enemies[k].active) {
+            boss_lasers[j][i].x = enemies[k].x;
+            boss_lasers[j][i].y = enemies[k].y;
+            boss_lasers[j][i].active = true;
+            float dx = player.x - enemies[k].x;
+            float dy = player.y - enemies[k].y;
+            float length = sqrt(dx * dx + dy * dy);
+            if (length != 0) {
+                boss_lasers[j][i].direction_x = (dx / length) * 80;
+                boss_lasers[j][i].direction_y = (dy / length) * 80;
+            }
+            else {
+                boss_lasers[j][i].direction_x = 0;
+                boss_lasers[j][i].direction_y = 0;
+            }
+
+            break;
+        }
+    }
+}
+
+void move_boss_lasers() {
+    for (int j = 0; j < MAX_BOSSES; ++j) {
+        for (int i = 0; i < MAX_BOSSES_LASER; i++) {
+            if (boss_lasers[j][i].active) {
+                boss_lasers[j][i].x += boss_lasers[j][i].direction_x;
+                boss_lasers[j][i].y += boss_lasers[j][i].direction_y;
+                if (boss_lasers[j][i].x < 0 || boss_lasers[j][i].x > SCREEN_WIDTH ||
+                    boss_lasers[j][i].y < 0 || boss_lasers[j][i].y > SCREEN_HEIGHT) {
+                    boss_lasers[j][i].active = false;
+                }
+            }
+        }
+    }
+}
 
 
 void attack_boss() {
@@ -616,4 +705,92 @@ void attack_boss() {
 			}
 		}
 	}
+}
+
+void attack_laser_boss() {
+    for (int i = 0; i < MAX_BOSSES; ++i) {
+        if (enemies[i + MAX_KNIGHTS].active) {
+            boss_laser_timer[i]++;
+            if (boss_laser_timer[i] >= 500) {
+                boss_laser(i);
+                if(boss_laser_timer[i] >600) boss_laser_timer[i] = 0;
+            }
+        }
+    }
+}
+
+// 레이저 돌리는 함수
+void draw_rotated_laser(int k) {
+   
+    if (boss_laser_timer[k-MAX_KNIGHTS] == 350) {
+        boss_laser_target[k - MAX_KNIGHTS].x = player.x;
+        boss_laser_target[k - MAX_KNIGHTS].y = player.y;
+       
+    }
+
+    float dx = boss_laser_target[k - MAX_KNIGHTS].x - enemies[k].x;
+    float dy = boss_laser_target[k - MAX_KNIGHTS].y - enemies[k].y;
+
+    float angle = atan2(-dx, dy); // 보스 → 플레이어 방향 각도 계산
+
+    if (boss_laser_timer[k - MAX_KNIGHTS] >= 350 && boss_laser_timer[k - MAX_KNIGHTS] <= 380) {
+        al_draw_rotated_bitmap(
+            laser_img[0],
+            al_get_bitmap_width(laser_img[0]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 380 && boss_laser_timer[k - MAX_KNIGHTS] <= 410) {
+        al_draw_rotated_bitmap(
+            laser_img[1],
+            al_get_bitmap_width(laser_img[1]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 410 && boss_laser_timer[k - MAX_KNIGHTS] <= 440) {
+        al_draw_rotated_bitmap(
+            laser_img[2],
+            al_get_bitmap_width(laser_img[2]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 440 && boss_laser_timer[k - MAX_KNIGHTS] <= 470) {
+        al_draw_rotated_bitmap(
+            laser_img[3],
+            al_get_bitmap_width(laser_img[3]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 470 && boss_laser_timer[k - MAX_KNIGHTS] <= 500) {
+        al_draw_rotated_bitmap(
+            laser_img[4],
+            al_get_bitmap_width(laser_img[4]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
+    if (boss_laser_timer[k - MAX_KNIGHTS] > 500) {
+        al_draw_rotated_bitmap(
+            laser_img[5],
+            al_get_bitmap_width(laser_img[5]) / 2,
+            0,
+            enemies[k].x, enemies[k].y, // 레이저의 시작 위치 (보스 좌표)
+            angle,  // 회전 각도 (라디안)
+            0
+        );
+    }
 }
