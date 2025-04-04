@@ -48,7 +48,7 @@
 #define AMOUNT_DEBUFF 6
 
 
-ALLEGRO_BITMAP* background;
+ALLEGRO_BITMAP* background[10];
 ALLEGRO_BITMAP* summon_img_l;
 ALLEGRO_BITMAP* summon_img_r;
 ALLEGRO_BITMAP* summon2_img_l;

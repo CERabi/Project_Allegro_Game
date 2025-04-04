@@ -157,7 +157,7 @@ void init(void) {
     al_start_timer(spawn_timer);
     al_start_timer(spawn_timer_boss);
 
-    al_draw_scaled_bitmap(background, 0, 0, al_get_bitmap_width(background), al_get_bitmap_height(background),
+    al_draw_scaled_bitmap(background[0], 0, 0, al_get_bitmap_width(background[0]), al_get_bitmap_height(background[0]),
         0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     al_flip_display();
 }
