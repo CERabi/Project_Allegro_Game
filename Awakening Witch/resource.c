@@ -314,7 +314,17 @@ void load_resource(void) {
     }
     boss_summon = al_load_sample("Resource/audio/boss_summon.ogg");
     if (!player_attack) {
-        fprintf(stderr, "player_attack 로드 실패!\n");
+        fprintf(stderr, "boss_summon 로드 실패!\n");
+        return;
+    }
+    laser_audio_1 = al_load_sample("Resource/audio/laser_reversed.ogg");
+    if (!laser_audio_1) {
+        fprintf(stderr, "laser_audio_1 로드 실패!\n");
+        return;
+    }
+    laser_audio_2 = al_load_sample("Resource/audio/laser.ogg");
+    if (!laser_audio_2) {
+        fprintf(stderr, "laser_audio_2 로드 실패!\n");
         return;
     }
 }

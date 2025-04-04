@@ -112,6 +112,8 @@ ALLEGRO_SAMPLE* BGM;
 ALLEGRO_SAMPLE* monster_hit;
 ALLEGRO_SAMPLE* player_attack;
 ALLEGRO_SAMPLE* boss_summon;
+ALLEGRO_SAMPLE* laser_audio_1;
+ALLEGRO_SAMPLE* laser_audio_2;
 
 ALLEGRO_SAMPLE_INSTANCE** sample1;
 ALLEGRO_SAMPLE_INSTANCE** sample2;

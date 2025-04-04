@@ -726,12 +726,20 @@ void attack_boss() {
 void attack_laser_boss() {
 	for (int i = 0; i < MAX_BOSSES; ++i) {
 		if (enemies[i + MAX_KNIGHTS].active) {
+			if (boss_laser_timer[i] == 200) {
+				al_play_sample(laser_audio_1, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+			}
+			if (boss_laser_timer[i] == 500) {
+				al_play_sample(laser_audio_2, 0.3, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+			}
 			boss_laser_timer[i]++;
 			if (boss_laser_timer[i] >= 500) {
 				boss_laser(i);
 
 			}
-			if (boss_laser_timer[i] > 600) boss_laser_timer[i] = 0;
+			if (boss_laser_timer[i] > 600) {
+				boss_laser_timer[i] = 0;
+			}
 		}
 	}
 }
