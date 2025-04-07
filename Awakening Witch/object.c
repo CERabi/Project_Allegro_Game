@@ -48,9 +48,9 @@ void move_player() {
 }
 
 void player_enhance_bu() {
-	if (money_display < COST_ATT || player.bullets >= MAX_PLAYER_BULLETS) return;
+	if (money_display < COST_BU || player.bullets >= MAX_PLAYER_BULLETS) return;
 	player.bullets += 1;
-	money_display -= COST_ATT;
+	money_display -= COST_BU;
 }
 
 void player_enhance_sp() {
@@ -60,9 +60,9 @@ void player_enhance_sp() {
 }
 
 void player_enhance_dm() {
-	if (money_display < COST_BU) return;
-	player.damage += 0.3;
-	money_display -= COST_BU;
+	if (money_display < COST_ATT) return;
+	player.damage += 0.1;
+	money_display -= COST_ATT;
 }
 
 void fire_bullet() {
@@ -591,7 +591,7 @@ void check_boss_laser_collision(void) {
 						float dy = boss_lasers[j][i].y - summons[k].y;
 						float distance = sqrt(dx * dx + dy * dy);
 						if (distance < 75) {
-							summons[k].health -= 0.5;
+							summons[k].health -= 0.3;
 							al_play_sample(monster_hit, 0.6, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 							if (summons[k].health <= 0) {
 								if (k < MAX_ZOMBIES) --now_alley[0];
