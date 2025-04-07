@@ -18,8 +18,16 @@
 ```
 ├── Game/
 ├── ├── Resource/
+├── ├── ├── audio/
+├── ├── ├── font/
+├── ├── ├── pic/
+├── ├── ├── rank_db/
 ├── Awakening Witch/
 ├── ├── Resource/
+├── ├── ├── audio/
+├── ├── ├── font/
+├── ├── ├── pic/
+├── ├── ├── rank_db/
 ```
 
 ### 팀 소개
