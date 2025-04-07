@@ -1,7 +1,7 @@
 # Awaken Witch
 
 ### 설치법
-/Game/Awakening Witch.exe를 실행합니다.
+/Game/Awakening Witch.exe를 실행합니다.</br>
 /Awakening Witch 를 Visual Studio에서 열어 컴파일 할 수 있습니다.
 
 ### 스크린샷 및 플레이 영상
