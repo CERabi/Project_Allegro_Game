@@ -381,6 +381,7 @@ void Special_moves(int number) {
 		invincible_timer = 120;
 		apply_screen_shake(15, 30);
 		if (target_array[i].health <= 0) {
+			money_display += target_array[i].credit;
 			target_array[i].active = false;
 			if (i >= MAX_KNIGHTS) boss_laser_timer[i - MAX_KNIGHTS] = 0;
 			for (int k = 0; k < max2; k++) {

@@ -19,8 +19,8 @@ void gamescreen(void) {
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN) {
             // 적 생성
-            if (key[ALLEGRO_KEY_1]) spawn_enermy(1);
-            if (key[ALLEGRO_KEY_2]) spawn_enermy(2);
+            // if (key[ALLEGRO_KEY_1]) spawn_enermy(1);
+            // if (key[ALLEGRO_KEY_2]) spawn_enermy(2);
             
             // 필살기
             if (key[ALLEGRO_KEY_R]) Special_moves(1);
@@ -31,10 +31,10 @@ void gamescreen(void) {
             if (key[ALLEGRO_KEY_D]) spawn_summon(12);
 
             // 적 삭제(디버그용)
-            if (key[ALLEGRO_KEY_5]) clear_summons(1);
+            // if (key[ALLEGRO_KEY_5]) clear_summons(1);
             
             // 아군 삭제(디버그용)
-            if (key[ALLEGRO_KEY_6]) clear_summons(11);
+            // if (key[ALLEGRO_KEY_6]) clear_summons(11);
 
             // 공격
             if (key[ALLEGRO_KEY_SPACE]) fire_bullet();
