@@ -6,7 +6,7 @@ void draw_menu() {
         0, 0, 1500, 900, 0);  // 화면 크기 1500x900으로 변경
 
     // 제목 텍스트는 여전히 가운데 정렬
-    al_draw_text(title_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 220, ALLEGRO_ALIGN_CENTER, "Awakening Witch");
+    al_draw_text(title_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 220, ALLEGRO_ALIGN_CENTER, "Awaken Witch");
 
     // 버튼 크기와 위치 조정
     int button_width = 600;  // 버튼의 너비를 키움

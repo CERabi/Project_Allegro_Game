@@ -24,7 +24,7 @@ typedef struct Summon {
     int number;
     int matched_enemy;
     double health;
-    int damage;
+    double damage;
     int credit;
     int score;
     int size;

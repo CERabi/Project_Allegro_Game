@@ -36,9 +36,9 @@
 #define FRAME_DELAY 0.2
 #define KNIGHT_MAX_HEALTH 3.0f
 #define BOSS_MAX_HEALTH 10.0f
-#define BAT_MAX_HEALTH 2.0f
-#define ZOMBIE_MAX_HEALTH 6.0f
-#define GOBLIN_MAX_HEALTH 10.0f
+#define BAT_MAX_HEALTH 4.0f
+#define ZOMBIE_MAX_HEALTH 12.0f
+#define GOBLIN_MAX_HEALTH 20.0f
 #define COST_ATT 300
 #define COST_SPD 100
 #define COST_BU 500

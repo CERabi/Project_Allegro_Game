@@ -61,7 +61,7 @@ void player_enhance_sp() {
 
 void player_enhance_dm() {
 	if (money_display < COST_BU) return;
-	player.damage += 0.1;
+	player.damage += 0.3;
 	money_display -= COST_BU;
 }
 
@@ -181,7 +181,7 @@ void spawn_summon(int number) {
 	int i;
 	int temp;
 	int health;
-	int damage;
+	double damage;
 	int credit;
 	int size;
 	double speed;
@@ -191,7 +191,7 @@ void spawn_summon(int number) {
 		i = 0;
 		temp = MAX_ZOMBIES;
 		health = ZOMBIE_MAX_HEALTH;
-		damage = 1;
+		damage = 0.5;
 		credit = COST_ZOMBIE;
 		speed = 1.7;
 		size = 50;
@@ -201,7 +201,7 @@ void spawn_summon(int number) {
 		i = MAX_ZOMBIES;
 		temp = MAX_GOBLINS;
 		health = GOBLIN_MAX_HEALTH;
-		damage = 2;
+		damage = 1;
 		credit = COST_GOBLIN;
 		speed = 2.0;
 		size = 50;
@@ -211,7 +211,7 @@ void spawn_summon(int number) {
 		i = MAX_ZOMBIES + MAX_GOBLINS;
 		temp = MAX_BATS;
 		health = BAT_MAX_HEALTH;
-		damage = 1;
+		damage = 0.25;
 		credit = COST_BAT;
 		speed = 5.0;
 		size = 30;
