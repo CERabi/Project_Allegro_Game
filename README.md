@@ -8,7 +8,7 @@
 이미지 클릭시 영상으로 이동합니다.</br>
 [![Video Label](https://i.ytimg.com/an_webp/b0vYmEOfEQE/mqdefault_6s.webp?du=3000&sqp=CM7ozL8G&rs=AOn4CLC78OEgwJXkCxSriwsrc0q0AqBrDg)](https://www.youtube.com/watch?v=b0vYmEOfEQE)
 
-### 스크린샷 및 플레이 영상
+### 개발일지
 [개발일지 링크](https://docs.google.com/spreadsheets/d/11sGyltalhDhb-OYo56ny35Z81IWBeZY4eidpiBHN3-M/edit?usp=sharing)
 
 ### 사용 기술
