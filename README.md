@@ -10,11 +10,12 @@
 | 이름                  | 버전    |
 |:---------------------:|:-------:|
 | C    		| MSVC 2019   |
+| Allegro	|  5.2.10.1  |
 ### 디렉토리 구조
 ├── Game/
 ├── Awakening Witch/
 ### 팀 소개
-| 전동민 | 진승혁 | [하규승](https://github.com/CERabi/) | 조익현 |
+| [전동민](https://github.com/qwerrrqwerq) | [진승혁](https://github.com/DeliaBS123) | [하규승](https://github.com/CERabi/) | [조익현](https://github.com/cho2khyun) |
 |:-------:|:-------:|:-------:|:-------:|
 | <img width="100px" alt="MEMBER1" src="https://avatars.githubusercontent.com/u/151756637?v=4" /> | <img width="100px" alt="MEMBER2" src="https://avatars.githubusercontent.com/u/205569657?v=4" /> | <img width="100px" alt="MEMBER3" src="https://avatars.githubusercontent.com/u/174900093?v=4&size=64" /> | <img width="100px" alt="MEMBER4" src="https://avatars.githubusercontent.com/u/89765162?v=4" /> |
 | - | - | hgs6417@gmail.com | - |
