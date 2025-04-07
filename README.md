@@ -5,7 +5,7 @@
 /Awakening Witch 를 Visual Studio에서 열어 컴파일 할 수 있습니다.
 
 ### 스크린샷 및 플레이 영상
-[![Video Label](https://i9.ytimg.com/vi/Kj_wo4fQtwI/mqdefault.jpg?sqp=CMCH27cG-oaymwEoCMACELQB8quKqQMcGADwAQH4AYwCgALgA4oCDAgAEAEYciBaKDswDw==&rs=AOn4CLB-jemeWmMWzKxFEmJ1QR52WolSyA)](https://www.youtube.com/shorts/Kj_wo4fQtwI)
+[![Video Label](https://i.ytimg.com/an_webp/b0vYmEOfEQE/mqdefault_6s.webp?du=3000&sqp=CM7ozL8G&rs=AOn4CLC78OEgwJXkCxSriwsrc0q0AqBrDg)](https://www.youtube.com/watch?v=b0vYmEOfEQE)
 ### 사용 기술
 | 이름                  | 버전    |
 |:---------------------:|:-------:|
