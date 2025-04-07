@@ -5,18 +5,23 @@
 /Awakening Witch 를 Visual Studio에서 열어 컴파일 할 수 있습니다.
 
 ### 스크린샷 및 플레이 영상
-이미지 클릭시 영상으로 이동합니다.
+이미지 클릭시 영상으로 이동합니다.</br>
 [![Video Label](https://i.ytimg.com/an_webp/b0vYmEOfEQE/mqdefault_6s.webp?du=3000&sqp=CM7ozL8G&rs=AOn4CLC78OEgwJXkCxSriwsrc0q0AqBrDg)](https://www.youtube.com/watch?v=b0vYmEOfEQE)
+
 ### 사용 기술
 | 이름                  | 버전    |
 |:---------------------:|:-------:|
 | C    		| MSVC 2019   |
 | Allegro	|  5.2.10.1  |
+
 ### 디렉토리 구조
 ```
 ├── Game/
+├── ├── Resource/
 ├── Awakening Witch/
+├── ├── Resource/
 ```
+
 ### 팀 소개
 | [전동민](https://github.com/qwerrrqwerq) | [진승혁](https://github.com/DeliaBS123) | [하규승](https://github.com/CERabi/) | [조익현](https://github.com/cho2khyun) |
 |:-------:|:-------:|:-------:|:-------:|
