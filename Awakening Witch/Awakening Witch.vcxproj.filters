@@ -95,6 +95,9 @@
     <None Include="Resource\audio\bgm.ogg">
       <Filter>리소스 파일\audio</Filter>
     </None>
+    <None Include="Resource\audio\laser.ogg" />
+    <None Include="Resource\audio\laser_reversed.ogg" />
+    <None Include="Resource\audio\mainmenu.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\pic\fireball.png">
@@ -186,6 +189,45 @@
     </Image>
     <Image Include="Resource\pic\laser_wait6.png">
       <Filter>리소스 파일\pic</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback10.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback2.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback3.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback4.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback5.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback6.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback7.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback8.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\battleback9.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\bat_up.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\goblin_up.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\X.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Resource\pic\zombie_up.png">
+      <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
